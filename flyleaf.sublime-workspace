@@ -1,0 +1,806 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mak",
+				"makeListItem"
+			],
+			[
+				"lis",
+				"listItemWrapper"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"sea",
+				"searchButton"
+			],
+			[
+				"sear",
+				"searchBar"
+			],
+			[
+				"cla",
+				"classes"
+			],
+			[
+				"c",
+				"createElement"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"L",
+				"LifelockDAO"
+			],
+			[
+				"li",
+				"lifelockDAO"
+			],
+			[
+				"life",
+				"LifelockDAO"
+			],
+			[
+				"p",
+				"parameters"
+			],
+			[
+				"fi",
+				"finalOutput"
+			],
+			[
+				"con",
+				"concat"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"han",
+				"handleSqlData"
+			],
+			[
+				"handle",
+				"handleDecData"
+			],
+			[
+				"new",
+				"newYear"
+			],
+			[
+				"agent",
+				"agentId"
+			],
+			[
+				"age",
+				"agentId"
+			],
+			[
+				"sta",
+				"startDate"
+			],
+			[
+				"pa",
+				"parseInt"
+			],
+			[
+				"date",
+				"dateArray"
+			],
+			[
+				"csv",
+				"csvSplit"
+			],
+			[
+				"LL",
+				"LLEnrolls"
+			],
+			[
+				"my",
+				"mysqlQuery"
+			],
+			[
+				"ms",
+				"msssqlQuery"
+			],
+			[
+				"db",
+				"dbErr"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"node",
+				"nodetest"
+			],
+			[
+				"ex",
+				"exports"
+			],
+			[
+				"boad",
+				"_boardModel"
+			],
+			[
+				"page",
+				"pageX"
+			],
+			[
+				"B",
+				"BoardModel"
+			],
+			[
+				"_board",
+				"_boardModel"
+			],
+			[
+				"del",
+				"deltaY"
+			],
+			[
+				"_get",
+				"_getGameState"
+			],
+			[
+				"drow",
+				"drawBackground"
+			],
+			[
+				"gradie",
+				"gradientX"
+			],
+			[
+				"crea",
+				"createRadialGradient"
+			],
+			[
+				"cell",
+				"cellsize"
+			],
+			[
+				"re",
+				"require"
+			],
+			[
+				"get",
+				"getPostByPermalink"
+			],
+			[
+				"getPO",
+				"getPostsByTag"
+			],
+			[
+				"ses",
+				"sessionID"
+			],
+			[
+				"sess",
+				"session"
+			],
+			[
+				"session",
+				"sessionID"
+			],
+			[
+				"Sessions",
+				"SessionsDAO"
+			],
+			[
+				"invalid",
+				"invalidPasswordError"
+			],
+			[
+				"pas",
+				"passwordHash"
+			],
+			[
+				"USers",
+				"UsersDAO"
+			],
+			[
+				"Users",
+				"UsersDAO"
+			],
+			[
+				"rad",
+				"radialGradient"
+			],
+			[
+				"gr",
+				"gradientY"
+			],
+			[
+				"gra",
+				"gradient"
+			],
+			[
+				"be",
+				"beginPath"
+			],
+			[
+				"str",
+				"strokeStyle"
+			],
+			[
+				"fil",
+				"fillStyle"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"line",
+				"lineWidth"
+			],
+			[
+				"over",
+				"override"
+			],
+			[
+				"rec",
+				"recordingsPath"
+			],
+			[
+				"not",
+				"notFoundArray"
+			],
+			[
+				"Tra",
+				"TransferOptions"
+			],
+			[
+				"arcive",
+				"archiveServer"
+			],
+			[
+				"exca",
+				"express.callback	ExpressJS: base calback"
+			],
+			[
+				"exp",
+				"express.res.get	ExpressJS: Get the case-insensitive response header field."
+			],
+			[
+				"g",
+				"github"
+			],
+			[
+				"comm",
+				"comments"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"va",
+				"validateUserDoc"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fri",
+				"friendCount"
+			],
+			[
+				"fir",
+				"friendRangedCount"
+			],
+			[
+				"friends",
+				"friends"
+			],
+			[
+				"Ene",
+				"EnemyHero"
+			],
+			[
+				"En",
+				"EnemyHero"
+			],
+			[
+				"ene",
+				"EnemyHero"
+			],
+			[
+				"e",
+				"exc_info"
+			],
+			[
+				"find",
+				"find_one"
+			],
+			[
+				"poly",
+				"polyfill-next-selector"
+			],
+			[
+				"pap",
+				"paper-tabs"
+			],
+			[
+				"core",
+				"core-toolbar"
+			],
+			[
+				"co",
+				"core-ajax"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 1784,
+				"line_ending": "Unix",
+				"name": "index.html"
+			}
+		}
+	],
+	"build_system": "Packages/User/node.sublime-build",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"mar",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"mark",
+				"Markdown Preview: Open Markdown Cheat sheet"
+			],
+			[
+				"ma",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"sid",
+				"View: Toggle Side Bar"
+			],
+			[
+				"open",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"op",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"package coo",
+				"Package Control: Discover Packages"
+			],
+			[
+				"pc re",
+				"Package Control: Remove Package"
+			],
+			[
+				"paco int	",
+				"Package Control: Install Package"
+			],
+			[
+				"paco lit",
+				"Package Control: List Packages"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"view fi",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"sy",
+				"Set Syntax: LESS"
+			],
+			[
+				"isntall	",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 475.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/aerze/projects/flyleaf/app",
+		"/home/aerze/projects/flyleaf/app/materialize"
+	],
+	"file_history":
+	[
+		"/home/aerze/projects/alec/index.js",
+		"/home/aerze/projects/flyleaf/index.js",
+		"/home/aerze/projects/base/index.js",
+		"/home/aerze/projects/base/package.json",
+		"/home/aerze/projects/flyleaf/README.md",
+		"/home/aerze/projects/flyleaf/TODO.md",
+		"/home/aerze/projects/flyleaf/TODO.txt",
+		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/.jshintrc",
+		"/home/aerze/projects/manga/index.js",
+		"/home/aerze/Documents/Phoneware/Notes/TODO",
+		"/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/aerze/Documents/Phoneware/mysql/LifelockDrops.csv",
+		"/home/aerze/projects/vicitools/routes.js",
+		"/home/aerze/projects/vicitools/mysqlTesting.js",
+		"/home/aerze/projects/vicitools/routes/lifelock.js",
+		"/home/aerze/projects/vicitools/routes/test.js",
+		"/home/aerze/projects/vicitools/package.json",
+		"/home/aerze/projects/vicitools/index.js",
+		"/home/aerze/projects/vicitools/routes/campaigns.js",
+		"/home/aerze/projects/vicitools/routes/reports.js",
+		"/home/aerze/projects/vicitools/mssqlTesting.js",
+		"/home/aerze/projects/vicitools/routes/dec_data.csv",
+		"/home/aerze/projects/vicitools/routes/decData.js",
+		"/home/aerze/projects/recordings_cloud/index.js",
+		"/home/aerze/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/aerze/.aws/credentials",
+		"/home/aerze/Downloads/credentials",
+		"/home/aerze/projects/vicitools/local_modules/Statement.js",
+		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/home/aerze/projects/vicitools/public/bower/web-animations-js/tutorial/sample-tutorial.html",
+		"/home/aerze/projects/royal-blue-private/TODO.txt",
+		"/home/aerze/projects/royal-blue-private/index.js",
+		"/home/aerze/Documents/notes/Angular Notes.note",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/stylus/css/main.styl",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/views/index.dot",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/public/js/layout.js",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/index.js",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/.bowerrc",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/routes/index.js",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/stylus/main.styl",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/.git/info/exclude",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/public/js/Game.js",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/public/js/BoardModel.js",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/public/js/BoardRenderer.js",
+		"/C/Users/Gus/Desktop/Projects/royal-blue-private/contributors.txt",
+		"/C/Backup/Games/RISE.OF.NATIONS.GOLD.EDITION/code.txt",
+		"/C/Backup/Games/Capture cards.txt",
+		"/D/MSI Z97 U3 Plus/realtek_pcielan_7_mb/realtek_pcielan_7_mb/WIN7/64/note.txt",
+		"/D/MSI Z97 U3 Plus/intel_chipse_9_mb/Patsburg/readme.txt",
+		"/C/Backup/Games/RISE.OF.NATIONS.GOLD.EDITION/ind.risegold.nfo",
+		"/C/Users/Gus/AppData/Local/Temp/scp32417/home/node/nodetest/public/4connect/index.swig",
+		"/C/Users/Gus/AppData/Local/Temp/scp35258/home/node/nodetest/app.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp33175/home/node/nodetest/routes/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp32646/home/node/nodetest/public/4connect/index.html",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/views/index.swig",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/public/style/game 0.0.1.css",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/server.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp15994/home/node/nodetest/public/game/main.html",
+		"/C/Users/Gus/AppData/Roaming/Sublime Text 3/Packages/User/reorientGame.sublime-snippet",
+		"/C/Users/Gus/AppData/Local/Temp/scp14558/royalblue/views/index.swig",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/views/practice 1.swig",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/node_modules/swig/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp12026/royalblue/package.json",
+		"/C/Users/Gus/AppData/Local/Temp/scp35413/royalblue/views/index.swig",
+		"/C/Users/Gus/AppData/Local/Temp/scp15591/royalblue/index.js",
+		"/C/Users/Gus/Documents/forge/server.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp29965/royalblue/node_modules/path/path.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp12981/royalblue/node_modules/node/package.json",
+		"/C/Users/Gus/Documents/forge/DAOs/posts.js",
+		"/C/Users/Gus/Documents/forge/views/blogTemplate.swig",
+		"/C/Users/Gus/Documents/forge/routes/index.js",
+		"/C/Users/Gus/Documents/forge/routes/content.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/app.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/models/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/models/user.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/routes/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/middleware/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/models/blogpost.js",
+		"/C/Users/Gus/AppData/Roaming/Sublime Text 3/Packages/User/resRender.sublime-snippet",
+		"/C/Users/Gus/Documents/forge/views/newPostTemplate.swig",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/routes/login.js",
+		"/C/Users/Gus/AppData/Local/Temp/Temp1_lesson7_examples.775b116de0ee.zip/app2.js",
+		"/C/Users/Gus/Documents/forge/routes/error.js",
+		"/C/Users/Gus/Downloads/enron/dump/enron/messages.metadata.json",
+		"/C/Drivers/MCE_Update_2.2.2.0/SWDesc.txt",
+		"/C/Users/Gus/AppData/Local/Temp/scp36879/mongo/homeworks/hw3-2and3-3/blog/sessions.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp44668/mongo/homeworks/hw3-2and3-3/blog/package.json",
+		"/C/Users/Gus/AppData/Local/Temp/scp01780/mongo/homeworks/hw3-2and3-3/blog/routes/session.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp00810/mongo/homeworks/hw3-2and3-3/blog/posts.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp14777/mongo/homeworks/hw3-2and3-3/blog/routes/error.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp00441/mongo/homeworks/hw3-2and3-3/blog/routes/content.js",
+		"/C/Users/Gus/AppData/Roaming/Sublime Text 3/Packages/User/ifError.sublime-snippet",
+		"/C/Users/Gus/Documents/forge/routes/session.js",
+		"/C/Users/Gus/Documents/forge/DAOs/users.js",
+		"/C/Users/Gus/Documents/forge/package.json",
+		"/C/Users/Gus/Documents/forge/README.md",
+		"/C/Users/Gus/AppData/Local/Temp/scp04950/mongo/homeworks/hw3-2and3-3/blog/users.js",
+		"/C/Users/Gus/Documents/forge/DAOs/sessions.js",
+		"/C/Users/Gus/AppData/Roaming/Sublime Text 3/Packages/User/useStrict.sublime-snippet",
+		"/C/Users/Gus/AppData/Local/Temp/scp56632/mongo/homeworks/hw3-2and3-3/blog/package.json",
+		"/C/Users/Gus/AppData/Local/Temp/scp55902/mongo/homeworks/hw3-2and3-3/blog/users.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp30662/mongo/homeworks/hw3-2and3-3/blog/sessions.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp30908/mongo/homeworks/hw3-2and3-3/blog/posts.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp32799/mongo/homeworks/hw3-2and3-3/blog/routes/index.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp35273/mongo/homeworks/hw3-2and3-3/blog/package.json",
+		"/C/Users/Gus/AppData/Local/Temp/scp29159/mongo/homeworks/hw3-2and3-3/blog/app.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp05094/mongo/homeworks/hw3-2and3-3/blog/routes/session.js",
+		"/C/Users/Gus/Documents/Apress Pro Android/Canvas Practice/package.json",
+		"/C/Users/Gus/Node/Express4x/package.json",
+		"/C/Users/Gus/Node/Express4x/app.js",
+		"/C/Users/Gus/Documents/forge/views/index.swig",
+		"/C/Users/Gus/Documents/FileTransfer 3.1.4.js",
+		"/C/Users/Gus/Documents/FileTransfer",
+		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/SID-{10001,,12756828160}/timeProfilingData.json",
+		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{00000731-0001-0001-0000-000000000000}/journal",
+		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{0000B837-0001-0001-0000-000000000000}/mraid.js",
+		"/C/Users/Gus/Desktop/motoX repair.js",
+		"/C/Users/Gus/Node/contractors/node_modules/morgan/README.md",
+		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/hosts",
+		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/INSTALLING INSTRUCTIONS.txt",
+		"/C/Riot Games/League of Legends/Config/game.cfg",
+		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/HOSTS SETUP.pdf",
+		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/IMPORTANT SO READ FIRST.txt",
+		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/UPDATING THE APPS.txt",
+		"/C/Users/Gus/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Gus/Documents/forge/.gitignore",
+		"/C/Users/Gus/AppData/Local/Temp/scp01541/mongo/homeworks/hw3-2and3-3/blog/sessions.js",
+		"/C/Users/Gus/AppData/Local/Temp/scp59092/mongo/homeworks/hw3-2and3-3/blog/routes/session.js"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 103.0,
+		"where_history":
+		[
+			"C:\\Users\\Gus\\Documents\\Apress Pro Android\\Canvas Practice\\public\\js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"topten",
+			"LifeLock",
+			",",
+			"sss",
+			"and",
+			"drawToken",
+			" BoardModel",
+			"coll",
+			"column",
+			"collumns",
+			"collumn",
+			"collumns",
+			"collumn",
+			"column",
+			"reset",
+			"_reset",
+			"collums",
+			"collum",
+			"width",
+			"cellsize",
+			"width",
+			"/",
+			"PostNotFound",
+			"blog_template",
+			"users",
+			"email",
+			"errors",
+			"users",
+			" x ",
+			"x",
+			")\\n",
+			")",
+			"mp3",
+			"<job>\n<?job error='true' debug='true'?>\n<description> Used for transfering recordings to TWC automatically </description>\n<reference object='WinSCP.Session'/>\n<script language='JScript'>\n    time_scriptStart = new Date(); // Records script start time\n    var override = {\n        mmddyyyy: '0912014',\n        yyyymmdd: '20140912',\n        yyyy_mm_dd: '2014-09-12'\n    };\n//  Declare all global variables\n    // Add file system access and functionality \n    var fso = new ActiveXObject('Scripting.FileSystemObject'),\n    // Add ability to read from console\n        stdin = WScript.StdIn,\n    // Add ability to write to console\n        stdout = WScript.StdOut,\n    // open acces to shell\n        oShell = WScript.CreateObject('WScript.Shell');\n    // Number of recordings downloaded to on first pass\n        count1 = 0,\n    // Number of recordings downloaded on second pass\n        count2 = 0, \n    // Total number of recordings downloaded after both passes\n        totalCount = 0,\n    // Total number of rows read\n        csvRows = 0,\n    // Array hondling errors after first pass\n        secondPass = [],\n    // Array holding errors after second pass\n        finalErrors = [],\n    // File name of inupt CSV (e.g. 'PH2014030401')\n        csvFileName = 'PH' + getRunDate(override, 'yyyymmdd')+ '01',\n    // Open text stream into log file, or create one if \n    // not already existant\n        logFile = fso.OpenTextFile(\"F:\\\\File Transfers\\\\Recordings\\\\Cox\\\\Logs\\\\Script \"+getRunDate(override, 'yyyymmdd')+\".log\", 8, true);\n\n\n//  Declare all Paths (File Locations)\n    // Path to parent folder for CSV file\n    var csvPath  = 'Z:\\\\Knoah\\\\'+ csvFileName +'.CSV',\n    // Path to Landline recordings in Vici Server\n        landlinePath = '/home/archive/RECORDINGS/'+ getRunDate(override, 'yyyy-mm-dd')+'/',\n    // Path to Wireless recordings in Vici server\n        wirelessPath = '/home/archive/RECORDINGS/mobile/'+ getRunDate(override, 'yyyy-mm-dd')+'/',\n    // Path to local folder that will hold the recordings\n        savefilePath = 'F:\\\\File Transfers\\\\Recordings\\\\Cox\\\\'+ csvFileName +'\\\\',\n    // Path to my computer\n        newSaveFile = \"T:\\\\Cox\\\\\";\n\n\n//  Fuction to log both to console and logFile\n    function log (text) {\n        logFile.Write(text);\n        stdout.Write(text);\n    }\n    log('\\r\\n\\r\\n\\r\\n --Begin-- ' + time_scriptStart);\n//  Check to see if save file already exists\n//  if so, pause script, send mail notification\n//  if not log success\n    // if (fso.FolderExists(savefilePath)) {\n    //     log('\\r\\nFolder ' + savefilePath + ' already exists.');\n    //     log('\\r\\nPress \\'Enter\\' to quit.');\n    //     logFile.Close();\n    //     var userinput = stdin.Readline();\n    //     WScript.quit();\n    // } else {\n        log(\"\\r\\nCreating new File...\");\n        fso.CreateFolder(savefilePath);\n        log(\"\\t_\\t_\\t_\\t_\\t_\\t_\\t_>Done.\");\n    // }\n\n//  Open CSV file, then open a text stream into \n//  the file. If file is not found pause script\n    try {\n        csvFile = fso.OpenTextFile(csvPath, 1);\n    } catch(e) {\n        if (e) {\n            log(\"\\r\\n\" + (e.number & 0xFFFF));\n            log(\"\\r\\n\" + e.description);\n            throw e;\n        }\n    }\n    csvTextStream = csvFile.ReadAll();\n\n    if (csvTextStream) {\n        log('\\r\\n'+ csvPath+' loaded. Parsing File...');\n    } else {\n        log('\\r\\n---ERROR---\\r\\n    COULD NOT OPEN: ' + csvPath);\n        log('\\r\\nPress \\'Enter\\' to quit.');\n        logFile.Close();\n        var userinput = stdin.Readline();\n        WScript.quit();\n    }\n\n//  Parse the CSV file into an array for processing,\n//  then close the csv file. Log how many files \n//  were found, if none dump whole array into log\n    time_parseStart = new Date();\n    var csvArray = CSVToArray(csvTextStream);\n    if (csvArray) {\n        csvRows = csvArray.length-1;\n        log('\\t_\\t_>Done. ' + csvRows + ' records found.');\n    } else {\n        log('\\r\\n---ERROR---\\r\\n    PARSING FAILED: ' + csvArray);\n        log('\\r\\nPress \\'Enter\\' to quit.');\n        logFile.Close();\n        var userinput = stdin.Readline();\n        WScript.quit();\n    }\n    time_parseEnd = new Date();\n    csvFile.Close();\n\n//  Set up session and transfer options for WinSCP\n    var sessionOptions = WScript.CreateObject('WinSCP.SessionOptions');\n        sessionOptions.Protocol = Protocol_Sftp;\n        sessionOptions.HostName = '10.10.4.9';\n        sessionOptions.UserName = 'root';\n        sessionOptions.Password = 'vicidial';\n        sessionOptions.SshHostKeyFingerprint = 'ssh-rsa 2048 e2:f9:9f:19:ee:4e:c0:1a:99:eb:bd:c0:76:db:da:58';\n    var transferOptions = WScript.CreateObject('WinSCP.TransferOptions');\n        transferOptions.TransferMode = TransferMode_Binary;\n\n//  Attempt to open WinSCP Session Library\n    var session = WScript.CreateObject('WinSCP.Session');\n    if (session) {\n        log('\\r\\nAttempting to connect to '+ sessionOptions.HostName + '...');\n    }\n\n//  Attempt to open SFTP Session, if not possible log\n//  the error. Also the 'try' statement begins here \n//  to catch disconnection issues\n    try {\n        session.Open(sessionOptions);\n        if (session.Opened) {\n            log('\\t_\\t_\\t_\\t_\\t_>Connected.');\n        } else {\n            log('\\r\\n---ERROR---\\r\\n    CONNECTION FAILED: '+ sessionOptions.HostName +' not connected');\n            log('\\r\\nPress \\'Enter\\' to quit.');\n        logFile.Close();\n        var userinput = stdin.Readline();\n        WScript.quit();\n        }\n\n//  Begin download of Landline recordings, catch failures\n//  which are most likely Wireless save those in array\n        time_landlineDownloadStart = new Date();\n        // Loop thorugh csvArray Rows\n        log('\\r\\nStarting first download pass...');\n        for (var i=1; i < csvArray.length; i+=1) {\n            // log('\\r\\n' + i + '  //  ');\n            // log(csvArray[i][22]);\n            // Make sure to use the correct column\n            var transferResult = session.GetFiles(landlinePath + csvArray[i][22], savefilePath, false, transferOptions);\n            // Check to see is download was successful\n            if (transferResult.isSuccess) {\n                // Increment counters\n                count1++;\n                totalCount++;\n            } else if (!transferResult.isSuccess) {\n                secondPass.push(csvArray[i][22]);\n            }\n        };\n        log('\\t_\\t_\\t_\\t_\\t_\\t_>Done.');\n        time_landlineDownloadEnd = new Date();\n\n        time_wirelessDownloadStart = new Date();\n        log('\\r\\nStarting second download pass...');\n        // Loop through athe secondPass\n        for (var i=0; i <= secondPass.length; i+=1) {\n            var transferResult = session.GetFiles(wirelessPath + secondPass[i], savefilePath, false, transferOptions);\n\n            if (transferResult.isSuccess) {\n                count2++;\n                totalCount++;\n            } else if (!transferResult.isSuccess) {\n\n                // // Print final errors using funky enumerator thing\n                // for (var enumerator = new Enumerator(transferResult.Failures); !enumerator.atEnd(); enumerator.moveNext()) {\n                //     log('\\r\\n---ERROR---\\r\\n    FILE NOT FOUND: '+ enumerator.item() +' could not be found.');\n                // }\n                finalErrors.push(secondPass[i]);\n            }\n        };\n        log('\\t_\\t_\\t_\\t_\\t_>Done.');\n        time_wirelessDownloadEnd = new Date();\n// Properly disconnect from local SFTP\n    } finally {\n        session.Dispose();\n        log('\\r\\nConnection Closed.');\n    }\n\n    function Server(hostname, sshFingerprint, recordingsPath) {\n        this.hostname = hostname;\n        this.sshFingerprint = sshFingerprint;\n        this.recordingsPath = recordingsPath;\n\n        this.notFoundArray = [];\n        this.downloadCount = 0;\n        this.session = {};\n\n        this.sessionOptions = WScript.CreateObject('WinSCP.SessionOptions');\n        this.sessionOptions.Protocol = Protocol_Sftp;\n        this.sessionOptions.Hostname = hostname;\n        this.sessionOptions.UserName = 'root';\n        this.sessionOptions.Password = 'vicidial';\n        this.sessionOptions.SshHostKeyFingerprint = sshFingerprint;\n        this.transferOptions = WScript.CreateObject('WinSCP.TransferOptions');\n        this.transferOptions.TransferMode = TransferMode_Binary;\n\n        this.openSession = function () {\n            this.session = WScript.CreateObject('WinSCP.Session');\n            this.session.Open(this.sessionOptions);\n\n            if (this.session.Opened) {\n                log('\\r\\n\\r\\nNew session to ' + this.hostname + ' opened.');\n            } else {\n                log('\\r\\nError opening session to ' + this.hostname + '!');\n            }\n        }\n\n        this.downloadFiles = function(filenamesArray) {\n            log('\\r\\nStarting downloading of ' + filenamesArray.length + ' files in ' + this.recordingsPath + '\\n');\n\n            for (var i = 0; i < filenamesArray.length; i++) {\n                var transferResult = this.session.GetFiles(this.recordingsPath + filenamesArray[i], savefilePath, false, this.transferOptions);\n                if (transferResult.isSuccess) {\n                    this.downloadCount++;\n                    totalCount++;\n                } else if (!transferResult.isSuccess) {\n                    // log('didn\\'t transfer: ' + filenamesArray[i]);\n                    this.notFoundArray.push(filenamesArray[i]);\n                }\n                stdout.Write('Percent complete: ' + Math.floor((i / filenamesArray.length) * 100 ) + '% \\r');\n                if (i === filenamesArray.length - 1) {\n                    log('Percent complete: 100% \\r');\n                }\n            };\n\n            log('\\r\\nDownload of ' + this.downloadCount + ' completed. ');\n            log('\\r\\nLeft to find: ' + (csvRows - totalCount));\n            log('\\r\\nNot Found: ' + this.notFoundArray.length);\n        }\n    }\n\n    var archiveServer = new Server('10.10.4.9', 'ssh-rsa 2048 e2:f9:9f:19:ee:4e:c0:1a:99:eb:bd:c0:76:db:da:58', '/home/archive/mobile/' + getRunDate(override, 'yyyy-mm-dd') + '/')\n        archiveServer.openSession();\n        archiveServer.downloadFiles(finalErrors);\n        archiveServer.session.Dispose();\n    var manualServer = new Server('10.10.7.24', 'ssh-rsa 2048 14:6d:4c:c6:90:ad:35:33:30:87:1d:1c:ee:7d:d6:b6', '/var/spool/asterisk/monitorDONE/MP3/')\n        manualServer.openSession();\n        manualServer.downloadFiles(archiveServer.notFoundArray);\n        manualServer.session.Dispose();\n    var manualServer1 = new Server('10.10.7.23', 'ssh-rsa 2048 ce:2e:e7:40:a6:59:ad:2e:b1:66:c1:e8:28:79:e7:38', '/var/spool/asterisk/monitorDONE/MP3/')\n        manualServer1.openSession();\n        manualServer1.downloadFiles(manualServer.notFoundArray); /*(manualServer.notFoundArray);*/\n        manualServer1.session.Dispose();\n    var manualServer2 = new Server('10.10.7.22', 'ssh-rsa 2048 d5:4e:77:34:37:84:ec:e5:b8:67:fa:2b:d3:56:f5:c9', '/var/spool/asterisk/monitorDONE/MP3/')\n        manualServer2.openSession();\n        manualServer2.downloadFiles(manualServer1.notFoundArray);\n        manualServer2.session.Dispose();\n\n\n\n    log(\n        '\\r\\n           ________________Script Complete________________\\r\\n\\r\\n'+\n\n            '              Files Moved:  '+ (count1 + count2)+' files\\r\\n\\r\\n'+\n\n            '                 CSV Read:  '+ calcTime(time_parseStart,time_parseEnd)+ '\\r\\n'+\n            '               First Pass:  '+ calcTime(time_landlineDownloadStart,time_landlineDownloadEnd)+ '\\r\\n'+\n            '              Second Pass:  '+ calcTime(time_wirelessDownloadStart,time_wirelessDownloadEnd)+ '\\r\\n'+\n            '               Total Time:  '+ calcTime(time_scriptStart,time_wirelessDownloadEnd)+ '\\r\\n\\r\\n'+\n\n            '           ________!Errors, Files Not Downloaded__________'\n        );\n\n    for (var i = manualServer2.length - 1; i >= 0; i--) {\n        log('\\r\\n' + manualServer2.notFoundArray[i]);\n    };\n\n//  Fisrt place csv in final folder, then compress and \n//  encrypt the file, and the send success email\n    log('\\r\\n\\r\\nCopying CSV file to new folder.');\n    fso.CopyFile(csvPath, savefilePath);\n    log('\\t_\\t_\\t_\\t_\\t_\\t_>Done.');\n\n    log('\\r\\nCompressing File..');\n    time_zipStart = new Date();\n    // oShell.Run('WinRAR a \"'+ csvFileName +'.zip\" \"'+ csvFileName +'\"',1, true);\n       oShell.Run('WinRAR a \"'+ csvFileName +'.zip\" \"'+ csvFileName +'\"',1, true);\n    time_zipEnd = new Date();\n    log('\\t_\\t_\\t_\\t_\\t_\\t_\\t_>Done.');\n\n    log('\\r\\nEcrypting File..');\n    time_encryptStart = new Date();\n    oShell.Run('gpg --recipient \"11666AA1\" --encrypt \"'+ csvFileName +'.zip\"',1 , true);\n    time_encryptEnd = new Date();\n    log('\\t_\\t_\\t_\\t_\\t_\\t_\\t_>Done.');\n\n    log(\n'\\r\\n           ___________________Zip & Encrypt________________\\r\\n\\r\\n'+\n\n    '                 Zip time:  '+ calcTime(time_zipStart,time_zipEnd)+ '\\r\\n'+\n    '             Encrypt time:  '+ calcTime(time_encryptStart,time_encryptEnd)+ '\\r\\n\\r\\n'+\n\n    '               Total Time:  '+ calcTime(time_zipStart,time_encryptEnd)+ '\\r\\n\\r\\n'+\n\n    '           _______________________________________________\\r\\n\\r\\n'+\n\n    '\\t\\t\\t\\t\\t\\t\\t\\t>> Process Total:  '+ calcTime(time_scriptStart, time_encryptEnd)+ '\\r\\n'\n    );\n\n    var downloadMessage = new Message(\n            csvFileName + ' prepared', \n            'File: '+ csvFileName + '.zip.gpg\\r\\n' + \n            'Count: ' + (csvRows) + '  Recordings\\r\\n' + \n            'Total Count: ' + (totalCount));\n        downloadMessage.send('gsuarez@phonenetinc.com');\n\n// //  Set-up new session for final Upload\n//     var knoahSessionOptions = WScript.CreateObject('WinSCP.SessionOptions');\n//         knoahSessionOptions.Protocol = Protocol_Sftp;\n//         knoahSessionOptions.HostName = '10.10.7.9';\n//         knoahSessionOptions.UserName = 'root';\n//         knoahSessionOptions.Password = 'vicidial';\n//         knoahSessionOptions.SshHostKeyFingerprint = 'ssh-rsa 2048 f7:08:cc:12:dc:be:d3:43:a5:50:e0:7e:12:ee:e6:10';\n//     var knoahTransferOptions = WScript.CreateObject('WinSCP.TransferOptions');\n//         knoahTransferOptions.TransferMode = TransferMode_Binary;\n//         knoahTransferOptions.ResumeSupport.State = TransferResumeSupportState_Off;\n\n\n// //  Attempt to open WinSCP Session Library\n//     var knoahSession = WScript.CreateObject('WinSCP.Session');\n//     if (knoahSession) {\n//         log('\\r\\nAttempting to connect to '+ knoahSessionOptions.HostName + '...');\n//     }\n\n// //  Attempt to open SFTP Session, if not possible log\n// //  the error. Also the 'try' statement begins here \n// //  to catch disconnection issues\n//     try {\n//         knoahSession.Open(knoahSessionOptions);\n//         if (knoahSession.Opened) {\n//             log('\\t_\\t_\\t_\\t_\\t_>Connected.');\n//         } else {\n//             log('\\r\\n---ERROR---\\r\\n    CONNECTION FAILED: '+ knoahSessionOptions.HostName +' not connected');\n//             log('\\r\\nPress \\'Enter\\' to quit.');\n//         logFile.Close();\n//         var userinput = stdin.Readline();\n//         WScript.quit();\n//         }\n\n// //  Begin download of Landline recordings, catch failures\n// //  which are most likely Wireless save those in array\n//         time_uploadStart = new Date();\n//         log('\\r\\nUploading to SFTP...');\n//         // Upload the file\n//         var transferResult = knoahSession.PutFiles('F:\\\\File Transfers\\\\Recordings\\\\Cox\\\\'+ csvFileName + '.zip.gpg', '/home/', false, knoahTransferOptions);\n\n//         for (var enumerator = new Enumerator(transferResult.Transfers); !enumerator.atEnd(); enumerator.moveNext()) {\n//             log('\\t_\\t_\\t_\\t_\\t_\\t_\\t_>Done.');\n//             var uploadMessage = new Message(csvFileName + ' uploaded', 'File: '+ enumerator.item().Destination + '\\r\\nCount: ' + (count1 + count2) + '  Recordings\\r\\nDouble Check: ' + (totalCount) + '\\r\\nUpload Time: ' + calcTime(time_uploadStart, Date()));\n//             uploadMessage.send('gsuarez@phonenetinc.com');\n//         }\n\n// // Properly disconnect from local SFTP\n//     } finally {\n//         knoahSession.Dispose();\n//         log('\\r\\nConnection Closed.');\n//     }\n\n    fso.CopyFile('F:\\\\File Transfers\\\\Recordings\\\\Cox\\\\'+ csvFileName + '.zip.gpg', newSaveFile);\n    WScript.echo(\"Done\");\n    \n\n    log('\\r\\n --Ended-- ' + Date());\n    log('\\r\\n\\r\\n\\r\\n');\n    logFile.Close();\n    WScript.quit();\n//  Define functions used in the script\n    // CSV to js Array function, found on StackExchange\n        function CSVToArray( strData, strDelimiter ){\n            // Check to see if the delimiter is defined. If not,\n            // then default to comma.\n            strDelimiter = (strDelimiter || \",\");\n\n            // Create a regular expression to parse the CSV values.\n            var objPattern = new RegExp(\n                (\n                    // Delimiters.\n                    \"(\\\\\" + strDelimiter + \"|\\\\r?\\\\r\\n|\\\\r|^)\" +\n\n                    // Quoted fields.\n                    \"(?:\\\"([^\\\"]*(?:\\\"\\\"[^\\\"]*)*)\\\"|\" +\n\n                    // Standard fields.\n                    \"([^\\\"\\\\\" + strDelimiter + \"\\\\r\\\\r\\n]*))\"\n                ),\n                \"gi\"\n                );\n\n\n            // Create an array to hold our data. Give the array\n            // a default empty first row.\n            var arrData = [[]];\n\n            // Create an array to hold our individual pattern\n            // matching groups.\n            var arrMatches = null;\n\n            // var c = 0\n\n            // Keep looping over the regular expression matches\n            // until we can no longer find a match.\n            while (arrMatches = objPattern.exec( strData )){\n\n                // WScript.echo(\"testing...\" +c);\n                // c++;\n\n                // Get the delimiter that was found.\n                var strMatchedDelimiter = arrMatches[ 1 ];\n\n                // Check to see if the given delimiter has a length\n                // (is not the start of string) and if it matches\n                // field delimiter. If id does not, then we know\n                // that this delimiter is a row delimiter.\n                if (\n                    strMatchedDelimiter.length &&\n                    (strMatchedDelimiter != strDelimiter)\n                    ){\n\n                    // Since we have reached a new row of data,\n                    // add an empty row to our data array.\n                    arrData.push( [] );\n\n                }\n\n\n                // Now that we have our delimiter out of the way,\n                // let's check to see which kind of value we\n                // captured (quoted or unquoted).\n                if (arrMatches[ 2 ]){\n\n                    // We found a quoted value. When we capture\n                    // this value, unescape any double quotes.\n                    var strMatchedValue = arrMatches[ 2 ].replace(\n                        new RegExp( \"\\\"\\\"\", \"g\" ),\n                        \"\\\"\"\n                        );\n\n                } else {\n\n                    // We found a non-quoted value.\n                    var strMatchedValue = arrMatches[ 3 ];\n\n                }\n\n\n                // Now that we have our value string, let's add\n                // it to the data array.\n                arrData[ arrData.length - 1 ].push( strMatchedValue );\n            }\n\n                // Return the parsed data.\n                return( arrData );\n        }\n    \n    // Calculate Time difference and format to string\n        function calcTime(startingTime, endingTime){\n                var elapsedTime = endingTime - startingTime;\n                var display = '',\n                    hours = 0,\n                    mins = 0,\n                    secs = 0;\n                if (!elapsedTime){\n                    display += '0 secs';\n                }\n                if (elapsedTime/3600000 >= 1) {\n                    hours = Math.floor(elapsedTime/3600000);\n                    elapsedTime -= hours*3600000;\n                    display += hours+' hours ';\n                } \n                if (elapsedTime/60000 >=1) {\n                    mins = Math.floor(elapsedTime/60000);\n                    elapsedTime -= mins*60000;\n                    display += mins+' mins ';\n                }\n                if (elapsedTime) {\n                    secs = (elapsedTime/1000);\n                    elapsedTime -= secs*1000;\n                    display += secs+' secs ';\n                }\n                return (display);\n            };\n\n    // Add Zero\n        function addZero (x) {\n            x = parseInt(x);\n            if (x < 10) {\n                x = '0' + x\n            }\n            return x;\n        }\n\n    // Create formatted date string \n        function getRunDate (override, type, time) {\n            if (type === 'mmddyyyy') {\n                var runDate = addZero(time_scriptStart.getMonth() + 1);\n                runDate += addZero(time_scriptStart.getDate());\n                runDate += time_scriptStart.getFullYear();\n                if (override) {\n                    runDate = override.mmddyyyy;\n                }\n            } else if (type === 'yyyymmdd') {\n                var runDate = time_scriptStart.getFullYear();\n                runDate += addZero(time_scriptStart.getMonth() + 1);\n                runDate += addZero(time_scriptStart.getDate());\n                if (override) {\n                    runDate = override.yyyymmdd;\n                }\n            } else if (type === 'yyyy-mm-dd') {\n                var runDate = time_scriptStart.getFullYear() + '-';\n                runDate += addZero(time_scriptStart.getMonth() + 1) + '-';\n                runDate += addZero(time_scriptStart.getDate());\n                if (override) {\n                    runDate = override.yyyy_mm_dd;\n                }\n            }\n\n            // Display time as well as date\n            if (time === 'time') {\n                runDate += ' ';\n                // Convert from 24-hr to 12-hr time\n                var time_scriptStartHours = time_scriptStart.getHours();\n                if (time_scriptStartHours === 0) {\n                    runDate += \"12.\";\n                } else if (time_scriptStartHours <= 12) {\n                    runDate += addZero(time_scriptStartHours) + ':';    \n                } else if (time_scriptStartHours > 12) {\n                    runDate += addZero(time_scriptStartHours - 12) + ':';\n                };\n                // Add minutes\n                runDate += addZero(time_scriptStart.getMinutes());\n                // Add abbreviations\n                if (time_scriptStartHours <= 12) {\n                    runDate += 'AM';\n                } else if (time_scriptStartHours > 12) {\n                    runDate += 'PM';\n                };\n                return runDate;\n            } else {\n                return runDate;\n            }\n        }\n\n\n    // Mail message object constructor function\n        function Message (subject, message) {\n            this.initialString = '.\\\\mailsend.exe ';\n            this.from = ' -from gsuarez@phonenetinc.com';// from always 'gsuarez@phonenetinc.com'\n            this.ssl = ' -ssl ';// ssl always true\n            this.port = ' -port 465';// port always 465\n            this.auth = ' -auth '// auth always true\n            this.smtp = ' -smtp smtp.gmail.com'// smtp always 'smtp.gmail.com'\n            this.subject = ' -sub \\\"' + subject + '\\\"';\n            this.body = ' -M \\\"' + message + '\\\"';\n            this.cc = ' +cc ';// cc always false\n            this.bc = ' +bc ';// bc always false\n            this.user = ' -user gsuarez@phonewareinc.com';// user always 'gsuarez@phonewareinc.com'\n            this.pass = ' -pass \\\"b4x#ftj<\\\"';// pass always 'b4x#ftj<'\n            this.send = function(to) {\n                var fixedTo = ' -to ' + to;\n                var finalString = this.initialString + fixedTo + this.from + this.ssl + this.port + this.auth + this.smtp + this.subject + this.body + this.cc + this.bc + this.user + this.pass;\n                oShell.Run(finalString, 1, true);\n                log('\\r\\nMail sub: ' + this.subject + ' sent to ' + to + '\\r\\n');\n            }\n        };\n        //20140327-104332_7578728810_8364-all.mp3\n</script>\n</job>",
+			"manual",
+			"]",
+			"[",
+			",",
+			"}",
+			"{",
+			";",
+			"2",
+			"body",
+			"addUser",
+			"@line-height-computed",
+			" @line-height-computed",
+			"gray-lighter",
+			"hr",
+			"#97db91",
+			"brand-pri",
+			"csvFileName"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1784,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1753,
+								1753
+							]
+						],
+						"settings":
+						{
+							"auto_name": "index.html",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 51.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 204.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "flyleaf.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"sta",
+				"local_modules/Statement.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/projects/vicitools/vicitools.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 283.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
