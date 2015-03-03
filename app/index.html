@@ -4,7 +4,7 @@
     <title>Flyleaf.co</title>
      <!--Import materialize.css-->
      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
-
+     <link rel="stylesheet" type="text/css" href="css/main.css">
      <!--Let browser know website is optimized for mobile-->
      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
@@ -12,25 +12,32 @@
 <body>
     <div class="navbar-fixed">
         <nav>
-          <div class="nav-wrapper">
+          <div class="nav-wrapper green">
             <div class="col s12">
-              <a href="#!" class="brand-logo">Logo</a>
-              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+              <a href="/" class="brand-logo">
+                <img class="logo" src="images/flyleaf.png">
+              </a>
+              <a href="/menu" data-activates="mobile-demo" class="button-collapse">
+              <i class="mdi-navigation-menu"></i></a>
               <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</i></a></li>
-                <li><a href="components.html">Components</a></li>
-                <li><a href="javascript.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
+                <li><a href="./myBooks">My Books</a></li>
+                <li><a href="./manga">Manga</a></li>
+                <li><a href="./settings">Settings</a></li>
+                <li><a href="./aboutUs">About Us</a></li>
               </ul>
               <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html">Sass</i></a></li>
-                <li><a href="components.html">Components</a></li>
-                <li><a href="javascript.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
+                <li><a href="./myBooks">My Books</a></li>
+                <li><a href="./manga">Manga</a></li>
+                <li><a href="./settings">Settings</a></li>
+                <li><a href="./aboutUs">About Us</a></li>
               </ul>
             </div>
           </div>
         </nav>
+    </div>
+
+    <div class="main-view">
+        Loading...
     </div>
 
 
@@ -41,14 +48,24 @@
 
 
 
-
-
-
+<!-- VENDOR JS -->
      <!--Import jQuery before materialize.js-->
-     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-     <script type="text/javascript">
-        $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70});
-     </script>
+     <!-- // <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+      <script type="text/javascript" src='js/pouchdb.js'></script>
+      <script type="text/javascript" src="js/page.js"></script>
+
+<!-- LOCAL JS -->
+      <script type="text/javascript" src="js/netto.js"></script>
+      <script type="text/javascript" src="js/mangaEden.js"></script>
+      <script type="text/javascript" src="js/data.js"></script>
+      <script type="text/javascript" src="js/display.js"></script>
+      <script type="text/javascript" src="js/flyleaf.js"></script>
+      <script type="text/javascript" src="js/routing.js"></script>
+      <script type="text/javascript">
+        $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70, closeOnClick: true});
+      </script>
+
 </body>
 </html>
