@@ -37,7 +37,7 @@ var MangaEden = function() {
                    alias: list.manga[i].a,
                    genre: list.manga[i].c,
                    hits: list.manga[i].h,
-                   mangaEdenID: list.manga[i].i,
+                   _id: list.manga[i].i,
                    coverImage: list.manga[i].im,
                    lastChapterDate: list.manga[i].ld,
                    status: list.manga[i].s

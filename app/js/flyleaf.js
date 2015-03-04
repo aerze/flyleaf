@@ -6,16 +6,29 @@ var Flyleaf = function() {
     var data = new Data();
 
     var dbInfo = {};
-    this.init = function () {
-        data.storeAllManga();
-        data.getDbs(function(info) {
-            dbInfo = info;
+    var _manga = [];
 
-            if (dbInfo.myBooks.doc_count > 0) {
-                page('/myBooks');
-            } else {
-                page('/manga');
-            }
+    var loadManga = function(callback) {
+        console.log('Flyleaf :: loading Manga');
+        data.storeAllManga();
+        data.getAllManga(function (manga) {
+            _manga = manga;
+            // manga = null; //TODO research if making this null helps release the variable.
+            callback();
+        });
+    };
+
+    this.init = function () {
+        loadManga(function() {
+            data.getDbs(function(info) {
+                dbInfo = info;
+
+                if (dbInfo.myBooks.doc_count > 0) {
+                    page('/myBooks');
+                } else {
+                    page('/manga');
+                }
+            });
         });
     };
 
@@ -32,23 +45,21 @@ var Flyleaf = function() {
     };
 
     this.manga = function () {
-        console.log('manga');
-        data.getAllManga(function (manga) {
-            // TODO return manga in alphabetical order
-            // TODO make a manga query abstraction data.getBooks(map/reduce query)
-            console.log('flyleaf.js:: all manga');
-            var mangaList = [];
-            for (var i = manga.length - 1; i >= 0; i--) {
+        console.log('flyleaf.js:: all manga');
+        var mangaNodeList = [];
 
-                var item = document.createElement('li');
-                var book = manga[i].doc;
-                item.innerHTML = 'Title: ' + book.title + ' Hits: ' + book.hits;  
-                
-                mangaList.push(item);
-            }
-            display.renderList(mangaList);
-        });
-        // display.manga();
+        // TODO return manga in alphabetical order
+        // TODO make a manga query abstraction data.getBooks(map/reduce query)
+
+        for (var i = _manga.length - 1; i >= 0; i--) {
+
+            var item = document.createElement('li');
+            var book = _manga[i].doc;
+            item.innerHTML = 'Title: ' + book.title + ' Hits: ' + book.hits;  
+            
+            mangaNodeList.push(item);
+        }
+        display.renderList(mangaNodeList);
     };
 
     this.settings = function () {
@@ -57,5 +68,17 @@ var Flyleaf = function() {
 
     this.aboutUs = function () {
         console.log('About us');
+    };
+
+    this._getManga = function() {
+        return _manga;
+    };
+
+    this._sortByHits = function(mangaArray) {
+        var sorted = [];
+        sorted = mangaArray.sort(function (a, b) {
+            return a.doc.hits - b.doc.hits;
+        });
+        return sorted;
     };
 };

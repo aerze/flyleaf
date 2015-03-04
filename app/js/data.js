@@ -1,6 +1,6 @@
 'use strict';
 /*jshint browser: true */
-/*global Data: true, PouchDB, confirm, alert*/
+/*global Data: true, PouchDB, confirm, alert, page, MangaEden*/
 var Data = function() {
     var mangaEden = new MangaEden();
     
@@ -78,6 +78,25 @@ var Data = function() {
         db.books.allDocs({include_docs: true, descending: false}, function(err, docs) {
             if (err) throw err;
             callback(docs.rows);
+        });
+    };
+
+    this.getMangaByHits = function(callback) {
+        var map = function (doc, emit) {
+            if (doc.hits) {
+                emit(doc.hits);
+            }
+        };
+
+        var options = {
+            include_docs: true, 
+            descending: true
+        };
+
+
+        db.books.query(map, options, function (err, response) {
+            if (err) throw err;
+            callback(response);
         });
     };
 
