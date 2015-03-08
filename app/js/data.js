@@ -2,18 +2,28 @@
 /*jshint browser: true */
 /*global Data: true, PouchDB, confirm, alert, page, MangaEden*/
 var Data = function() {
+    var display = Object.create(Display);
     var mangaEden = new MangaEden();
-    
+    var info = {};    
     var db = {
         books: new PouchDB('flyleaf_books'),
         myBooks: new PouchDB('flyleaf_myBooks')
     };
+    this._DB = db;
 
-    this.getDbs = function(callback) {
+    this.exists = function(callback) {
+        getDBInfo(function (dbInfo) {
+            if (dbInfo.books.doc_count > 0) callback(dbInfo);
+            else callback(null);
+        });
+    };
+
+    var getDBInfo = function(callback) {
         var dbInfo = {};
         db.books.info(function (err, info) {
             dbInfo.books = info;
             if (dbInfo.myBooks) {
+                info = dbInfo;
                 callback(dbInfo);
             }
         });
@@ -21,12 +31,14 @@ var Data = function() {
         db.myBooks.info(function (err, info) {
             dbInfo.myBooks = info;
             if (dbInfo.books) {
+                info = dbInfo;
                 callback(dbInfo);
             }
         });
     };
 
     this.addBook = function(title, completed) {
+        throw NOTYET;
         var book = {
             _id: new Date().toISOString(),
             title: title,
@@ -39,20 +51,11 @@ var Data = function() {
         });
     };
 
-    this.getMyBooks = function () {
-        db.myBooks.allDocs({
-            include_docs: true,
-            descending: true
-        }, function (err, docs) {
-            if (err) throw err;
-            else return docs;
-        });
-    };
-
-    this.storeAllManga = function () {
+    this.restoreAllManga = function (callback) {
         // check to see if the books are in pouch, otherwise get them, return them, and put them in.
         mangaEden.getListAll(function (manga, total) {
-            console.log('data.js:: getListAll called');
+            display.startLoading('Data', 'Manga');
+
             db.books.info(function (err, info) {
                 console.log(total, info.doc_count);
                 if (info.doc_count !== total) {
@@ -63,19 +66,28 @@ var Data = function() {
                         db.books = new PouchDB('flyleaf_books');
                         db.books.bulkDocs(manga, function (err, response) {
                             if (err) throw err;
-                            else page('/manga');
+                            else callback();
+                            // else page('/manga');
                         });
                     });
                 } else {
                     console.log('data.js:: DB is up-to-date');
-                    page('/manga');
+                    callback();
+                    // page('/manga');
                 }
             });
         });
     };
 
+    this.getMyBooks = function (callback) {
+        db.myBooks.allDocs({include_docs: true, descending: false}, function (err, docs) {
+            if (err) throw err;
+            callback(docs.rows);
+        });
+    };
+
     this.getAllManga = function (callback) {
-        db.books.allDocs({include_docs: true, descending: false}, function(err, docs) {
+        db.books.allDocs({include_docs: true, descending: false}, function (err, docs) {
             if (err) throw err;
             callback(docs.rows);
         });

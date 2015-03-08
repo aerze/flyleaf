@@ -28,6 +28,12 @@ var Display = {
         console.log('display.js:: manga');
         // add search filter
         // display list after each filter change
+    },
+    startLoading: function (caller, process) {
+        console.log(caller + ':: Loading > ' + process);
+    },
+    endLoading: function (caller, process) {
+        console.log(caller + ':: Loaded < ' + process);
     }
 };
 

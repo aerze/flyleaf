@@ -1,35 +1,74 @@
 'use strict';
-/*global page */
+/*global Display, Data, page*/
 
 var Flyleaf = function() {
     var display = Object.create(Display);
     var data = new Data();
 
-    var dbInfo = {};
     var _manga = [];
+    var _myBooks = [];
+    var _initalLoad = false;
+
+
+    var loadDB = function (callback) {
+        if (_initalLoad === false) {
+            display.startLoading('Flyleaf', 'Manga:Database');
+            // Checks for existting DB and that books are loaded.
+            data.exists(function (dbInfo) {
+                if (dbInfo) {
+                    display.endLoading('Flyleaf', 'Manga:Database');
+                    _initalLoad = true;
+                    callback(dbInfo);
+                } else {
+                    data.restoreAllManga(function () {
+                        display.endLoading('Flyleaf', 'Manga:Database');
+                        _initalLoad = true;
+                        callback(dbInfo);
+                    });
+                }
+            });
+        }
+    };
 
     var loadManga = function(callback) {
-        console.log('Flyleaf :: loading Manga');
-        data.storeAllManga();
+        display.startLoading('Flyleaf', 'Manga:LocalMemory');
         data.getAllManga(function (manga) {
             _manga = manga;
-            // manga = null; //TODO research if making this null helps release the variable.
+            manga = null; //TODO research if making this null helps release the variable.
+            display.endLoading('Flyleaf', 'Manga:LocalMemory');
             callback();
         });
     };
 
-    this.init = function () {
-        loadManga(function() {
-            data.getDbs(function(info) {
-                dbInfo = info;
-
-                if (dbInfo.myBooks.doc_count > 0) {
-                    page('/myBooks');
-                } else {
-                    page('/manga');
-                }
-            });
+    var loadMyBooks = function(callback) {
+        debugger;
+        display.startLoading('Flyleaf', 'MyBooks:LocalMemory');
+        data.getMyBooks(function (myBooks) {
+            _myBooks = myBooks;
+            myBooks = null;
+            display.endLoading('Flyleaf', 'MyBooks:LocalMemory');
+            callback();
         });
+    };
+
+    this.home = function () {
+        loadDB(function (dbInfo) {
+            if (dbInfo.myBooks.doc_count > 0) {
+                loadManga(function () {
+                    loadMyBooks(function () {
+                        page('/myBooks');
+                    });
+                });
+            } else {
+                loadManga(function () {
+                    page('/myBooks');
+                });
+            }
+        });
+    };
+
+    this.search = function(path) {
+        console.log(path.path);
     };
 
     this.myBooks = function () {

@@ -1,11 +1,12 @@
 /* global 
-    page: true
+    page: true,
+    Flyleaf: true
     */
 'use strict';
 var flyleaf = new Flyleaf();
 
-page('/', flyleaf.init);
-page('/manga', flyleaf.manga);
+page('/', flyleaf.home);
+page('/search', flyleaf.search);
 page('/myBooks', flyleaf.myBooks);
 page('/settings', flyleaf.settings);
 page('/aboutUs', flyleaf.aboutUs);
