@@ -8,6 +8,6 @@ var app = new express();
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname + '/app')));
 
-app.listen(80, function() {
+app.listen(process.env.PORT, function() {
     console.log('Server started');
 });
