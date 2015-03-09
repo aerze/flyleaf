@@ -61,18 +61,18 @@ var Data = function() {
                 if (info.doc_count !== total) {
                     db.books.destroy(function (err) {
                         console.log('data.js:: db.books deleted!');
-                        if (err) throw err;
+                        if (err) callback(err);
 
                         db.books = new PouchDB('flyleaf_books');
-                        db.books.bulkDocs(manga, function (err, response) {
-                            if (err) throw err;
-                            else callback();
+                        db.books.bulkDocs(manga, function (err) {
+                            if (err) callback(err);
+                            else callback(null);
                             // else page('/manga');
                         });
                     });
                 } else {
                     console.log('data.js:: DB is up-to-date');
-                    callback();
+                    callback(null);
                     // page('/manga');
                 }
             });

@@ -76,4 +76,4 @@ var MangaEden = function() {
 };
 
 
-console.log('mangaEden.js:: loaded');
+// console.log('mangaEden.js:: loaded');

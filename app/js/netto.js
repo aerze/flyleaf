@@ -24,4 +24,4 @@ var Netto = function() {
 	};
 };
 
-console.log('(ネット) netto.js:: loaded');
+// console.log('(ネット) netto.js:: loaded');
