@@ -108,7 +108,7 @@ var Flyleaf = function() {
             if (dbInfo.books.doc_count > 0) {
                 display.startLoading('Flyleaf', 'Manga:Search');
                 display.search(flyleaf._sortByHits(_manga), function() {
-                    display.endLoading('Flyleaf', 'MyBooks:Search');
+                    // display.endLoading('Flyleaf', 'MyBooks:Search');
                 });
             } else {
                 display.error('No Manga found, I have no idea what happened.\n Contact @mythrilco on Twitter maybe?');
