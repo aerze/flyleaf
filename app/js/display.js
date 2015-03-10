@@ -24,7 +24,7 @@ var Display = {
     //     this.renderNode(list);
     // },
 
-    search: function (manga) {
+    search: function (manga, callback) {
         // add search filter
         // display list after each filter change
 
@@ -71,6 +71,7 @@ var Display = {
                 }
             }
             view.appendChild(listContainer);
+            callback();
         }
 
         function Item (doc) {
@@ -86,7 +87,6 @@ var Display = {
     },
 
     manga: function(manga) {
-        console.log(manga);
         this.renderString('manga loaded');
         
         // Maybe change to use document.createElement to prevent haivng to loop again though jQ
@@ -99,7 +99,10 @@ var Display = {
         var description = '<p>' + manga.description + '</p>';
         var chapters = '<ul> <h5>Chapters</h5>';
         for (var i = manga.chapters.length - 1; i >= 0; i--) {
-            chapters += '<li class="chapters" id="' + manga.chapters[i][3] + '">' + manga.chapters[i][0] + ': ' + manga.chapters[i][2] + '</li>';
+            var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
+                'CH ' + manga.chapters[i][0] :
+                'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
+            chapters += '<li class="chapters waves-effect waves-light green btn" id="' + manga.chapters[i][3] + '">' + label + '</li><br/>';
         }
         chapters += '</ul>';
 
@@ -107,7 +110,6 @@ var Display = {
         this.renderString(view);
 
         var chapterNodes = $('.chapters');
-        console.log(chapterNodes);
         for (var j = chapterNodes.length - 1; j >= 0; j--) {
             chapterNodes[j].onclick = loadChapter;
         }

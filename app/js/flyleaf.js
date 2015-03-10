@@ -83,7 +83,7 @@ var Flyleaf = function() {
     this.home = function () {
         init(function(err, dbInfo) {
             _dbInfo = dbInfo;
-            console.log('Flyleaf:: Initialization Complete');
+            display.endLoading('Flyleaf', 'Initialization');
 
             page('/myBooks');
         });
