@@ -128,8 +128,11 @@ var Data = function() {
 
 
     this.getMangaInfo = function (id, callback) {
-        console.log('data proxy called');
         mangaEden.getManga(id, callback);
+    };
+
+    this.getChapterInfo = function (id, callback) {
+        mangaEden.getChapter(id, callback);
     };
 };
 

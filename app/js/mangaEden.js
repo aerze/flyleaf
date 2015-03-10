@@ -64,13 +64,8 @@ var MangaEden = function() {
 
         var path = 'http://www.mangaeden.com/api/chapter/'+ chapterId +'/';
         netto.get(path, function(data) {
-            var chapter = parse(data);
-            var pageLinks = [];
-            console.log('mangaEden.js:: Got Pages: ' + chapter.images.length);
-            for (var i = 0; i < chapter.images.length; i++) {
-                pageLinks.push('https://cdn.mangaeden.com/mangasimg/' + chapter.images[i][1]); 
-            }
-            callback(pageLinks);
+            var chapter = JSON.parse(data);
+            callback(chapter);
         });
     };
 };

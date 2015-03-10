@@ -11,6 +11,7 @@ page('/myBooks', flyleaf.myBooks);
 page('/settings', flyleaf.settings);
 page('/aboutUs', flyleaf.aboutUs);
 page('/manga/:id', flyleaf.manga);
+page('/chapter/:id', flyleaf.chapter);
 page.start({hashbang: true});
 
 

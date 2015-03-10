@@ -89,20 +89,42 @@ var Display = {
         console.log(manga);
         this.renderString('manga loaded');
         
+        // Maybe change to use document.createElement to prevent haivng to loop again though jQ
+
         var image = '<img src="https://cdn.mangaeden.com/mangasimg/' + manga.image + '"></img>';
         var title = '<h3>' + manga.title + '</h3>';
         var author = '<h5> Author: ' + manga.author + '</h5>';
         var artist = '<h5> Artist: ' + manga.artist + '</h5>';
         var categories = '<ul><li>' + manga.categories.join('</li><li>') + '</li>';
         var description = '<p>' + manga.description + '</p>';
-        var chapters = '<ul>';
+        var chapters = '<ul> <h5>Chapters</h5>';
         for (var i = manga.chapters.length - 1; i >= 0; i--) {
-            chapters += '<li>' + manga.chapters[i][0] + ': ' + manga.chapters[i][2] + '</li>';
+            chapters += '<li class="chapters" id="' + manga.chapters[i][3] + '">' + manga.chapters[i][0] + ': ' + manga.chapters[i][2] + '</li>';
         }
         chapters += '</ul>';
 
         var view = image + title + author + artist + categories + description + chapters;
         this.renderString(view);
+
+        var chapterNodes = $('.chapters');
+        console.log(chapterNodes);
+        for (var j = chapterNodes.length - 1; j >= 0; j--) {
+            chapterNodes[j].onclick = loadChapter;
+        }
+
+        function loadChapter() {
+            page('/chapter/' + this.id);
+        }
+    },
+
+    chapter: function(chapterInfo) {
+        this.renderString('chapter loaded');
+        var images = '';
+
+        for (var i = chapterInfo.images.length - 1; i >= 0; i--) {
+            images += '<img src="https://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
+        }
+        this.renderString(images);
     },
 
     startLoading: function (caller, process) {

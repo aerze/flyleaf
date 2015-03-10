@@ -127,9 +127,14 @@ var Flyleaf = function() {
     };
 
     this.manga = function (req) {
-        console.log(req.params);
         data.getMangaInfo(req.params.id, function (mangaInfo) {
             display.manga(mangaInfo);
+        });
+    };
+
+    this.chapter = function (req) {
+        data.getChapterInfo(req.params.id, function (chapterInfo) {
+            display.chapter(chapterInfo);
         });
     };
 
