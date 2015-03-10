@@ -52,8 +52,8 @@ var MangaEden = function() {
         if (mangaId === undefined) return 'ERROR:: no mangaId';
 
         var path = 'http://www.mangaeden.com/api/manga/'+ mangaId +'/';
-        netto.proxy(path, function(data) {
-            var manga = parse(data);
+        netto.get(path, function(data) {
+            var manga = JSON.parse(data);
             console.log('mangaEden.js:: Got Manga: ' + manga.title);
             callback(manga);
         });
@@ -63,7 +63,7 @@ var MangaEden = function() {
         if (chapterId === undefined) return 'ERROR:: no chapterId';
 
         var path = 'http://www.mangaeden.com/api/chapter/'+ chapterId +'/';
-        netto.proxy(path, function(data) {
+        netto.get(path, function(data) {
             var chapter = parse(data);
             var pageLinks = [];
             console.log('mangaEden.js:: Got Pages: ' + chapter.images.length);

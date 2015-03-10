@@ -102,7 +102,7 @@ var Flyleaf = function() {
         });
     };
 
-    this.search = function(path) {
+    this.search = function() {
         init(function(err, dbInfo) {
             if (err) console.log(err);
             if (dbInfo.books.doc_count > 0) {
@@ -124,6 +124,13 @@ var Flyleaf = function() {
 
     this.aboutUs = function () {
         display.renderString('Twitter: @mythrilco');
+    };
+
+    this.manga = function (req) {
+        console.log(req.params);
+        data.getMangaInfo(req.params.id, function (mangaInfo) {
+            display.manga(mangaInfo);
+        });
     };
 
     this._getManga = function() {

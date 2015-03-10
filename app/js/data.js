@@ -122,6 +122,15 @@ var Data = function() {
             });
         }
     };
+
+
+
+
+
+    this.getMangaInfo = function (id, callback) {
+        console.log('data proxy called');
+        mangaEden.getManga(id, callback);
+    };
 };
 
 

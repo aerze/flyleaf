@@ -29,7 +29,7 @@ var Display = {
         // display list after each filter change
 
         this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
-        // var subView = document.querySelector('.sub-view');
+
         var searchList =  [];
         searchList = manga;
         console.log(searchList.length);
@@ -54,8 +54,7 @@ var Display = {
 
             if (all) {
                 for (var i = list.length - 1; i >= 0; i--) {
-                    var item = document.createElement('li');
-                    item.innerHTML = list[i].doc.title;
+                    var item = new Item(list[i].doc);
                     listContainer.appendChild(item);
                 }
             } else {
@@ -73,6 +72,37 @@ var Display = {
             }
             view.appendChild(listContainer);
         }
+
+        function Item (doc) {
+            var item = document.createElement('li');
+            item.innerHTML = doc.title;
+            item.id = doc._id;
+            item.alias = doc.alias;
+            item.onclick =  function() {
+                page('/manga/' + this.id);
+            };
+            return item;
+        }
+    },
+
+    manga: function(manga) {
+        console.log(manga);
+        this.renderString('manga loaded');
+        
+        var image = '<img src="https://cdn.mangaeden.com/mangasimg/' + manga.image + '"></img>';
+        var title = '<h3>' + manga.title + '</h3>';
+        var author = '<h5> Author: ' + manga.author + '</h5>';
+        var artist = '<h5> Artist: ' + manga.artist + '</h5>';
+        var categories = '<ul><li>' + manga.categories.join('</li><li>') + '</li>';
+        var description = '<p>' + manga.description + '</p>';
+        var chapters = '<ul>';
+        for (var i = manga.chapters.length - 1; i >= 0; i--) {
+            chapters += '<li>' + manga.chapters[i][0] + ': ' + manga.chapters[i][2] + '</li>';
+        }
+        chapters += '</ul>';
+
+        var view = image + title + author + artist + categories + description + chapters;
+        this.renderString(view);
     },
 
     startLoading: function (caller, process) {
