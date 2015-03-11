@@ -7,7 +7,7 @@ var Flyleaf = function() {
 
     var _manga = [];
     var _myBooks = [];
-    var _dbInfo = {};
+    var _dbInfo = { books: { doc_count: 0 }, myBooks: { doc_count: 0} };
     var _initalLoad = false;
 
     var init = function (callback) {
@@ -16,12 +16,12 @@ var Flyleaf = function() {
         
         display.startLoading('Flyleaf', 'Initialization');
         loadDB(function (err, dbInfo) {
-            if (err) console.log(err);
+            dbInfo = dbInfo || { books: { doc_count: 0 }, myBooks: { doc_count: 0} };
+            if (err) new problem(err);
 
             loadManga(function (err) {
                 if (err) console.log(err);
-
-                if (dbInfo.myBooks.doc_count > 0) {
+                if (dbInfo !== null && dbInfo.myBooks.doc_count > 0) {
 
                     loadMyBooks(function (err) {
                         if (err) console.log(err);
