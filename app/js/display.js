@@ -60,12 +60,10 @@ var Display = {
             } else {
                 for (var i = list.length - 1; i >= 0; i--) {
                     if (list[i].doc.title.toLowerCase().indexOf(filter) > -1) {
-                        var item = document.createElement('li');
-                        item.innerHTML = list[i].doc.title;
+                        var item = new Item(list[i].doc);
                         listContainer.appendChild(item);
                     } else if (list[i].doc.alias.indexOf(filter) > -1) {
-                        var item = document.createElement('li');
-                        item.innerHTML = list[i].doc.title;
+                        var item = new Item(list[i].doc);
                         listContainer.appendChild(item);
                     }
                 }
