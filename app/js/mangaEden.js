@@ -1,31 +1,22 @@
 'use strict';
 
 var MangaEden = function() {
-    var netto = new Netto();
-    var parse = function(data) {
-        return JSON.parse(JSON.parse(data));
-    };
+    var net = Object.create(Net);
 
-    
-    this.search = function(name) {
-        console.log(this);
-    };
-
-    // TODO: look into removeing proxy
-    this.getList = function(page, pageSize, callback) {
-        page = page || 0;
-        pageSize = pageSize || 16000;
-        var path = 'http://www.mangaeden.com/api/list/0/?p=' + page + '&l='+pageSize;
-        netto.get(path, function(data) {
-            var list = parse(data);
-            console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
-            callback(list);
-        });
-    };
+    // this.getList = function(page, pageSize, callback) {
+    //     page = page || 0;
+    //     pageSize = pageSize || 16000;
+    //     var path = 'http://www.mangaeden.com/api/list/0/?p=' + page + '&l='+pageSize;
+    //     net.get(path, function(data) {
+    //         var list = parse(data);
+    //         console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
+    //         callback(list);
+    //     });
+    // };
 
     this.getListAll = function(callback) {
         var path = 'http://www.mangaeden.com/api/list/0/';
-        netto.get(path, function(data) {
+        net.get(path, function(data) {
             var list = JSON.parse(data);
             
             console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
@@ -52,7 +43,7 @@ var MangaEden = function() {
         if (mangaId === undefined) return 'ERROR:: no mangaId';
 
         var path = 'http://www.mangaeden.com/api/manga/'+ mangaId +'/';
-        netto.get(path, function(data) {
+        net.get(path, function(data) {
             var manga = JSON.parse(data);
             console.log('mangaEden.js:: Got Manga: ' + manga.title);
             callback(manga);
@@ -63,7 +54,7 @@ var MangaEden = function() {
         if (chapterId === undefined) return 'ERROR:: no chapterId';
 
         var path = 'http://www.mangaeden.com/api/chapter/'+ chapterId +'/';
-        netto.get(path, function(data) {
+        net.get(path, function(data) {
             var chapter = JSON.parse(data);
             callback(chapter);
         });

@@ -4,52 +4,76 @@
 		"selected_items":
 		[
 			[
-				"sea",
-				"searchList"
+				"complie",
+				"compile"
 			],
 			[
 				"render",
-				"renderList"
-			],
-			[
-				"sub",
-				"subView"
-			],
-			[
-				"doc",
-				"doc_count"
-			],
-			[
-				"main",
-				"main-view"
-			],
-			[
-				"re",
 				"renderString"
 			],
 			[
-				"_",
-				"_myBooks"
+				"man",
+				"mangaEden"
+			],
+			[
+				"in",
+				"innerHTML"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"list",
+				"listContainer"
+			],
+			[
+				"prt",
+				"port"
+			],
+			[
+				"end",
+				"endLoading"
 			],
 			[
 				"load",
 				"loadMyBooks"
 			],
 			[
+				"_",
+				"_initalLoad"
+			],
+			[
+				"pro",
+				"process"
+			],
+			[
+				"manga",
+				"mangaList"
+			],
+			[
+				"My",
+				"myBooks"
+			],
+			[
 				"fun",
 				"function"
 			],
 			[
-				"manga",
-				"mangaArray"
+				"main",
+				"mainView"
 			],
 			[
-				"sor",
-				"sorted"
+				"s",
+				"startIndex"
 			],
 			[
-				"de",
-				"descending"
+				"fly",
+				"flyleafProto"
+			],
+			[
+				"ma",
+				"mainView"
 			],
 			[
 				"mak",
@@ -62,6 +86,10 @@
 			[
 				"te",
 				"text-decoration"
+			],
+			[
+				"sea",
+				"searchButton"
 			],
 			[
 				"sear",
@@ -210,6 +238,10 @@
 			[
 				"cell",
 				"cellsize"
+			],
+			[
+				"re",
+				"require"
 			],
 			[
 				"get",
@@ -388,77 +420,90 @@
 	"buffers":
 	[
 		{
-			"file": "app/js/flyleaf.js",
-			"settings":
-			{
-				"buffer_size": 4432,
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "<!DOCTYPE html>\n<html>\n<head>\n    <title>Flyleaf.co</title>\n     <!--Import materialize.css-->\n     <link type=\"text/css\" rel=\"stylesheet\" href=\"materialize/css/materialize.min.css\"  media=\"screen,projection\"/>\n     <link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n     <!--Let browser know website is optimized for mobile-->\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/>\n</head>\n\n<body>\n    <div class=\"navbar-fixed\">\n        <nav>\n          <div class=\"nav-wrapper green\">\n            <div class=\"col s12\">\n              <a class=\"brand-logo\">\n                <img class=\"logo\" src=\"images/flyleaf.png\">\n              </a>\n              <a href=\"/menu\" data-activates=\"mobile-demo\" class=\"button-collapse\">\n              <i c0lass=\"mdi-navigation-menu\"></i></a>\n              <ul class=\"right hide-on-med-and-down\">\n                <li><a href=\"./myBooks\">My Books</a></li>\n                <li><a href=\"./search\">Search</a></li>\n                <li><a href=\"./settings\">Settings</a></li>\n                <li><a href=\"./aboutUs\">About Us</a></li>\n              </ul>\n              <ul class=\"side-nav\" id=\"mobile-demo\">\n                <li><a href=\"./myBooks\">My Books</a></li>\n                <li><a href=\"./search\">Search</a></li>\n                <li><a href=\"./settings\">Settings</a></li>\n                <li><a href=\"./aboutUs\">About Us</a></li>\n              </ul>\n            </div>\n          </div>\n        </nav>\n    </div>\n\n    <div class=\"main-view\">\n        Loading...\n    </div>\n\n\n\n\n\n\n\n\n\n<!-- VENDOR JS -->\n     <!--Import jQuery before materialize.js-->\n     <!-- // <script type=\"text/javascript\" src=\"https://code.jquery.com/jquery-2.1.1.min.js\"></script> -->\n      <script type=\"text/javascript\" src=\"js/jquery.js\"></script>\n      <script type=\"text/javascript\" src=\"materialize/js/materialize.min.js\"></script>\n      <script type=\"text/javascript\" src='js/pouchdb.js'></script>\n      <script type=\"text/javascript\" src=\"js/page.js\"></script>\n\n<!-- LOCAL JS -->\n      <script type=\"text/javascript\" src=\"js/dev.js\"></script>\n      <script type=\"text/javascript\" src=\"js/net.js\"></script>\n      <script type=\"text/javascript\" src=\"js/mangaEden.js\"></script>\n      <!-- <script type=\"text/javascript\" src=\"js/data.js\"></script>\n      <script type=\"text/javascript\" src=\"js/display.js\"></script>\n      <script type=\"text/javascript\" src=\"js/flyleaf.js\"></script>\n      <script type=\"text/javascript\" src=\"js/init.js\"></script> -->\n      <script type=\"text/javascript\">\n        $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70, closeOnClick: true});\n      </script>\n\n</body>\n</html>",
 			"file": "app/index.html",
+			"file_size": 2691,
+			"file_write_time": 130711179969732721,
 			"settings":
 			{
-				"buffer_size": 2686,
-				"line_ending": "Windows"
+				"buffer_size": 2692,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/data.js",
+			"file": "app/js/dev.js",
 			"settings":
 			{
-				"buffer_size": 4499,
-				"line_ending": "Windows"
+				"buffer_size": 912,
+				"line_ending": "Unix",
+				"name": "error.js"
 			}
 		},
 		{
-			"file": "app/js/display.js",
+			"file": "app/css/main.css",
 			"settings":
 			{
-				"buffer_size": 4762,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Procfile",
-			"settings":
-			{
-				"buffer_size": 18,
-				"line_ending": "Windows",
-				"name": "web: node index.js"
-			}
-		},
-		{
-			"file": "index.js",
-			"settings":
-			{
-				"buffer_size": 354,
-				"line_ending": "Windows"
+				"buffer_size": 28,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "app/js/mangaEden.js",
 			"settings":
 			{
-				"buffer_size": 2622,
-				"line_ending": "Windows"
+				"buffer_size": 2170,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/netto.js",
+			"file": "app/js/data.js",
 			"settings":
 			{
-				"buffer_size": 703,
-				"line_ending": "Windows"
+				"buffer_size": 4653,
+				"line_ending": "Unix",
+				"name": "data.js"
 			}
 		},
 		{
-			"contents": "<div class=\"button-group\"><button class=\"waves-effect waves-light btn\"> POP </button><button class=\"waves-effect waves-light btn\"> ⇵ </button></div>",
+			"file": "app/js/init.js",
 			"settings":
 			{
-				"buffer_size": 148,
-				"line_ending": "Windows",
-				"name": "<div class=\"button-group\"><button class=\"waves-eff"
+				"buffer_size": 368,
+				"line_ending": "Unix",
+				"name": "routing.js"
+			}
+		},
+		{
+			"file": "app/js/flyleaf.js",
+			"settings":
+			{
+				"buffer_size": 4722,
+				"line_ending": "Unix",
+				"name": "flyleafHandler.sj"
+			}
+		},
+		{
+			"file": "app/js/display.js",
+			"settings":
+			{
+				"buffer_size": 5631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/aerze/projects/desuka/public/js/megane.js",
+			"settings":
+			{
+				"buffer_size": 1306,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "TODO.md",
+			"settings":
+			{
+				"buffer_size": 991,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -473,6 +518,18 @@
 				"View: Toggle Side Bar"
 			],
 			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
 				"mar",
 				"Markdown Preview: Preview in Browser"
 			],
@@ -483,10 +540,6 @@
 			[
 				"ma",
 				"Markdown Preview: Preview in Browser"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"sid",
@@ -541,7 +594,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 457.0
 	},
 	"console":
 	{
@@ -563,25 +616,36 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/aerze/projects/flyleaf"
+		"/home/aerze/projects/flyleaf",
+		"/home/aerze/projects/flyleaf/app",
+		"/home/aerze/projects/flyleaf/app/css",
+		"/home/aerze/projects/flyleaf/app/js"
 	],
 	"file_history":
 	[
-		"/C/Users/aerze/projects/flyleaf/app/materialize/js/materialize.js",
-		"/C/Users/aerze/projects/flyleaf/app/js/routing.js",
-		"/C/Users/aerze/Desktop/keyboard.html",
-		"/C/Users/aerze/projects/flyleaf/app/index.html",
-		"/home/aerze/projects/alec/index.js",
+		"/home/aerze/projects/manga/index.js",
+		"/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/aerze/projects/flyleaf/app/js/net.js",
+		"/home/aerze/projects/flyleaf/app/test/test.json",
+		"/home/aerze/projects/flyleaf/node_modules/express/History.md",
+		"/home/aerze/Documents/notes/AngularJS-directives.note",
 		"/home/aerze/projects/flyleaf/index.js",
+		"/home/aerze/projects/flyleaf/app/css/main.css",
+		"/home/aerze/projects/flyleaf/app/materialize/font/material-design-icons/Material-Design-Icons.svg",
+		"/home/aerze/projects/desuka/public/js/mangaEden.js",
+		"/home/aerze/projects/flyleaf/app/js/.jshintrc",
+		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/.jshintrc",
+		"/home/aerze/projects/flyleaf/.gitignore",
+		"/home/aerze/projects/flyleaf/app/js/display.js",
+		"/home/aerze/projects/flyleaf/app/materialize/css/materialize.css",
+		"/run/user/1000/gvfs/sftp:host=10.10.4.9/root/bin/npm",
+		"/home/aerze/projects/alec/index.js",
 		"/home/aerze/projects/base/index.js",
 		"/home/aerze/projects/base/package.json",
 		"/home/aerze/projects/flyleaf/README.md",
 		"/home/aerze/projects/flyleaf/TODO.md",
 		"/home/aerze/projects/flyleaf/TODO.txt",
-		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/.jshintrc",
-		"/home/aerze/projects/manga/index.js",
 		"/home/aerze/Documents/Phoneware/Notes/TODO",
-		"/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/aerze/Documents/Phoneware/mysql/LifelockDrops.csv",
 		"/home/aerze/projects/vicitools/routes.js",
 		"/home/aerze/projects/vicitools/mysqlTesting.js",
@@ -686,19 +750,11 @@
 		"/C/Users/Gus/Documents/FileTransfer",
 		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/SID-{10001,,12756828160}/timeProfilingData.json",
 		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{00000731-0001-0001-0000-000000000000}/journal",
-		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{0000B837-0001-0001-0000-000000000000}/mraid.js",
-		"/C/Users/Gus/Desktop/motoX repair.js",
-		"/C/Users/Gus/Node/contractors/node_modules/morgan/README.md",
-		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/hosts",
-		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/INSTALLING INSTRUCTIONS.txt",
-		"/C/Riot Games/League of Legends/Config/game.cfg",
-		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/HOSTS SETUP.pdf",
-		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/HOSTS SET-UP/IMPORTANT SO READ FIRST.txt",
-		"/C/Backup/Programs/Adobe/Adobe After Effects CS5.5/UPDATING THE APPS.txt"
+		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{0000B837-0001-0001-0000-000000000000}/mraid.js"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -713,17 +769,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"&x#21F5",
-			"\\n",
-			"console.log",
-			"\\n",
-			" ",
-			";		|",
-			"charCodeS",
-			"keyCode",
-			"],[",
-			",",
-			"][",
+			"mangaeden",
+			"netto",
+			"problem",
+			"complie",
+			"restore",
+			"_manga",
+			"bookArray",
+			"i",
 			"topten",
 			"LifeLock",
 			",",
@@ -792,62 +845,64 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 7,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/js/flyleaf.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4432,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2686,
+						"buffer_size": 2692,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								604,
-								604
+								2675,
+								2675
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 690.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/js/dev.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 912,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								81,
+								81
+							]
+						],
+						"settings":
+						{
+							"auto_name": "error.js",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"spell_check": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -859,11 +914,11 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/js/data.js",
-					"semi_transient": false,
+					"file": "app/css/main.css",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 4499,
+						"buffer_size": 28,
 						"regions":
 						{
 						},
@@ -876,161 +931,133 @@
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 735.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "app/js/display.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4762,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 1480.0,
-						"translation.y": 117.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Procfile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								18,
-								18
-							]
-						],
-						"settings":
-						{
-							"auto_name": "web: node index.js",
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 354,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "app/js/mangaEden.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2622,
+						"buffer_size": 2170,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								78,
+								78
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 240.0,
+						"translation.y": 57.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "app/js/netto.js",
+					"buffer": 4,
+					"file": "app/js/data.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 703,
+						"buffer_size": 4653,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								703,
-								703
+								3948,
+								3948
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+							"auto_name": "data.js",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/init.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "routing.js",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/js/flyleaf.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4722,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								298,
+								298
+							]
+						],
+						"settings":
+						{
+							"auto_name": "flyleafHandler.sj",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"spell_check": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1040,32 +1067,93 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
+					"file": "app/js/display.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 148,
+						"buffer_size": 5631,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								148,
-								0
+								3043,
+								3043
 							]
 						],
 						"settings":
 						{
-							"auto_name": "<div class=\"button-group\"><button class=\"waves-eff",
-							"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/home/aerze/projects/desuka/public/js/megane.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								669,
+								669
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 57.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "TODO.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 991,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								260,
+								260
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1073,7 +1161,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1113,7 +1201,7 @@
 	"project": "flyleaf.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1121,6 +1209,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"html",
+				"app/index.html"
+			],
+			[
+				"dis",
+				"app/js/display.js"
+			],
 			[
 				"sta",
 				"local_modules/Statement.js"

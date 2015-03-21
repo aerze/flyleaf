@@ -1,16 +1,22 @@
 'use strict';
 /*jshint browser: true */
-/*global Data: true, PouchDB, confirm, alert, page, MangaEden*/
+/*global Data: true, PouchDB, confirm, alert, MangaEden*/
 var Data = function() {
     var display = Object.create(Display);
     var mangaEden = new MangaEden();
     var info = {};    
     var db = {
-        books: new PouchDB('flyleaf_books'),
-        myBooks: new PouchDB('flyleaf_myBooks')
+        books: {},
+        myBooks: {}
     };
-    this._DB = db;
 
+    this._DB = db;
+    
+    this.init = function(callback) {
+        db.books = new PouchDB('flyleaf_books');
+        db.myBooks = new PouchDB('flyleaf_myBooks');
+    };
+    this.init();
     this.exists = function(callback) {
         getDBInfo(function (dbInfo) {
             if (dbInfo.books.doc_count > 0) callback(dbInfo);
@@ -20,6 +26,7 @@ var Data = function() {
 
     var getDBInfo = function(callback) {
         var dbInfo = {};
+        console.log(db);
         db.books.info(function (err, info) {
             dbInfo.books = info;
             if (dbInfo.myBooks) {
