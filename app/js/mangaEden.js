@@ -3,17 +3,6 @@
 var MangaEden = function() {
     var net = Object.create(Net);
 
-    // this.getList = function(page, pageSize, callback) {
-    //     page = page || 0;
-    //     pageSize = pageSize || 16000;
-    //     var path = 'http://www.mangaeden.com/api/list/0/?p=' + page + '&l='+pageSize;
-    //     net.get(path, function(data) {
-    //         var list = parse(data);
-    //         console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
-    //         callback(list);
-    //     });
-    // };
-
     this.getListAll = function(callback) {
         var path = 'http://www.mangaeden.com/api/list/0/';
         net.get(path, function(data) {
@@ -60,6 +49,3 @@ var MangaEden = function() {
         });
     };
 };
-
-
-// console.log('mangaEden.js:: loaded');

@@ -2,50 +2,49 @@
 /*jshint browser: true */
 /*global Data: true, PouchDB, confirm, alert, MangaEden*/
 var Data = function() {
-    var display = Object.create(Display);
     var mangaEden = new MangaEden();
-    var info = {};    
+    var dbInfo = {};
     var db = {
         books: {},
         myBooks: {}
     };
 
     this._DB = db;
-    
-    this.init = function(callback) {
+    this._dbInfo = dbInfo;
+
+    this.connect = function(callback) {
         db.books = new PouchDB('flyleaf_books');
         db.myBooks = new PouchDB('flyleaf_myBooks');
     };
-    this.init();
-    this.exists = function(callback) {
-        getDBInfo(function (dbInfo) {
-            if (dbInfo.books.doc_count > 0) callback(dbInfo);
-            else callback(null);
-        });
-    };
 
-    var getDBInfo = function(callback) {
-        var dbInfo = {};
-        console.log(db);
+    // This is kinda complicated (to me) but basically it checks to see
+    // if both of the databases already exist, but if they don't
+    // it loads at lead the new manga information from MangaEden
+    this.getDBInfo = function (callback) {
         db.books.info(function (err, info) {
-            dbInfo.books = info;
-            if (dbInfo.myBooks) {
-                info = dbInfo;
-                callback(dbInfo);
+            if (err) callback(err, null);
+            else {
+                dbInfo.books = info;
+                if (dbInfo.books.doc_count <= 0) {
+                    pullMangaList(function (err, total) {
+                        if (err) console.log(err);
+                        else (dbInfo.books.doc_count = total);
+                    });
+                }
+                if (dbInfo.myBooks) callback(null, dbInfo);
             }
         });
-
         db.myBooks.info(function (err, info) {
-            dbInfo.myBooks = info;
-            if (dbInfo.books) {
-                info = dbInfo;
-                callback(dbInfo);
+            if (err) callback(err, null);
+            else {
+                dbInfo.myBooks = info;
+                if (dbInfo.books) callback(null, dbInfo);
             }
         });
     };
 
     this.addBook = function(title, completed) {
-        throw NOTYET;
+        throw new Error('Not Yet');
         var book = {
             _id: new Date().toISOString(),
             title: title,
@@ -58,45 +57,30 @@ var Data = function() {
         });
     };
 
-    this.restoreAllManga = function (callback) {
-        // check to see if the books are in pouch, otherwise get them, return them, and put them in.
+    var pullMangaList = function (callback) {
         mangaEden.getListAll(function (manga, total) {
-            display.startLoading('Data', 'Manga');
-
-            db.books.info(function (err, info) {
-                console.log(total, info.doc_count);
-                if (info.doc_count !== total) {
-                    db.books.destroy(function (err) {
-                        console.log('data.js:: db.books deleted!');
-                        if (err) callback(err);
-
-                        db.books = new PouchDB('flyleaf_books');
-                        db.books.bulkDocs(manga, function (err) {
-                            if (err) callback(err);
-                            else callback(null);
-                            // else page('/manga');
-                        });
-                    });
-                } else {
-                    console.log('data.js:: DB is up-to-date');
-                    callback(null);
-                    // page('/manga');
-                }
+            db.books.destroy(function (err) {
+                if (err) callback(err, null);
+                db.books = new PouchDB('flyleaf_books');
+                db.books.bulkDocs(manga, function (err) {
+                    if (err) callback(err, null);
+                    else callback(null, total);
+                });
             });
         });
     };
 
     this.getMyBooks = function (callback) {
         db.myBooks.allDocs({include_docs: true, descending: false}, function (err, docs) {
-            if (err) throw err;
-            callback(docs.rows);
+            if (err) callback(err, null);
+            else callback(null, docs.rows);
         });
     };
 
     this.getAllManga = function (callback) {
         db.books.allDocs({include_docs: true, descending: false}, function (err, docs) {
-            if (err) throw err;
-            callback(docs.rows);
+            if (err) callback(err, null);
+            else callback(null, docs.rows);
         });
     };
 
@@ -112,16 +96,21 @@ var Data = function() {
             descending: true
         };
 
-
         db.books.query(map, options, function (err, response) {
             if (err) throw err;
             callback(response);
         });
     };
 
-    this.resetDB = function() {
+    this.removeDB = function(override) {
+        if (override) {
+            remove();
+            return;
+        }        
         var agree = confirm('Would you like to delete the whole Database? \n Only press ok if you know what you\'re doing.');
-        if (agree) {
+        if (agree) remove();
+
+        function remove() {
             db.books.destroy(function (err) {
                 if (err) throw err;
                 console.log('DB gone!');
@@ -129,10 +118,6 @@ var Data = function() {
             });
         }
     };
-
-
-
-
 
     this.getMangaInfo = function (id, callback) {
         mangaEden.getManga(id, callback);
@@ -143,7 +128,7 @@ var Data = function() {
     };
 };
 
-
+// returned from a getManga request
 // a: "1001"                    =alias
 // c: Array[7]                  =category
     // 0: "Adventure"

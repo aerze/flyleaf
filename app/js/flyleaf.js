@@ -1,121 +1,55 @@
-'use strict';
 /*global Display, Data, page, console*/
+'use strict';
 
 var Flyleaf = function() {
-    var display = Object.create(Display);
     var data = new Data();
+    this.data = data;
 
-    var _manga = [];
-    var _myBooks = [];
-    var _dbInfo = { books: { doc_count: 0 }, myBooks: { doc_count: 0} };
+    var display = new Display(data);
+    
+    var _dbInfo = {};
     var _initalLoad = false;
+    
+    // Runs on every page change
+    this.init = function (context, next) {
+        if (_initalLoad) { 
+            console.log('Pouch is already connected.');
+            next();
+        } else {
+            console.log('initializing *bbbzzzpptt*');
+            console.log('connecting to pouchDB');
+            data.connect();
 
-    var init = function (callback) {
-        console.log(_initalLoad);
-        if (_initalLoad)  return callback(null, _dbInfo);
-        
-        display.startLoading('Flyleaf', 'Initialization');
-        loadDB(function (err, dbInfo) {
-            dbInfo = dbInfo || { books: { doc_count: 0 }, myBooks: { doc_count: 0} };
-            if (err) new problem(err);
-
-            loadManga(function (err) {
-                if (err) console.log(err);
-                if (dbInfo !== null && dbInfo.myBooks.doc_count > 0) {
-
-                    loadMyBooks(function (err) {
-                        if (err) console.log(err);
-                        complete();
-                    });
-
-                } else {
-                    complete();
-                }
-                
-                function complete() {
-                    _initalLoad = true;
-                    console.log(dbInfo);
-                    display.endLoading('Flyleaf', 'Initialization');
-                    callback(null, dbInfo);
-                }
-            });
-        });
-    };
-
-    var loadDB = function (callback) {
-        if (_initalLoad === false) {
-            display.startLoading('Flyleaf', 'Manga:Database');
-            // Checks for existting DB and that books are loaded.
-            data.exists(function (dbInfo) {
-                if (dbInfo) {
-                    display.endLoading('Flyleaf', 'Manga:Database');
-                    callback(null, dbInfo);
-                } else {
-                    data.restoreAllManga(function (err) {
-                        display.endLoading('Flyleaf', 'Manga:Database');
-                        callback(err, dbInfo);
-                    });
-                }
+            data.getDBInfo(function (err, dbInfo) {
+                _dbInfo = dbInfo;
+                _initalLoad = true;
+                next();
             });
         }
     };
 
-    var loadManga = function(callback) {
-        display.startLoading('Flyleaf', 'Manga:LocalMemory');
-        data.getAllManga(function (manga) {
-            _manga = manga;
-            manga = null; //TODO research if making this null helps release the variable.
-            display.endLoading('Flyleaf', 'Manga:LocalMemory');
-            callback(null);
-        });
-    };
-
-    var loadMyBooks = function(callback) {
-        display.startLoading('Flyleaf', 'MyBooks:LocalMemory');
-        data.getMyBooks(function (myBooks) {
-            _myBooks = myBooks;
-            myBooks = null;
-            display.endLoading('Flyleaf', 'MyBooks:LocalMemory');
-            callback(null);
-        });
-    };
-
     this.home = function () {
-        init(function(err, dbInfo) {
-            _dbInfo = dbInfo;
-            display.endLoading('Flyleaf', 'Initialization');
-
             page('/myBooks');
-        });
     };
 
     this.myBooks = function () {
-        init(function(err, dbInfo) {
-            if (err) console.log(err);
-            if (dbInfo.myBooks.doc_count > 0) {
-                display.mangaList(_myBooks, function() {
-                    console.log('Flyleaf:: Displaying MyBooks');
-                });
-            } else {
-                display.error('No Books saved!\nGo to the search page to find some.'); 
-            }
-        });
+        if (data._dbInfo.myBooks.doc_count > 0) {
+            display.mangaList('myBooks', function() {
+                
+            });
+        } else {
+            display.error('No Books saved!<br/>Go to the search page to find some.'); 
+        }
     };
 
     this.search = function() {
-        init(function(err, dbInfo) {
-            if (err) console.log(err);
-            if (dbInfo.books.doc_count > 0) {
-                display.startLoading('Flyleaf', 'Manga:Search');
-                display.search(flyleaf._sortByHits(_manga), function() {
-                    // display.endLoading('Flyleaf', 'MyBooks:Search');
+            if (data._dbInfo.books.doc_count > 0) {
+                display.search('books', function() {
+
                 });
             } else {
-                display.error('No Manga found, I have no idea what happened.\n Contact @mythrilco on Twitter maybe?');
+                display.error('No Manga found, I have no idea what happened.');
             }
-        });
-
-
     };
 
     this.settings = function () {
@@ -123,7 +57,7 @@ var Flyleaf = function() {
     };
 
     this.aboutUs = function () {
-        display.renderString('Twitter: @mythrilco');
+        display.renderString('Twitter: @mythrilco<br/>Weekend Hacker: @aerze @jenniration @nkhilv');
     };
 
     this.manga = function (req) {
@@ -138,15 +72,11 @@ var Flyleaf = function() {
         });
     };
 
-    this._getManga = function() {
-        return _manga;
-    };
-
-    this._sortByHits = function(mangaArray) {
-        var sorted = [];
-        sorted = mangaArray.sort(function (a, b) {
-            return a.doc.hits - b.doc.hits;
-        });
-        return sorted;
-    };
+    // this._sortByHits = function(mangaArray) {
+    //     var sorted = [];
+    //     sorted = mangaArray.sort(function (a, b) {
+    //         return a.doc.hits - b.doc.hits;
+    //     });
+    //     return sorted;
+    // };
 };

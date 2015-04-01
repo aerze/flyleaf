@@ -420,17 +420,6 @@
 	"buffers":
 	[
 		{
-			"contents": "<!DOCTYPE html>\n<html>\n<head>\n    <title>Flyleaf.co</title>\n     <!--Import materialize.css-->\n     <link type=\"text/css\" rel=\"stylesheet\" href=\"materialize/css/materialize.min.css\"  media=\"screen,projection\"/>\n     <link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n     <!--Let browser know website is optimized for mobile-->\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/>\n</head>\n\n<body>\n    <div class=\"navbar-fixed\">\n        <nav>\n          <div class=\"nav-wrapper green\">\n            <div class=\"col s12\">\n              <a class=\"brand-logo\">\n                <img class=\"logo\" src=\"images/flyleaf.png\">\n              </a>\n              <a href=\"/menu\" data-activates=\"mobile-demo\" class=\"button-collapse\">\n              <i c0lass=\"mdi-navigation-menu\"></i></a>\n              <ul class=\"right hide-on-med-and-down\">\n                <li><a href=\"./myBooks\">My Books</a></li>\n                <li><a href=\"./search\">Search</a></li>\n                <li><a href=\"./settings\">Settings</a></li>\n                <li><a href=\"./aboutUs\">About Us</a></li>\n              </ul>\n              <ul class=\"side-nav\" id=\"mobile-demo\">\n                <li><a href=\"./myBooks\">My Books</a></li>\n                <li><a href=\"./search\">Search</a></li>\n                <li><a href=\"./settings\">Settings</a></li>\n                <li><a href=\"./aboutUs\">About Us</a></li>\n              </ul>\n            </div>\n          </div>\n        </nav>\n    </div>\n\n    <div class=\"main-view\">\n        Loading...\n    </div>\n\n\n\n\n\n\n\n\n\n<!-- VENDOR JS -->\n     <!--Import jQuery before materialize.js-->\n     <!-- // <script type=\"text/javascript\" src=\"https://code.jquery.com/jquery-2.1.1.min.js\"></script> -->\n      <script type=\"text/javascript\" src=\"js/jquery.js\"></script>\n      <script type=\"text/javascript\" src=\"materialize/js/materialize.min.js\"></script>\n      <script type=\"text/javascript\" src='js/pouchdb.js'></script>\n      <script type=\"text/javascript\" src=\"js/page.js\"></script>\n\n<!-- LOCAL JS -->\n      <script type=\"text/javascript\" src=\"js/dev.js\"></script>\n      <script type=\"text/javascript\" src=\"js/net.js\"></script>\n      <script type=\"text/javascript\" src=\"js/mangaEden.js\"></script>\n      <!-- <script type=\"text/javascript\" src=\"js/data.js\"></script>\n      <script type=\"text/javascript\" src=\"js/display.js\"></script>\n      <script type=\"text/javascript\" src=\"js/flyleaf.js\"></script>\n      <script type=\"text/javascript\" src=\"js/init.js\"></script> -->\n      <script type=\"text/javascript\">\n        $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70, closeOnClick: true});\n      </script>\n\n</body>\n</html>",
-			"file": "app/index.html",
-			"file_size": 2691,
-			"file_write_time": 130711179969732721,
-			"settings":
-			{
-				"buffer_size": 2692,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "app/js/dev.js",
 			"settings":
 			{
@@ -440,28 +429,11 @@
 			}
 		},
 		{
-			"file": "app/css/main.css",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 28,
+				"buffer_size": 2682,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/mangaEden.js",
-			"settings":
-			{
-				"buffer_size": 2170,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/data.js",
-			"settings":
-			{
-				"buffer_size": 4653,
-				"line_ending": "Unix",
-				"name": "data.js"
 			}
 		},
 		{
@@ -483,18 +455,35 @@
 			}
 		},
 		{
-			"file": "app/js/display.js",
+			"file": "/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 5631,
+				"buffer_size": 231,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/aerze/projects/desuka/public/js/megane.js",
+			"file": "app/js/data.js",
 			"settings":
 			{
-				"buffer_size": 1306,
+				"buffer_size": 4694,
+				"line_ending": "Unix",
+				"name": "data.js"
+			}
+		},
+		{
+			"file": "app/js/mangaEden.js",
+			"settings":
+			{
+				"buffer_size": 2170,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/display.js",
+			"settings":
+			{
+				"buffer_size": 5631,
 				"line_ending": "Unix"
 			}
 		},
@@ -508,11 +497,24 @@
 		}
 	],
 	"build_system": "Packages/User/node.sublime-build",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
+		"height": 117.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
 			[
 				"side",
 				"View: Toggle Side Bar"
@@ -594,7 +596,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 457.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -623,6 +625,11 @@
 	],
 	"file_history":
 	[
+		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/home/aerze/Downloads/sublime-text_build-3083_amd64.deb",
+		"/home/aerze/projects/flyleaf/app/index.html",
+		"/home/aerze/projects/desuka/public/js/megane.js",
+		"/home/aerze/projects/desuka/index.js",
 		"/home/aerze/projects/manga/index.js",
 		"/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/aerze/projects/flyleaf/app/js/net.js",
@@ -663,7 +670,6 @@
 		"/home/aerze/.aws/credentials",
 		"/home/aerze/Downloads/credentials",
 		"/home/aerze/projects/vicitools/local_modules/Statement.js",
-		"/home/aerze/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
 		"/home/aerze/projects/vicitools/public/bower/web-animations-js/tutorial/sample-tutorial.html",
 		"/home/aerze/projects/royal-blue-private/TODO.txt",
 		"/home/aerze/projects/royal-blue-private/index.js",
@@ -746,11 +752,7 @@
 		"/C/Users/Gus/Node/Express4x/package.json",
 		"/C/Users/Gus/Node/Express4x/app.js",
 		"/C/Users/Gus/Documents/forge/views/index.swig",
-		"/C/Users/Gus/Documents/FileTransfer 3.1.4.js",
-		"/C/Users/Gus/Documents/FileTransfer",
-		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/SID-{10001,,12756828160}/timeProfilingData.json",
-		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{00000731-0001-0001-0000-000000000000}/journal",
-		"/C/Users/Gus/AppData/Local/Temp/WPDNSE/{0000B837-0001-0001-0000-000000000000}/mraid.js"
+		"/C/Users/Gus/Documents/FileTransfer 3.1.4.js"
 	],
 	"find":
 	{
@@ -845,42 +847,11 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2692,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2675,
-								2675
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 690.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "app/js/dev.js",
 					"semi_transient": false,
 					"settings":
@@ -909,102 +880,42 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/css/main.css",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 28,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/js/mangaEden.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2170,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								78,
-								78
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 57.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/js/data.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4653,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3948,
-								3948
-							]
-						],
-						"settings":
-						{
-							"auto_name": "data.js",
-							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 1,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2315,
+								2315
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 741.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "app/js/init.js",
 					"semi_transient": false,
 					"settings":
@@ -1030,11 +941,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "app/js/flyleaf.js",
 					"semi_transient": false,
 					"settings":
@@ -1046,8 +957,8 @@
 						"selection":
 						[
 							[
-								298,
-								298
+								1346,
+								1346
 							]
 						],
 						"settings":
@@ -1063,7 +974,98 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/aerze/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								192,
+								192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/data.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4694,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								472
+							]
+						],
+						"settings":
+						{
+							"auto_name": "data.js",
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/js/mangaEden.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 456.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1094,41 +1096,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "/home/aerze/projects/desuka/public/js/megane.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1306,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								669,
-								669
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 57.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
 					"file": "TODO.md",
 					"semi_transient": false,
 					"settings":
@@ -1153,7 +1125,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1198,6 +1170,7 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
 	"project": "flyleaf.sublime-project",
 	"replace":
 	{
@@ -1207,6 +1180,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1227,6 +1201,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1239,6 +1214,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],

@@ -1,14 +1,17 @@
 'use strict';
 
-var Display = {
-    mainView : document.querySelector('.main-view'),
-    renderString: function (string) {
+var Display = function(data) {
+    this.data = data;   
+    this.mainView = document.querySelector('.main-view');
+
+    this.renderString = function (string) {
         this.mainView.innerHTML = string;
-    },
-    renderNode: function (node) {
+    };
+
+    this.renderNode = function (node) {
         this.mainView.innerHTML = '';
         this.mainView.appendChild(node);
-    },
+    };
     // renderList: function (array) {
     //     console.log('display.js:: renderList');
         
@@ -22,9 +25,9 @@ var Display = {
     //     }
 
     //     this.renderNode(list);
-    // },
+    // };
 
-    search: function (manga, callback) {
+    this.search = function (manga, callback) {
         // add search filter
         // display list after each filter change
 
@@ -82,9 +85,9 @@ var Display = {
             };
             return item;
         }
-    },
+    };
 
-    manga: function(manga) {
+    this.manga = function(manga) {
         this.renderString('manga loaded');
         
         // Maybe change to use document.createElement to prevent haivng to loop again though jQ
@@ -115,9 +118,9 @@ var Display = {
         function loadChapter() {
             page('/chapter/' + this.id);
         }
-    },
+    };
 
-    chapter: function(chapterInfo) {
+    this.chapter = function(chapterInfo) {
         this.renderString('chapter loaded');
         var images = '';
 
@@ -125,30 +128,21 @@ var Display = {
             images += '<img src="https://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
         }
         this.renderString(images);
-    },
+    };
 
-    startLoading: function (caller, process) {
+    this.startLoading = function (caller, process) {
         var string = caller + ':: Loading > ' + process; 
         console.log(string);
         this.renderString(string);
-    },
-    endLoading: function (caller, process) {
+    };
+    this.endLoading = function (caller, process) {
         var string = caller + '::  Loaded < ' + process;
         console.log(string);
         this.renderString(string);
-    },
+    };
 
-    error: function (string) {
+    this.error = function (string) {
         this.renderString(string);
-    }
+    };
 
 };
-
-// function View () {
-//     var mainView = document.querySelector('.main-view');
-
-//     this.render = function (context) {
-//         console.log('ROUTER:: Route Set: ' + context.path);
-//         mainView.innerHTML = 'Manga';
-//     };
-// }
