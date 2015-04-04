@@ -28,5 +28,4 @@ node_modules
 .lock-wscript
 
 # Sublime project/workspace files
-.sublime-project
-.sublime-workspace
+*.sublime*
