@@ -32,11 +32,7 @@ var Display = function(data) {
         // display list after each filter change
 
         this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
-
-        var searchList =  [];
-        searchList = manga;
-        console.log(searchList.length);
-
+        // var searchList =  [];
         var inputView = $('#search');
         var subView = $('.sub-view');
         inputView.on('input', function(event) {
@@ -45,35 +41,57 @@ var Display = function(data) {
         });
 
 
-
-        renderList(searchList, '', subView[0]);
-
-        function renderList(list, filter, view) {
-            console.log('rendering');
-            var all = (filter === '') ? true : false ;
-            var listContainer = document.createElement('ul');
-            filter = filter.toLowerCase();
-            view.innerHTML = '';
-
-            if (all) {
-                for (var i = list.length - 1; i >= 0; i--) {
-                    var item = new Item(list[i].doc);
-                    listContainer.appendChild(item);
-                }
+        data.getMangaByHits(function (err, docs) {
+            if (err) {
+                subView[0].innerHTML = err.toString();        
             } else {
-                for (var i = list.length - 1; i >= 0; i--) {
-                    if (list[i].doc.title.toLowerCase().indexOf(filter) > -1) {
-                        var item = new Item(list[i].doc);
-                        listContainer.appendChild(item);
-                    } else if (list[i].doc.alias.indexOf(filter) > -1) {
-                        var item = new Item(list[i].doc);
-                        listContainer.appendChild(item);
-                    }
-                }
+                renderList(docs, subView[0]);
+            }
+        });
+
+
+        function renderList (docs, view) {
+            var listContainer = document.createElement('ul');
+            for (var i = docs.length - 1; i >= 0; i--) {
+                var item = new Item(docs[i]);
+                listContainer.appendChild(item);
             }
             view.appendChild(listContainer);
-            callback();
         }
+        // searchList = manga;
+        // console.log(searchList.length);
+
+
+
+
+        // renderList(searchList, '', subView[0]);
+
+        // function renderList(list, filter, view) {
+        //     console.log('rendering');
+        //     var all = (filter === '') ? true : false ;
+        //     var listContainer = document.createElement('ul');
+        //     filter = filter.toLowerCase();
+        //     view.innerHTML = '';
+
+        //     if (all) {
+        //         for (var i = list.length - 1; i >= 0; i--) {
+        //             var item = new Item(list[i].doc);
+        //             listContainer.appendChild(item);
+        //         }
+        //     } else {
+        //         for (var i = list.length - 1; i >= 0; i--) {
+        //             if (list[i].doc.title.toLowerCase().indexOf(filter) > -1) {
+        //                 var item = new Item(list[i].doc);
+        //                 listContainer.appendChild(item);
+        //             } else if (list[i].doc.alias.indexOf(filter) > -1) {
+        //                 var item = new Item(list[i].doc);
+        //                 listContainer.appendChild(item);
+        //             }
+        //         }
+        //     }
+        //     view.appendChild(listContainer);
+        //     callback();
+        // }
 
         function Item (doc) {
             var item = document.createElement('li');

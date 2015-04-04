@@ -25,6 +25,8 @@ var Flyleaf = function() {
                 _initalLoad = true;
                 next();
             });
+
+            data.indexDB();
         }
     };
 

@@ -1,7 +1,9 @@
 'use strict';
 /*jshint browser: true */
-/*global Data: true, PouchDB, confirm, alert, MangaEden*/
+/*global Data: true, PouchDB, confirm, alert, MangaEden, console*/
 var Data = function() {
+    PouchDB.debug.enable('pouchdb:find');
+
     var mangaEden = new MangaEden();
     var dbInfo = {};
     var db = {
@@ -43,19 +45,19 @@ var Data = function() {
         });
     };
 
-    this.addBook = function(title, completed) {
-        throw new Error('Not Yet');
-        var book = {
-            _id: new Date().toISOString(),
-            title: title,
-            completed: completed
-        };
+    // this.addBook = function(title, completed) {
+    //     throw new Error('Not Yet');
+    //     var book = {
+    //         _id: new Date().toISOString(),
+    //         title: title,
+    //         completed: completed
+    //     };
 
-        db.books.put(book, function (err, result) {
-            if (err) throw err;
-            else console.log(result);
-        });
-    };
+    //     db.books.put(book, function (err, result) {
+    //         if (err) throw err;
+    //         else console.log(result);
+    //     });
+    // };
 
     var pullMangaList = function (callback) {
         mangaEden.getListAll(function (manga, total) {
@@ -84,22 +86,62 @@ var Data = function() {
         });
     };
 
-    this.getMangaByHits = function(callback) {
-        var map = function (doc, emit) {
-            if (doc.hits) {
-                emit(doc.hits);
-            }
-        };
 
-        var options = {
-            include_docs: true, 
-            descending: true
-        };
-
-        db.books.query(map, options, function (err, response) {
-            if (err) throw err;
-            callback(response);
+    this.indexDB = function () {
+        db.books.createIndex({
+            index: {fields: ['hits', 'name']}
+        })
+        .then(function (result) {
+            console.log(result);
+        })
+        .catch(function (err) {
+            console.log(err);
         });
+    };
+
+    this.getIndex = function () {
+        db.books.getIndexes()
+        .then(function (result) {
+            console.log(result);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    };
+
+    this.getMangaByHits = function(callback) {
+        console.log('running');
+
+        db.books.find({
+            selector: {hits: {$exists: true}},
+            sort: [{hits: 'desc'}],
+            limit: 25
+        })
+        .then(function (result) {
+            console.log(result);
+            callback(null, result);
+        })
+        .catch(function (err) {
+            console.log(err);
+            callback(err, null);
+        });
+
+        // var map = function (doc, emit) {
+        //     if (doc.hits) {
+        //         emit(doc.hits);
+        //     }
+        // };
+
+        // var options = {
+        //     include_docs: true, 
+        //     descending: true,
+        //     limit: 25
+        // };
+
+        // db.books.query(map, options, function (err, response) {
+        //     if (err) throw err;
+        //     callback(response);
+        // });
     };
 
     this.removeDB = function(override) {
