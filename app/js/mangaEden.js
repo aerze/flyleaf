@@ -4,11 +4,12 @@ var MangaEden = function() {
     var net = Object.create(Net);
 
     this.getListAll = function(callback) {
+        console.log('MangaEden:: getting mangaList');
         var path = 'http://www.mangaeden.com/api/list/0/';
         net.get(path, function(data) {
             var list = JSON.parse(data);
             
-            console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
+            console.log('MangaEden:: Got List: ' + list.start + '-' + list.end);
 
             var manga = [];
             for (var i = 0; i <= list.manga.length - 1; i+=1) {
@@ -24,6 +25,7 @@ var MangaEden = function() {
                 });
             }
             list.manga = null;
+            console.log('MangaEden:: done, sending back');
             callback(manga, list.total);
         });
     };

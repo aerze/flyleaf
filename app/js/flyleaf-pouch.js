@@ -13,24 +13,20 @@ var Flyleaf = function() {
     // Runs on every page change
     this.init = function (context, next) {
         if (_initalLoad) { 
-            console.log('Forerunner:: already connected.');
+            console.log('fDB is already connected.');
             next();
         } else {
-            console.log('Flyleaf:: initializing *bbbzzzpptt*');
-            console.log('Forerunner:: connecting');
+            console.log('initializing *bbbzzzpptt*');
+            console.log('connecting to fDB');
             data.connect();
 
-            data.loadDB(function (err, count) {
-                if (err) display.error('Database could not be loaded'); 
-                else {
-                    console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
-                    data.indexDB();
-                    _initalLoad = true;
-                    next();
-                }
+            data.loadDB(function (err, dbInfo) {
+                _dbInfo = dbInfo;
+                _initalLoad = true;
+                next();
             });
 
-            // Should probably Index DB here.
+            data.indexDB();
         }
     };
 
@@ -38,12 +34,10 @@ var Flyleaf = function() {
             page('/myBooks');
     };
 
-    this.myBooks = function (context) {
-        console.log('Flyleaf:: at ' + context.path);
-
-        if (data.count('myBooks') > 0) {
+    this.myBooks = function () {
+        if (data._dbInfo.myBooks.doc_count > 0) {
             display.mangaList('myBooks', function() {
-
+                
             });
         } else {
             display.error('No Books saved!<br/>Go to the search page to find some.'); 
@@ -51,7 +45,7 @@ var Flyleaf = function() {
     };
 
     this.search = function() {
-            if (data.count('manga') > 0) {
+            if (data._dbInfo.books.doc_count > 0) {
                 display.search('books', function() {
 
                 });

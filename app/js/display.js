@@ -40,19 +40,21 @@ var Display = function(data) {
             renderList(searchList, event.target.value, subView[0]);
         });
 
+        renderList(data.top(50), subView[0]);
 
-        data.getMangaByHits(function (err, docs) {
-            if (err) {
-                subView[0].innerHTML = err.toString();        
-            } else {
-                renderList(docs, subView[0]);
-            }
-        });
+
+        // data.getMangaByHits(function (err, docs) {
+        //     if (err) {
+        //         subView[0].innerHTML = err.toString();        
+        //     } else {
+                
+        //     }
+        // });
 
 
         function renderList (docs, view) {
             var listContainer = document.createElement('ul');
-            for (var i = docs.length - 1; i >= 0; i--) {
+            for (var i = 0; i <= docs.length - 1; i++) {
                 var item = new Item(docs[i]);
                 listContainer.appendChild(item);
             }

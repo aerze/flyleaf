@@ -1,67 +1,46 @@
 'use strict';
 /*jshint browser: true */
-/*global Data: true, PouchDB, ForerunnerDB, confirm, alert, MangaEden, console*/
+/*global Data: true, PouchDB, confirm, alert, MangaEden, console*/
 var Data = function() {
-
+    PouchDB.debug.enable('pouchdb:find');
 
     var mangaEden = new MangaEden();
     var dbInfo = {};
-    var db = {};
-    var myBooks = {};
-    var manga = {};
-    // this._DB = db;
-    // this._dbInfo = dbInfo;
-    // this._manga = manga;
+    var db = {
+        books: {},
+        myBooks: {}
+    };
 
+    this._DB = db;
+    this._dbInfo = dbInfo;
 
     this.connect = function(callback) {
-
-        db = new ForerunnerDB();
-        myBooks = db.collection('mybooks');
-        manga = db.collection('manga');
+        db.books = new PouchDB('flyleaf_books');
+        db.myBooks = new PouchDB('flyleaf_myBooks');
     };
 
     // This is kinda complicated (to me) but basically it checks to see
     // if both of the databases already exist, but if they don't
     // it loads at lead the new manga information from MangaEden
-    this.loadDB = function (callback) {
-        myBooks.loaded = -1;
-        manga.loaded = -1;
-
-        myBooks.load(function (err) {
+    this.getDBInfo = function (callback) {
+        db.books.info(function (err, info) {
             if (err) callback(err, null);
             else {
-                myBooks.loaded = myBooks.count();
-                if (manga.loaded >= 0 ) {
-                    callback(null, {
-                        myBooks: myBooks.loaded,
-                        manga: manga.loaded
+                dbInfo.books = info;
+                if (dbInfo.books.doc_count <= 0) {
+                    pullMangaList(function (err, total) {
+                        if (err) console.log(err);
+                        else (dbInfo.books.doc_count = total);
                     });
                 }
+                if (dbInfo.myBooks) callback(null, dbInfo);
             }
         });
-
-        manga.load(function (err) {
+        db.myBooks.info(function (err, info) {
             if (err) callback(err, null);
             else {
-                manga.loaded = manga.count();
-
-                if (manga.loaded <= 0) {
-                    console.log('Forerunner:: Loading Manga List');
-                    loadMangaList(function (err, total) {
-                        if (err) console.log(err);
-                        else {
-                            console.log(total);
-                        }
-                    });
-                }
-
-                if (myBooks.loaded >= 0) {
-                    callback(null, {
-                        myBooks: myBooks.loaded,
-                        manga: manga.loaded
-                    });
-                }
+                dbInfo.myBooks = info;
+                if (dbInfo.books) callback(null, dbInfo);
             }
         });
     };
@@ -80,23 +59,17 @@ var Data = function() {
     //     });
     // };
 
-    var loadMangaList = function (callback) {
-        mangaEden.getListAll(function (mangaList, total) {
-            console.log(manga[0]);
-            manga.setData(mangaList);
-            manga.save(function (err) {
+    var pullMangaList = function (callback) {
+        mangaEden.getListAll(function (manga, total) {
+            db.books.destroy(function (err) {
                 if (err) callback(err, null);
-                else {
-                    manga.loaded = total;
-                    console.log(this);
-                    callback(null, total);
-                }
+                db.books = new PouchDB('flyleaf_books');
+                db.books.bulkDocs(manga, function (err) {
+                    if (err) callback(err, null);
+                    else callback(null, total);
+                });
             });
         });
-    };
-
-    this.count = function (dbName) {
-        return db.collection(dbName).count();
     };
 
     this.getMyBooks = function (callback) {
@@ -115,14 +88,15 @@ var Data = function() {
 
 
     this.indexDB = function () {
-        manga.ensureIndex({
-            name:1,
-            hits:1
+        db.books.createIndex({
+            index: {fields: ['hits', 'name']}
+        })
+        .then(function (result) {
+            console.log(result);
+        })
+        .catch(function (err) {
+            console.log(err);
         });
-        manga.save(function (err) {
-            if (err) console.log('ForerunnerDB:: Could not index manga');
-        });
-        console.log('Forerunner:: manga: indexed');
     };
 
     this.getIndex = function () {
@@ -135,22 +109,40 @@ var Data = function() {
         });
     };
 
-    this.top = function (amount, dbName) {
-        dbName = dbName || 'manga';
+    this.getMangaByHits = function(callback) {
+        console.log('running');
 
-        return db.collection(dbName).find({},{
-            $orderBy: {
-                hits: -1
-            },
-        }).slice(0, amount);
-    };
+        // db.books.find({
+        //     selector: {hits: {$exists: true}},
+        //     sort: [{hits: 'desc'}],
+        //     limit: 25
+        // })
+        // .then(function (result) {
+        //     console.log(result);
+        //     callback(null, result);
+        // })
+        // .catch(function (err) {
+        //     console.log(err);
+        //     callback(err, null);
+        // });
 
-    this.getMangaByHits = function() {
-        return manga.find({},{
-            $orderBy: {
-                hits: -1
-            },
-        }).slice(0, 50);
+        var map = function (doc, emit) {
+            if (doc.hits) {
+                emit(doc.hits);
+            }
+        };
+
+        var options = {
+            include_docs: true, 
+            descending: true,
+            limit: 25
+        };
+
+        db.books.query(map, options, function (err, response) {
+            console.log(response);
+            if (err) callback(err, null);
+            else callback(null, response);
+        });
     };
 
     this.removeDB = function(override) {
