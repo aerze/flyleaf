@@ -46,17 +46,19 @@ var Data = function() {
             else {
                 manga.loaded = manga.count();
 
-                if (manga.loaded <= 0) {
+                if (manga.loaded === 0) {
                     console.log('Forerunner:: Loading Manga List');
                     loadMangaList(function (err, total) {
-                        if (err) console.log(err);
+                        if (err) callback(err, null);
                         else {
                             console.log(total);
+                            callback(null, {
+                                myBooks: myBooks.loaded,
+                                manga: manga.loaded
+                            });
                         }
                     });
-                }
-
-                if (myBooks.loaded >= 0) {
+                } else if (myBooks.loaded >= 0) {
                     callback(null, {
                         myBooks: myBooks.loaded,
                         manga: manga.loaded
@@ -191,9 +193,12 @@ var Data = function() {
     this.getMangaInfo = function (id, callback) {
         var book = myBooks.find({_id: id});
         if (book.length > 0) {
-            callback(null, book);
+            callback(null, book[0]);
         } else {
-            mangaEden.getManga(id, callback);
+            mangaEden.getManga(id, function (err, manga) {
+                manga._id = id;
+                callback(err, manga);
+            });
         }
     };
 
@@ -204,6 +209,25 @@ var Data = function() {
         } else {
             mangaEden.getChapter(id, callback);
         }
+    };
+
+    this.checkLibrary = function (id) {
+        var count =  myBooks.count({_id: id});
+        return (count > 0 );
+    };
+
+    this.getLibrary = function (callback) {
+        var library = myBooks.find();
+        if (library === 0) callback(new Error('Library Empty'), null);
+        else callback(null, library);
+    };
+
+    this.saveBook = function (book, callback) {
+        myBooks.insert(book);
+        myBooks.save(function (err) {
+            if (err) callback(err);
+            else callback(null);
+        });
     };
 };
 

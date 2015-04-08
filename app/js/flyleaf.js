@@ -40,20 +40,19 @@ var Flyleaf = function() {
 
     this.myBooks = function (context) {
         console.log('Flyleaf:: at ' + context.path);
-
         if (data.count('myBooks') > 0) {
-            display.mangaList('myBooks', function() {
-
-            });
+            display.library();
         } else {
             display.error('No Books saved!<br/>Go to the search page to find some.'); 
         }
     };
 
     this.search = function() {
-            if (data.count('manga') > 0) {
+        var check = data.count('manga');
+            if (check > 0) {
                 display.search();
             } else {
+                console.log(check);
                 display.error('No Manga found, I have no idea what happened.');
             }
     };
