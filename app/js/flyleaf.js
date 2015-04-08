@@ -52,9 +52,7 @@ var Flyleaf = function() {
 
     this.search = function() {
             if (data.count('manga') > 0) {
-                display.search('books', function() {
-
-                });
+                display.search();
             } else {
                 display.error('No Manga found, I have no idea what happened.');
             }
@@ -69,13 +67,15 @@ var Flyleaf = function() {
     };
 
     this.manga = function (req) {
-        data.getMangaInfo(req.params.id, function (mangaInfo) {
+        data.getMangaInfo(req.params.id, function (err, mangaInfo) {
+            if (err) display.error(err);
             display.manga(mangaInfo);
         });
     };
 
     this.chapter = function (req) {
-        data.getChapterInfo(req.params.id, function (chapterInfo) {
+        data.getChapterInfo(req.params.id, function (err, chapterInfo) {
+            if (err) display.error(err);
             display.chapter(chapterInfo);
         });
     };

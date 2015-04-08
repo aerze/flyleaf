@@ -17,7 +17,7 @@ var Data = function() {
     this.connect = function(callback) {
 
         db = new ForerunnerDB();
-        myBooks = db.collection('mybooks');
+        myBooks = db.collection('myBooks');
         manga = db.collection('manga');
     };
 
@@ -81,7 +81,8 @@ var Data = function() {
     // };
 
     var loadMangaList = function (callback) {
-        mangaEden.getListAll(function (mangaList, total) {
+        mangaEden.getListAll(function (err, mangaList, total) {
+            if (err) callback(err, null);
             console.log(manga[0]);
             manga.setData(mangaList);
             manga.save(function (err) {
@@ -145,6 +146,19 @@ var Data = function() {
         }).slice(0, amount);
     };
 
+    this.search = function (searchString, dbName) {
+        dbName = dbName || 'manga';
+        var re = new RegExp('^' + searchString + '.*', 'i');
+        var list = db.collection(dbName).find({
+            title: re
+        },{
+            $orderBy: {
+                hits: -1
+            }
+        });
+        return list;
+    };
+
     this.getMangaByHits = function() {
         return manga.find({},{
             $orderBy: {
@@ -152,6 +166,10 @@ var Data = function() {
             },
         }).slice(0, 50);
     };
+
+    this.sample = function() {
+        return manga.find()
+    }
 
     this.removeDB = function(override) {
         if (override) {
@@ -171,11 +189,21 @@ var Data = function() {
     };
 
     this.getMangaInfo = function (id, callback) {
-        mangaEden.getManga(id, callback);
+        var book = myBooks.find({_id: id});
+        if (book.length > 0) {
+            callback(null, book);
+        } else {
+            mangaEden.getManga(id, callback);
+        }
     };
 
     this.getChapterInfo = function (id, callback) {
-        mangaEden.getChapter(id, callback);
+        var book = myBooks.find({_id: id});
+        if (book.length > 0) {
+            callback(null, book);
+        } else {
+            mangaEden.getChapter(id, callback);
+        }
     };
 };
 

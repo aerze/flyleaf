@@ -12,47 +12,29 @@ var Display = function(data) {
         this.mainView.innerHTML = '';
         this.mainView.appendChild(node);
     };
-    // renderList: function (array) {
-    //     console.log('display.js:: renderList');
-        
-    //     var list = document.createElement('ul'); 
-    //     for (var i = 0; i <= array.length - 1; i+=1) {
-    //         // var item = document.createElement('li');
-    //         // item.innerHTML = array[i];  
-    //         // list.appendChild(item);
 
-    //         list.appendChild(array[i]);
-    //     }
-
-    //     this.renderNode(list);
-    // };
-
-    this.search = function (manga, callback) {
+    this.search = function () {
         // add search filter
         // display list after each filter change
 
         this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
-        // var searchList =  [];
+        
         var inputView = $('#search');
         var subView = $('.sub-view');
         inputView.on('input', function(event) {
-            console.log('Event fired');
-            renderList(searchList, event.target.value, subView[0]);
+            var searchString = event.target.value;
+            if (searchString === '') {
+                renderList(data.top(25), subView[0]);                
+            } else {
+                renderList(data.search(searchString), subView[0]);
+            }
         });
 
         renderList(data.top(50), subView[0]);
 
-
-        // data.getMangaByHits(function (err, docs) {
-        //     if (err) {
-        //         subView[0].innerHTML = err.toString();        
-        //     } else {
-                
-        //     }
-        // });
-
-
         function renderList (docs, view) {
+            view.innerHTML = '';
+
             var listContainer = document.createElement('ul');
             for (var i = 0; i <= docs.length - 1; i++) {
                 var item = new Item(docs[i]);
@@ -60,40 +42,6 @@ var Display = function(data) {
             }
             view.appendChild(listContainer);
         }
-        // searchList = manga;
-        // console.log(searchList.length);
-
-
-
-
-        // renderList(searchList, '', subView[0]);
-
-        // function renderList(list, filter, view) {
-        //     console.log('rendering');
-        //     var all = (filter === '') ? true : false ;
-        //     var listContainer = document.createElement('ul');
-        //     filter = filter.toLowerCase();
-        //     view.innerHTML = '';
-
-        //     if (all) {
-        //         for (var i = list.length - 1; i >= 0; i--) {
-        //             var item = new Item(list[i].doc);
-        //             listContainer.appendChild(item);
-        //         }
-        //     } else {
-        //         for (var i = list.length - 1; i >= 0; i--) {
-        //             if (list[i].doc.title.toLowerCase().indexOf(filter) > -1) {
-        //                 var item = new Item(list[i].doc);
-        //                 listContainer.appendChild(item);
-        //             } else if (list[i].doc.alias.indexOf(filter) > -1) {
-        //                 var item = new Item(list[i].doc);
-        //                 listContainer.appendChild(item);
-        //             }
-        //         }
-        //     }
-        //     view.appendChild(listContainer);
-        //     callback();
-        // }
 
         function Item (doc) {
             var item = document.createElement('li');
@@ -109,34 +57,72 @@ var Display = function(data) {
 
     this.manga = function(manga) {
         this.renderString('manga loaded');
-        
+        var main = document.createElement('div');
         // Maybe change to use document.createElement to prevent haivng to loop again though jQ
+        var _image = document.createElement('img');
+            _image.src = 'https://cdn.mangaeden.com/mangasimg/' + manga.image;
+        main.appendChild(_image);
+        // var image = '<img src="https://cdn.mangaeden.com/mangasimg/' + manga.image + '"></img>';
 
-        var image = '<img src="https://cdn.mangaeden.com/mangasimg/' + manga.image + '"></img>';
-        var title = '<h3>' + manga.title + '</h3>';
-        var author = '<h5> Author: ' + manga.author + '</h5>';
-        var artist = '<h5> Artist: ' + manga.artist + '</h5>';
-        var categories = '<ul><li>' + manga.categories.join('</li><li>') + '</li>';
-        var description = '<p>' + manga.description + '</p>';
-        var chapters = '<ul> <h5>Chapters</h5>';
+        var _title = createElement('h3', manga.title);
+        main.appendChild(_title);
+        // var title = '<h3>' + manga.title + '</h3>';
+
+        var _author = createElement('h5', 'Author: ' + manga.author);
+        main.appendChild(_author);        
+        // var author = '<h5> Author: ' + manga.author + '</h5>';
+
+        var _artist = createElement('h5', 'Artist: ' + manga.artist);
+        main.appendChild(_artist);
+        // var artist = '<h5> Artist: ' + manga.artist + '</h5>';
+
+        var _categories = document.createElement('ul');
+            _categories.innerHTML = '<li>' + manga.categories.join('</li><li>') + '</li>';
+        main.appendChild(_categories);
+        // var categories = '<ul><li>' + manga.categories.join('</li><li>') + '</li>';
+
+        var _description = createElement('p', manga.description);
+        main.appendChild(_description);
+        // var description = '<p>' + manga.description + '</p>';
+
+        var _chapters = document.createElement('ul');
+        var _chaptersHead = createElement('h5', 'Chapters');
+        _chapters.appendChild(_chaptersHead);
+        // var chapters = '<ul> <h5>Chapters</h5>';
+
         for (var i = manga.chapters.length - 1; i >= 0; i--) {
             var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
                 'CH ' + manga.chapters[i][0] :
                 'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
-            chapters += '<li class="chapters waves-effect waves-light green btn" id="' + manga.chapters[i][3] + '">' + label + '</li><br/>';
+            // var li = document.createElement('li');
+            // manga.chapters[i]
         }
-        chapters += '</ul>';
 
-        var view = image + title + author + artist + categories + description + chapters;
-        this.renderString(view);
+        // for (var i = manga.chapters.length - 1; i >= 0; i--) {
+        //     var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
+        //         'CH ' + manga.chapters[i][0] :
+        //         'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
+        //     chapters += '<li class="chapters waves-effect waves-light green btn" id="' + manga.chapters[i][3] + '">' + label + '</li><br/>';
+        // }
+        // chapters += '</ul>';
 
-        var chapterNodes = $('.chapters');
-        for (var j = chapterNodes.length - 1; j >= 0; j--) {
-            chapterNodes[j].onclick = loadChapter;
-        }
+        // var view = image + title + author + artist + categories + description + chapters;
+        // this.renderString(view);
+        this.renderNode(main);
+        // var chapterNodes = $('.chapters');
+        // for (var j = chapterNodes.length - 1; j >= 0; j--) {
+        //     chapterNodes[j].onclick = loadChapter;
+        // }
 
         function loadChapter() {
             page('/chapter/' + this.id);
+        }
+
+        function createElement (elem, text) {
+            var element = document.createElement(elem);
+            element.textContent = text;
+
+            return element;
         }
     };
 
