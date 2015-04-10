@@ -1,11 +1,11 @@
 {
   "name": "flyleaf",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A manga web reader",
   "main": "index.js",
   "scripts": {
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "start": "node index.js"
+    "start": "npm run generate-docs && node index.js"
   },
   "repository": {
     "type": "git",

@@ -65,13 +65,13 @@ var Display = function(data) {
         inputView.on('input', function(event) {
             var searchString = event.target.value;
             if (searchString === '') {
-                renderList(data.top(25), subView[0]);                
+                renderList(data.top('catalog', 25), subView[0]);                
             } else {
-                renderList(data.search(searchString), subView[0]);
+                renderList(data.search('catalog', searchString), subView[0]);
             }
         });
 
-        renderList(data.top(50), subView[0]);
+        renderList(data.top('catalog', 50), subView[0]);
 
         function renderList (docs, view) {
             view.innerHTML = '';

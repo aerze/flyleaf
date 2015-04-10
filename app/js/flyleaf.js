@@ -23,7 +23,7 @@ var Flyleaf = function() {
                 if (err) display.error(err.toString()); 
                 else {
                     console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
-                    data.indexDB(function (err) {
+                    data.indexCollection('catalog', function (err) {
                         if (err) console.log('Index creation failed, minor failure may impact catalog search times.');
                         _initalLoad = true;
                         next();
@@ -41,7 +41,7 @@ var Flyleaf = function() {
 
     this.myBooks = function (context) {
         console.log('Flyleaf:: at ' + context.path);
-        if (data.count('myBooks') > 0) {
+        if (data.count('library') > 0) {
             display.library();
         } else {
             display.error('No Books saved!<br/>Go to the search page to find some.'); 
@@ -49,7 +49,7 @@ var Flyleaf = function() {
     };
 
     this.search = function() {
-        var check = data.count('manga');
+        var check = data.count('catalog');
             if (check > 0) {
                 display.search();
             } else {
