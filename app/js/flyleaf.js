@@ -6,8 +6,7 @@ var Flyleaf = function() {
     this.data = data;
 
     var display = new Display(data);
-    
-    var _dbInfo = {};
+
     var _initalLoad = false;
     
     // Runs on every page change
@@ -21,12 +20,14 @@ var Flyleaf = function() {
             data.connect();
 
             data.loadDB(function (err, count) {
-                if (err) display.error('Database could not be loaded'); 
+                if (err) display.error(err.toString()); 
                 else {
                     console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
-                    data.indexDB();
-                    _initalLoad = true;
-                    next();
+                    data.indexDB(function (err) {
+                        if (err) console.log('Index creation failed, minor failure may impact catalog search times.');
+                        _initalLoad = true;
+                        next();
+                    });
                 }
             });
 

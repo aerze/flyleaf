@@ -27,7 +27,7 @@ var Display = function(data) {
 
 
         function makeBook(manga) {
-            console.log(manga);
+            // console.log(manga);
             var item = document.createElement('li');
             item.classList.add('collection-item','avatar');
             item.id = manga._id;
