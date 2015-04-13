@@ -4,11 +4,13 @@ var MangaEden = function() {
     var net = Object.create(Net);
 
     this.getListAll = function(callback) {
+        console.log('MangaEden:: getting mangaList');
         var path = 'http://www.mangaeden.com/api/list/0/';
-        net.get(path, function(data) {
+        net.get(path, function(err, data) {
+            if (err) callback(err, null);
             var list = JSON.parse(data);
             
-            console.log('mangaEden.js:: Got List: ' + list.start + '-' + list.end);
+            console.log('MangaEden:: Got List: ' + list.start + '-' + list.end);
 
             var manga = [];
             for (var i = 0; i <= list.manga.length - 1; i+=1) {
@@ -24,7 +26,8 @@ var MangaEden = function() {
                 });
             }
             list.manga = null;
-            callback(manga, list.total);
+            console.log('MangaEden:: done, sending back');
+            callback(null, manga, list.total);
         });
     };
 
@@ -32,10 +35,11 @@ var MangaEden = function() {
         if (mangaId === undefined) return 'ERROR:: no mangaId';
 
         var path = 'http://www.mangaeden.com/api/manga/'+ mangaId +'/';
-        net.get(path, function(data) {
+        net.get(path, function(err, data) {
+            if (err) callback(err, null);
             var manga = JSON.parse(data);
             console.log('mangaEden.js:: Got Manga: ' + manga.title);
-            callback(manga);
+            callback(err, manga);
         });
     };
 
@@ -43,9 +47,10 @@ var MangaEden = function() {
         if (chapterId === undefined) return 'ERROR:: no chapterId';
 
         var path = 'http://www.mangaeden.com/api/chapter/'+ chapterId +'/';
-        net.get(path, function(data) {
+        net.get(path, function(err, data) {
+            if (err) callback(err, null);
             var chapter = JSON.parse(data);
-            callback(chapter);
+            callback(err, chapter);
         });
     };
 };

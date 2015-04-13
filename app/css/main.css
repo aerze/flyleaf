@@ -1,3 +1,29 @@
 .logo {
     padding: 12px;
 }
+
+
+.collection-item.avatar {
+    height: 8em;
+    padding-left: 7em;
+    position: relative;
+}
+.collection-item.avatar .thumb-image {
+    max-height: 7rem;
+    max-width: 5rem;
+    display: inline-block;
+    left: 1em;
+    vertical-align: middle;
+    position: absolute;
+}
+.collection-item.avatar .title {
+    margin-top: 0rem;
+    margin-bottom: -0.5rem;
+    font-weight: 500;
+    /*font-weight: bold;*/
+}
+.collection-item.avatar p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
+}

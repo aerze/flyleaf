@@ -6,27 +6,32 @@ var Flyleaf = function() {
     this.data = data;
 
     var display = new Display(data);
-    
-    var _dbInfo = {};
+
     var _initalLoad = false;
     
     // Runs on every page change
     this.init = function (context, next) {
         if (_initalLoad) { 
-            console.log('Pouch is already connected.');
+            console.log('Forerunner:: already connected.');
             next();
         } else {
-            console.log('initializing *bbbzzzpptt*');
-            console.log('connecting to pouchDB');
+            console.log('Flyleaf:: initializing *bbbzzzpptt*');
+            console.log('Forerunner:: connecting');
             data.connect();
 
-            data.getDBInfo(function (err, dbInfo) {
-                _dbInfo = dbInfo;
-                _initalLoad = true;
-                next();
+            data.loadDB(function (err, count) {
+                if (err) display.error(err.toString()); 
+                else {
+                    console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
+                    data.indexCollection('catalog', function (err) {
+                        if (err) console.log('Index creation failed, minor failure may impact catalog search times.');
+                        _initalLoad = true;
+                        next();
+                    });
+                }
             });
 
-            data.indexDB();
+            // Should probably Index DB here.
         }
     };
 
@@ -34,22 +39,21 @@ var Flyleaf = function() {
             page('/myBooks');
     };
 
-    this.myBooks = function () {
-        if (data._dbInfo.myBooks.doc_count > 0) {
-            display.mangaList('myBooks', function() {
-                
-            });
+    this.myBooks = function (context) {
+        console.log('Flyleaf:: at ' + context.path);
+        if (data.count('library') > 0) {
+            display.library();
         } else {
             display.error('No Books saved!<br/>Go to the search page to find some.'); 
         }
     };
 
     this.search = function() {
-            if (data._dbInfo.books.doc_count > 0) {
-                display.search('books', function() {
-
-                });
+        var check = data.count('catalog');
+            if (check > 0) {
+                display.search();
             } else {
+                console.log(check);
                 display.error('No Manga found, I have no idea what happened.');
             }
     };
@@ -63,13 +67,15 @@ var Flyleaf = function() {
     };
 
     this.manga = function (req) {
-        data.getMangaInfo(req.params.id, function (mangaInfo) {
+        data.getMangaInfo(req.params.id, function (err, mangaInfo) {
+            if (err) display.error(err);
             display.manga(mangaInfo);
         });
     };
 
     this.chapter = function (req) {
-        data.getChapterInfo(req.params.id, function (chapterInfo) {
+        data.getChapterInfo(req.params.id, function (err, chapterInfo) {
+            if (err) display.error(err);
             display.chapter(chapterInfo);
         });
     };
