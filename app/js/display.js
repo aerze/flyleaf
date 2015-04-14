@@ -34,7 +34,7 @@ var Display = function(data) {
             item.onclick = function () { page('/manga/' + this.id); };
 
             var image = document.createElement('img');
-                image.src = 'https://cdn.mangaeden.com/mangasimg/' + manga.image;
+                image.src = 'http://cdn.mangaeden.com/mangasimg/' + manga.image;
                 image.alt = manga.title;
                 image.classList.add('thumb-image');
             item.appendChild(image);
@@ -101,7 +101,7 @@ var Display = function(data) {
         var main = document.createElement('div');
 
         var _image = document.createElement('img');
-            _image.src = 'https://cdn.mangaeden.com/mangasimg/' + manga.image;
+            _image.src = 'http://cdn.mangaeden.com/mangasimg/' + manga.image;
         main.appendChild(_image);
 
         var _title = createElement('h3', manga.title);
@@ -176,7 +176,7 @@ var Display = function(data) {
         var images = '';
 
         for (var i = chapterInfo.images.length - 1; i >= 0; i--) {
-            images += '<img src="https://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
+            images += '<img class="responsive-img" src="http://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
         }
         this.renderString(images);
     };

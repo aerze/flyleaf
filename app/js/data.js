@@ -5,7 +5,8 @@
 
 /**
  * Interface for the internal DB, Creates and holds connections to two 
- * collections.
+ * collections. Data searches for any item in the DB before trying
+ * to use the online API.
  * Library: Holds detailed information of the user's books.
  * Catalog: Holds basic information of books available on MangaEden.
  * @constructor
@@ -87,15 +88,13 @@ var Data = function () {
       * @param  {Function} callback callback(err, totalSaved<int>)
       */
     var downloadCatalog = function (callback) {
-        mangaEden.getListAll(function (err, mangaList, total) {
+        mangaEden.getFullList(function (err, mangaList, total) {
             if (err) callback(err, null);
-            console.log(mangaList[0]);
             catalog.setData(mangaList);
             catalog.save(function (err) {
                 if (err) callback(err, null);
                 else {
                     catalog.loaded = total;
-                    console.log(this);
                     callback(null, total);
                 }
             });

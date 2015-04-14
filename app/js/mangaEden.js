@@ -1,17 +1,25 @@
 'use strict';
 
+
+/**
+ * Interface for the MangaEden API. This standardizes the MangaEden API
+ * for Flyleaf, in hopes to add new sources to match closely to this.
+ * @constructor
+ */
 var MangaEden = function() {
     var net = Object.create(Net);
 
-    this.getListAll = function(callback) {
-        console.log('MangaEden:: getting mangaList');
+
+    /**
+     * Downloads the complete list of manga available at MangaEden
+     * @param  {Callback} callback callback(err, mangaList, totalManga)
+     */
+    this.getFullList = function(callback) {
+        console.log('MangaEden:: getting full list, this may take a while');
         var path = 'http://www.mangaeden.com/api/list/0/';
         net.get(path, function(err, data) {
             if (err) callback(err, null);
             var list = JSON.parse(data);
-            
-            console.log('MangaEden:: Got List: ' + list.start + '-' + list.end);
-
             var manga = [];
             for (var i = 0; i <= list.manga.length - 1; i+=1) {
                 manga.push({
@@ -26,13 +34,17 @@ var MangaEden = function() {
                 });
             }
             list.manga = null;
-            console.log('MangaEden:: done, sending back');
             callback(null, manga, list.total);
         });
     };
 
+    /**
+     * Downloads detailed manga information based on _id
+     * @param  {string}   mangaId  _id of the manga
+     * @param  {Callback} callback callback(err, [manga]{@link MangaDetailInfo})
+     */
     this.getManga = function(mangaId, callback) {
-        if (mangaId === undefined) return 'ERROR:: no mangaId';
+        if (mangaId === undefined || typeof mangaId !== 'string') callback(new Error('ERROR:: mangaId invalid'), null);
 
         var path = 'http://www.mangaeden.com/api/manga/'+ mangaId +'/';
         net.get(path, function(err, data) {
@@ -43,8 +55,14 @@ var MangaEden = function() {
         });
     };
 
+
+    /**
+     * Downloads the list of images, places them into [ImageInfo]{@link ImageInfo} objects
+     * @param  {string}   chapterId _id of the chapter
+     * @param  {Callback} callback callback(err, [chapter]{@link ChapterImages})
+     */
     this.getChapter = function(chapterId, callback) {
-        if (chapterId === undefined) return 'ERROR:: no chapterId';
+        if (chapterId === undefined || typeof chapterId !== 'string') callback(new Error('ERROR:: chapterId invalid'), null);
 
         var path = 'http://www.mangaeden.com/api/chapter/'+ chapterId +'/';
         net.get(path, function(err, data) {

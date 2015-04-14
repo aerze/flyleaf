@@ -30,8 +30,6 @@ var Flyleaf = function() {
                     });
                 }
             });
-
-            // Should probably Index DB here.
         }
     };
 
@@ -69,14 +67,14 @@ var Flyleaf = function() {
     this.manga = function (req) {
         data.getMangaInfo(req.params.id, function (err, mangaInfo) {
             if (err) display.error(err);
-            display.manga(mangaInfo);
+            else display.manga(mangaInfo);
         });
     };
 
     this.chapter = function (req) {
         data.getChapterInfo(req.params.id, function (err, chapterInfo) {
             if (err) display.error(err);
-            display.chapter(chapterInfo);
+            else display.chapter(chapterInfo);
         });
     };
 
