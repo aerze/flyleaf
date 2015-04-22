@@ -1,6 +1,35 @@
 'use strict';
 
 var Display = function(data) {
+
+    var makeListItem = function(manga, imageID, details) {
+        var item = document.createElement('li');
+            item.classList.add('collection-item', 'avatar');
+            item.id = manga._id;
+            item.onclick = function () { page('/manga/' + this.id); };
+
+        var image = document.createElement('img');
+            image.src = 'http://cdn.mangaeden.com/mangasimg/' + imageID;
+            image.alt = manga.title;
+            image.classList.add('thumb-image');
+        item.appendChild(image);
+
+        var title = document.createElement('h6');
+            title.classList.add('title', 'flow-text');
+            title.textContent = manga.title;
+        item.appendChild(title);
+
+        if (details) {
+            var details = document.createElement('p');
+                details.innerHTML  = 'Author: ' + manga.author + '<br>' +
+                // 'Artist: ' + manga.artist + '<br>' +
+                'Latest Chapter: ' + manga.chapters_len;
+            item.appendChild(details);
+        }
+
+        return item;
+    };
+
     this.data = data;   
     this.mainView = document.querySelector('.main-view');
 
@@ -20,38 +49,10 @@ var Display = function(data) {
 
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
-                var item = makeBook(lib[i]);
+                var item = makeListItem(lib[i], lib[i].image, true);
                 main.appendChild(item);
             }
         });
-
-
-        function makeBook(manga) {
-            // console.log(manga);
-            var item = document.createElement('li');
-            item.classList.add('collection-item','avatar');
-            item.id = manga._id;
-            item.onclick = function () { page('/manga/' + this.id); };
-
-            var image = document.createElement('img');
-                image.src = 'http://cdn.mangaeden.com/mangasimg/' + manga.image;
-                image.alt = manga.title;
-                image.classList.add('thumb-image');
-            item.appendChild(image);
-
-            var title = document.createElement('h6');
-                title.classList.add('title', 'flow-text');
-                title.textContent = manga.title;
-            item.appendChild(title);
-
-            var details = document.createElement('p');
-                details.innerHTML  = 'Author: ' + manga.author + '<br>' +
-                // 'Artist: ' + manga.artist + '<br>' +
-                'Latest Chapter: ' + manga.chapters_len;
-            item.appendChild(details);
-
-            return item;
-        }
     };
 
     this.search = function () {
@@ -75,24 +76,15 @@ var Display = function(data) {
 
         function renderList (docs, view) {
             view.innerHTML = '';
+            
+            console.log(docs);
 
             var listContainer = document.createElement('ul');
             for (var i = 0; i <= docs.length - 1; i++) {
-                var item = new Item(docs[i]);
+                var item = makeListItem(docs[i], docs[i].coverImage);
                 listContainer.appendChild(item);
             }
             view.appendChild(listContainer);
-        }
-
-        function Item (doc) {
-            var item = document.createElement('li');
-            item.innerHTML = doc.title;
-            item.id = doc._id;
-            item.alias = doc.alias;
-            item.onclick =  function() {
-                page('/manga/' + this.id);
-            };
-            return item;
         }
     };
 
@@ -150,9 +142,10 @@ var Display = function(data) {
             var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
                 'CH ' + manga.chapters[i][0] :
                 'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
-            var _chapterButton = createElement('li', label);
+            var _chapterButton = createElement('button', label);
                 _chapterButton.id = manga.chapters[i][3];
                 _chapterButton.onclick = loadChapter;
+                _chapterButton.classList.add('btn', 'btn-primary');
             _chapters.appendChild(_chapterButton);
         }
 
