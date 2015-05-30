@@ -1,10 +1,10 @@
 'use strict';
-
+/* globals page, $ */
 var Display = function(data) {
 
-    var makeListItem = function(manga, imageID, details) {
+    var makeListItem = function(manga, imageID, detail) {
         var item = document.createElement('li');
-            item.classList.add('collection-item', 'avatar');
+            item.classList.add('collection-item', 'avatar', 'waves-effect', 'waves-green');
             item.id = manga._id;
             item.onclick = function () { page('/manga/' + this.id); };
 
@@ -19,7 +19,7 @@ var Display = function(data) {
             title.textContent = manga.title;
         item.appendChild(title);
 
-        if (details) {
+        if (detail) {
             var details = document.createElement('p');
                 details.innerHTML  = 'Author: ' + manga.author + '<br>' +
                 // 'Artist: ' + manga.artist + '<br>' +
@@ -28,6 +28,17 @@ var Display = function(data) {
         }
 
         return item;
+    };
+
+    var makeListHeader = function(headerText) {
+        var header = document.createElement('li');
+            header.classList.add('collection-header');
+
+        var h4 = document.createElement('h4');
+            h4.textContent = headerText;
+
+        header.appendChild(h4);
+        return header;
     };
 
     this.data = data;   
@@ -47,6 +58,8 @@ var Display = function(data) {
             main.classList.add('collection');
         this.renderNode(main);
 
+        var header = makeListHeader('My Library');
+        main.appendChild(header);
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
                 var item = makeListItem(lib[i], lib[i].image, true);
@@ -64,15 +77,21 @@ var Display = function(data) {
         var inputView = $('#search');
         var subView = $('.sub-view');
         inputView.on('input', function(event) {
+            console.log(this);
             var searchString = event.target.value;
-            if (searchString === '') {
-                renderList(data.top('catalog', 25), subView[0]);                
+            if (searchString === '' || searchString.length <= 2) {
+                if (this.lastRendered === 'default') return;
+                renderList(data.top('catalog', 10), subView[0]);
+                this.lastRendered = 'default';
             } else {
                 renderList(data.search('catalog', searchString), subView[0]);
+                this.lastRendered = searchString;
             }
+
         });
 
-        renderList(data.top('catalog', 50), subView[0]);
+        renderList(data.top('catalog', 10), subView[0]);
+        inputView.lastRendered = 'default';
 
         function renderList (docs, view) {
             view.innerHTML = '';
@@ -92,12 +111,24 @@ var Display = function(data) {
         this.renderString('manga loaded');
         var main = document.createElement('div');
 
+        var parallaxContainer = document.createElement('div');
+            parallaxContainer.classList.add('parallax-container');
+
+        var parallaxDiv = document.createElement('div');
+            parallaxDiv.classList.add('parallax');
+
         var _image = document.createElement('img');
             _image.src = 'http://cdn.mangaeden.com/mangasimg/' + manga.image;
-        main.appendChild(_image);
+
+        parallaxDiv.appendChild(_image);
+        parallaxContainer.appendChild(parallaxDiv);
+        main.appendChild(parallaxContainer);
+
+        var sectionDiv = document.createElement('div');
+            sectionDiv.classList.add('section', 'white');
 
         var _title = createElement('h3', manga.title);
-        main.appendChild(_title);
+        sectionDiv.appendChild(_title);
 
         var _saveString = (data.checkLibrary(manga._id)) ? 
             'Already Saved.' :
@@ -115,15 +146,16 @@ var Display = function(data) {
                     });
                 }
             };
-        main.appendChild(_saveBook);
+        sectionDiv.appendChild(_saveBook);
 
         var _author = createElement('h5', 'Author: ' + manga.author);
-        main.appendChild(_author);
+        sectionDiv.appendChild(_author);
 
 
         var _artist = createElement('h5', 'Artist: ' + manga.artist);
-        main.appendChild(_artist);
+        sectionDiv.appendChild(_artist);
 
+        main.appendChild(sectionDiv);
 
         var _categories = document.createElement('ul');
             _categories.innerHTML = '<li>' + manga.categories.join('</li><li>') + '</li>';
@@ -151,6 +183,10 @@ var Display = function(data) {
 
         main.appendChild(_chapters);
         this.renderNode(main);
+
+        $(document).ready(function(){
+          $('.parallax').parallax();
+        });
 
         function loadChapter() {
             page('/chapter/' + this.id);

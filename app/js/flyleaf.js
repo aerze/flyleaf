@@ -61,7 +61,7 @@ var Flyleaf = function() {
     };
 
     this.aboutUs = function () {
-        display.renderString('Twitter: @mythrilco<br/>Weekend Hacker: @aerze @jenniration @nkhilv');
+        display.renderString('Twitter: @mythrilco<br/>Weekend Hacker: @aerze @jenniration');
     };
 
     this.manga = function (req) {

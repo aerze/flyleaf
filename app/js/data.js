@@ -5,8 +5,8 @@
 
 /**
  * Interface for the internal DB, Creates and holds connections to two 
- * collections. Data searches for any item in the DB before trying
- * to use the online API.
+ * collections. 
+ * Data searches for any item in the DB before trying to use the online API.
  * Library: Holds detailed information of the user's books.
  * Catalog: Holds basic information of books available on MangaEden.
  * @constructor
@@ -366,8 +366,8 @@ var Data = function () {
 
 /**
  * @typedef {Array} ChapterBasicInfo
- * @property {Int} 0 Chapter Name
- * @property {Int} 1 Chapter date in Unix Epoch Time 
+ * @property {Int} 0 Chapter number
+ * @property {Int} 1 Chapter upload date in Unix Epoch Time 
  * use new Date(MangaDetailInfo.last_Chapter_Date * 1000) 
  * to get the JS Date format
  * @property {String} 2 Chapter title

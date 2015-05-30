@@ -3,10 +3,26 @@
 }
 
 
+.title {
+    font-weight: 300;
+    font-size: 1.5rem;
+    padding-left: 2rem;
+}
+
+
+.parallax-container {
+    height: 300px;
+}
+    
+
+.collection-item:hover {
+    background-color: #DDDDDD;
+}
 .collection-item.avatar {
     height: 8em;
     padding-left: 7em;
     position: relative;
+    width: 100%;
 }
 .collection-item.avatar .thumb-image {
     max-height: 7rem;
