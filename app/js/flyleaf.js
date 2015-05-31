@@ -11,6 +11,7 @@ var Flyleaf = function() {
     
     // Runs on every page change
     this.init = function (context, next) {
+        $(window).scrollTop(0);
         if (_initalLoad) { 
             console.log('Forerunner:: already connected.');
             next();
