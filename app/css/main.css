@@ -1,19 +1,29 @@
+body {
+    background-color: #FFF;
+    /*color:#777;*/
+}
+
 .logo {
     padding: 12px;
 }
 
-
-.title {
+.nav-title {
     font-weight: 300;
+    padding-left: 1.5rem;
     font-size: 1.5rem;
-    padding-left: 2rem;
 }
-
 
 .parallax-container {
-    height: 300px;
+    height: 350px;
 }
     
+.collection-header,
+.collection .collection-header {
+    padding-top: 1rem;
+    padding-left: 2rem;
+    font-size: medium;
+    color: #4CAF50;
+}
 
 .collection-item:hover {
     background-color: #DDDDDD;
@@ -32,14 +42,24 @@
     vertical-align: middle;
     position: absolute;
 }
-.collection-item.avatar .title {
+.collection .collection-item.avatar .title {
+    color: black;
     margin-top: 0rem;
     margin-bottom: -0.5rem;
     font-weight: 500;
-    /*font-weight: bold;*/
+    font-size: 1.2rem;
+    padding-left: 2rem;
 }
-.collection-item.avatar p {
-    font-size: 0.9rem;
-    font-weight: 300;
-    margin-top: 0.5rem;
+.collection .collection-item.avatar p {
+    padding-left: 2rem;
+    font-weight: 400;
+    line-height: 1.3rem;
+    color: #777;
+    font-size: 1rem;
+    padding-top: 5px;
+
+}
+
+.collection .collection-item {
+    width: 100%;
 }
