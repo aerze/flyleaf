@@ -1,8 +1,26 @@
 'use strict';
 /* globals page, $, Materialize*/
 var Display = function(data) {
+    this.container = function () {
+        var container = document.createElement('div');
+            container.classList.add('container');
+            container.add = function(node) {
+                container.appendChild(node);
+                return container;
+            };
+            return container;
+    };
+    this.textNode = function (string) {
+        return document.createTextNode(string);
+    };
+    this.link = function (href, text) {
+        var link = document.createElement('a');
+            link.setAttribute('href', href);
+            link.appendChild(this.textNode(text));
+        return link;
+    };
 
-    var makeListItem = function(manga, imageID, detail) {
+    var makeListItem = function (manga, imageID, detail) {
         var item = document.createElement('li');
             item.classList.add('collection-item', 'avatar', 'waves-effect', 'waves-green');
             item.id = manga._id;
@@ -31,7 +49,7 @@ var Display = function(data) {
         return item;
     };
 
-    var makeListHeader = function(headerText) {
+    var makeListHeader = function (headerText) {
         var header = document.createElement('div');
             header.classList.add('collection-header');
 
@@ -46,11 +64,13 @@ var Display = function(data) {
     this.mainView = document.querySelector('.main-view');
 
     this.renderString = function (string) {
+        $(window).scrollTop(0);
         this.mainView.innerHTML = string;
     };
 
     this.renderNode = function (node) {
         this.mainView.innerHTML = '';
+        $(window).scrollTop(0);
         this.mainView.appendChild(node);
     };
 
@@ -185,20 +205,20 @@ var Display = function(data) {
         // end section
         // start collapsible
 
-  // <ul class="collapsible" data-collapsible="accordion">
-  //   <li>
-  //     <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>First</div>
-  //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-  //   </li>
-  //   <li>
-  //     <div class="collapsible-header"><i class="mdi-maps-place"></i>Second</div>
-  //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-  //   </li>
-  //   <li>
-  //     <div class="collapsible-header"><i class="mdi-social-whatshot"></i>Third</div>
-  //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-  //   </li>
-  // </ul>
+        // <ul class="collapsible" data-collapsible="accordion">
+        //   <li>
+        //     <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>First</div>
+        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        //   </li>
+        //   <li>
+        //     <div class="collapsible-header"><i class="mdi-maps-place"></i>Second</div>
+        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        //   </li>
+        //   <li>
+        //     <div class="collapsible-header"><i class="mdi-social-whatshot"></i>Third</div>
+        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        //   </li>
+        // </ul>
         
         var collapsibleContainer = document.createElement('ul');
             collapsibleContainer.classList.add('collapsible');
@@ -336,6 +356,7 @@ var Display = function(data) {
         console.log(string);
         this.renderString(string);
     };
+
     this.endLoading = function (caller, process) {
         var string = caller + '::  Loaded < ' + process;
         console.log(string);

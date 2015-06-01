@@ -11,7 +11,6 @@ var Flyleaf = function() {
     
     // Runs on every page change
     this.init = function (context, next) {
-        $(window).scrollTop(0);
         if (_initalLoad) { 
             console.log('Forerunner:: already connected.');
             next();
@@ -62,7 +61,20 @@ var Flyleaf = function() {
     };
 
     this.aboutUs = function () {
-        display.renderString('Twitter: @mythrilco<br/>Weekend Hacker: @aerze @jenniration');
+        var container = display.container();
+        container.classList.add('section');
+        container.add(display.textNode('This was made by '))
+                 .add(display.link('https://twitter.com/MythrilCo', '@mythrilco'))
+                 .add(document.createElement('br'))
+                 .add(display.textNode('Tweet me if you have any issues.'))
+                 .add(document.createElement('br'))
+                 .add(display.textNode('If you know what Github is and have an account, you can report issues '))
+                 .add(display.link('https://github.com/aerze/flyleaf/issues', 'here.'))
+                 .add(document.createElement('br'))
+                 .add(document.createElement('br'))
+                 .add(display.textNode('Thanks for reading! :)'));
+
+        display.renderNode(container);
     };
 
     this.manga = function (req) {
