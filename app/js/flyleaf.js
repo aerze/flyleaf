@@ -8,10 +8,10 @@ var Flyleaf = function() {
     var display = new Display(data);
 
     var _initalLoad = false;
-    
+
     // Runs on every page change
     this.init = function (context, next) {
-        if (_initalLoad) { 
+        if (_initalLoad) {
             console.log('Forerunner:: already connected.');
             next();
         } else {
@@ -20,7 +20,7 @@ var Flyleaf = function() {
             data.connect();
 
             data.loadDB(function (err, count) {
-                if (err) display.error(err.toString()); 
+                if (err) display.error(err.toString());
                 else {
                     console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
                     data.indexCollection('catalog', function (err) {
@@ -42,7 +42,7 @@ var Flyleaf = function() {
         if (data.count('library') > 0) {
             display.library();
         } else {
-            display.error('No Books saved!<br/>Go to the search page to find some.'); 
+            display.error('No Books saved!<br/>Go to the search page to find some.');
         }
     };
 
@@ -78,18 +78,40 @@ var Flyleaf = function() {
     };
 
     this.manga = function (req) {
+        current.mangaID = req.params.id;
         data.getMangaInfo(req.params.id, function (err, mangaInfo) {
+            setNavTitle(mangaInfo.title);
             if (err) display.error(err);
             else display.manga(mangaInfo);
         });
     };
 
     this.chapter = function (req) {
+        current.chapterID = req.params.id;
         data.getChapterInfo(req.params.id, function (err, chapterInfo) {
             if (err) display.error(err);
             else display.chapter(chapterInfo);
         });
     };
+
+    var current = {
+        mangaID: '',
+        chapterID:'',
+    };
+
+    this.setID = function (key, value) {
+        current[key] = value;
+    };
+
+    this.getID = function (key) {
+        return current[key];
+    };
+
+    var setNavTitle = function (string) {
+        var navTitle = document.querySelector('.nav-title');
+        navTitle.textContent = string;
+    };
+    this.setNavTitle = setNavTitle;
 
     // this._sortByHits = function(mangaArray) {
     //     var sorted = [];

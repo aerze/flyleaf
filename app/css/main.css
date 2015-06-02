@@ -2,9 +2,16 @@ body {
     background-color: #FFF;
     /*color:#777;*/
 }
+.main-view {
+    /*min-height: 700px;*/
+}
 
 .logo {
     padding: 12px;
+}
+
+.secondary-content {
+    color: #4CAF50;
 }
 
 .nav-title {
@@ -14,9 +21,9 @@ body {
 }
 
 .parallax-container {
-    height: 350px;
+    height: 400px;
 }
-    
+
 .collection-header,
 .collection .collection-header {
     padding-top: 1rem;

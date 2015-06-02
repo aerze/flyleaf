@@ -4,8 +4,8 @@
 
 
 /**
- * Interface for the internal DB, Creates and holds connections to two 
- * collections. 
+ * Interface for the internal DB, Creates and holds connections to two
+ * collections.
  * Data searches for any item in the DB before trying to use the online API.
  * Library: Holds detailed information of the user's books.
  * Catalog: Holds basic information of books available on MangaEden.
@@ -31,7 +31,7 @@ var Data = function () {
 
     /**
      * Ensures that both the Library and Catalog are loaded.
-     * If the Catalog is empty, it will re-download it from the 
+     * If the Catalog is empty, it will re-download it from the
      * MangaEden API (requires an Internet connection). Callback fires
      * once the DB connection is loaded.
      * @param  {Function} callback - callback(err, [DBCount]{@link Data~DBCount})
@@ -83,7 +83,7 @@ var Data = function () {
 
 
      /*
-      * Downloads the Catalog from the MangaEden API Calls back when the DB has 
+      * Downloads the Catalog from the MangaEden API Calls back when the DB has
       * been loaded or error has occurred.
       * @param  {Function} callback callback(err, totalSaved<int>)
       */
@@ -184,7 +184,7 @@ var Data = function () {
     /**
      * Return a sample record from a collection.
      * @param {CollectionName} name Name of Collection to use
-     * @return {MangaDetailInfo|MangaBasicInfo} 
+     * @return {MangaDetailInfo|MangaBasicInfo}
      */
     this.sample = function (name) {
         return db.collection(name).find()[0];
@@ -203,7 +203,7 @@ var Data = function () {
             remove(name, callback);
         } else {
             var agree = confirm('Would you like to delete the whole Database? \n Only press ok if you know what you\'re doing.');
-            if (agree) remove(name, callback);            
+            if (agree) remove(name, callback);
         }
 
         function remove(name, callback) {
@@ -239,7 +239,7 @@ var Data = function () {
     /**
      * Retrieves {@link MangaDetailInfo} of given the _id.
      * @param  {string}   id       The _id of a book
-     * @param  {Function} callback callback(err, [manga]{@link MangaDetailInfo}) 
+     * @param  {Function} callback callback(err, [manga]{@link MangaDetailInfo})
      */
     this.getMangaInfo = function (id, callback) {
         var book = library.find({_id: id});
@@ -283,9 +283,9 @@ var Data = function () {
 
 
     /**
-     * Retrieves an array of {@link MangaDetailInfo} with all the books 
+     * Retrieves an array of {@link MangaDetailInfo} with all the books
      * currently in the library.
-     * @param  {Function} callback 
+     * @param  {Function} callback
      * callback(err, [MangaArray]{@link MangaDetailInfo})
      */
     this.getLibrary = function (callback) {
@@ -297,8 +297,8 @@ var Data = function () {
 
 
     /**
-     * Stores a book in the library. 
-     * As of version 0.1.0 no type checking is done before storing and 
+     * Stores a book in the library.
+     * As of version 0.1.0 no type checking is done before storing and
      * will pretty much just store whatever you give.
      * @param  {MangaDetailInfo}   book     A Manga Object
      * @param  {Callback} callback callback(err)
@@ -310,6 +310,15 @@ var Data = function () {
             else callback(null);
         });
     };
+
+
+    this.readChapter = function (id, chapterPos, page) {
+        var book = library.find({_id: id});
+        var array = book[0].chapters;
+            array[chapterPos][4] = page;
+        library.updateById(id, {chapters: array});
+        library.save();
+    };
 };
 
 /**
@@ -317,12 +326,12 @@ var Data = function () {
  * @typedef {Object}
  * @property {String} _id Unique Id for Manga
  * @property {String} alias URL-friendly version of the title
- * @property {String} coverImage Image location, must be appended 
+ * @property {String} coverImage Image location, must be appended
  * to "https://cdn.mangaeden.com/mangasimg/"
  * @property {Array} genre Contains a list of genre tags, in no particular order
  * @property {Int} hits Number of hits on MangaEden, used to determine popularity
- * @property {Int} lastChapterDate The date of the latest chapter update in 
- * Unix Epoch Time use new Date(MangaBasicInfo.lastChapterDate * 1000) to get 
+ * @property {Int} lastChapterDate The date of the latest chapter update in
+ * Unix Epoch Time use new Date(MangaBasicInfo.lastChapterDate * 1000) to get
  * the JS Date format
  * @property {Int} status I'm not sure what this is yet
  * @property {String} title Title of book
@@ -339,7 +348,7 @@ var Data = function () {
  * @property {Array} artist-kw Artist names split by spaces
  * @property {String} author Credited author
  * @property {Array} author-kw Author names split by spaces
- * @property {Boolen} baka Unknown use, from MangaEden API though 'baka' means 
+ * @property {Boolen} baka Unknown use, from MangaEden API though 'baka' means
  * stupid so..
  * @property {Array} categories List of genre tags
  * @property {Array} chapters Array of [ChapterBasicInfo]{@link ChapterBasicInfo}
@@ -347,12 +356,12 @@ var Data = function () {
  * @property {Int} chapters_len length of chapters array
  * @property {String} description Description of manga
  * @property {Int} hits Number of hits on MangaEden, used to determine popularity
- * @property {String} image Image location, must be appended 
+ * @property {String} image Image location, must be appended
  * to "https://cdn.mangaeden.com/mangasimg/"
  * @property {String} imageURL Another URL for the same image as above
  * @property {Int} language Language of book (0 is for English);
- * @property {Int} last_Chapter_Date The date of the latest chapter update in 
- * Unix Epoch Time use new Date(MangaDetailInfo.last_Chapter_Date * 1000) to 
+ * @property {Int} last_Chapter_Date The date of the latest chapter update in
+ * Unix Epoch Time use new Date(MangaDetailInfo.last_Chapter_Date * 1000) to
  * get the JS Date format
  * @property {Array} random Unknown use, from MangaEden API
  * @property {Int} released Year of release
@@ -367,8 +376,8 @@ var Data = function () {
 /**
  * @typedef {Array} ChapterBasicInfo
  * @property {Int} 0 Chapter number
- * @property {Int} 1 Chapter upload date in Unix Epoch Time 
- * use new Date(MangaDetailInfo.last_Chapter_Date * 1000) 
+ * @property {Int} 1 Chapter upload date in Unix Epoch Time
+ * use new Date(MangaDetailInfo.last_Chapter_Date * 1000)
  * to get the JS Date format
  * @property {String} 2 Chapter title
  * @property {String} 3 Chapter _id
@@ -376,13 +385,13 @@ var Data = function () {
 
 /**
  * @typedef {Object} ChapterImages
- * @property {Array} images Array of [ImageInfo]{@link ImageInfo} objects 
+ * @property {Array} images Array of [ImageInfo]{@link ImageInfo} objects
  */
 
 /**
  * @typedef {Array} ImageInfo
  * @property {Int} 0 Page number
- * @property {String} 1 Image location, must be appended 
+ * @property {String} 1 Image location, must be appended
  * to "https://cdn.mangaeden.com/mangasimg/"
  * @property {Int} 2 Unknown use, from MangaEden API
  * @property {Int} 3 Unknown use, from MangaEden API
@@ -391,18 +400,18 @@ var Data = function () {
 /**
  * @typedef Data~collectionName
  * @description Flyleaf uses two collections 'Library' and 'Catalog'
- * @type {string} 
+ * @type {string}
  */
 
 
  /**
-  * @typedef Data~DBCount 
+  * @typedef Data~DBCount
   * @description Used in the loadDB callback function (see {@link Data#loadDB})
   * @type {Object}
   * @property {Int} library - number of records in library collection
   * @property {Int} catalog - number of records in catalog collection
   */
- 
+
 
 // returned from a getManga request
 // a: "1001"                    =alias
@@ -417,8 +426,8 @@ var Data = function () {
     // length: 7
 // h: 101                       =hits
 // i: "54de4e17719a162eba1e8e00"=ID
-// im:                          =image  
-    // "7f/7f2cabd1428954e0ec8312fad8e278150ed3efae2f959d980093c28e.jpg"    
+// im:                          =image
+    // "7f/7f2cabd1428954e0ec8312fad8e278150ed3efae2f959d980093c28e.jpg"
 // ld: 1423894550               =last chapter date
 // s: 1                         =status
 // t: "1001 ..."                =title

@@ -60,7 +60,7 @@ var Display = function(data) {
         return header;
     };
 
-    this.data = data;   
+    this.data = data;
     this.mainView = document.querySelector('.main-view');
 
     this.renderString = function (string) {
@@ -101,7 +101,7 @@ var Display = function(data) {
         // display list after each filter change
 
         this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
-        
+
         var inputView = $('#search');
         var subView = $('.sub-view');
         inputView.on('input', function(event) {
@@ -123,7 +123,7 @@ var Display = function(data) {
 
         function renderList (docs, view) {
             view.innerHTML = '';
-            
+
             console.log(docs);
 
             var listContainer = document.createElement('ul');
@@ -168,7 +168,7 @@ var Display = function(data) {
 
         var _artist = createElement('h5', 'Artist: ' + manga.artist);
         sectionDiv.appendChild(_artist);
-        
+
         //  start button
 
         var _saveString = '';
@@ -219,21 +219,21 @@ var Display = function(data) {
         //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
         //   </li>
         // </ul>
-        
+
         var collapsibleContainer = document.createElement('ul');
             collapsibleContainer.classList.add('collapsible');
             collapsibleContainer.setAttribute('data-collapsible', 'accordion');
 
         var tagsCollapsibleContainer = document.createElement('li');
-            
+
         var tagsCollapsibleHeader = document.createElement('div');
             tagsCollapsibleHeader.classList.add('collapsible-header', 'waves-effect', 'waves-green');
             tagsCollapsibleHeader.textContent = 'Tags';
-        
+
         var tagsCollapsibleHeaderIcon = document.createElement('i');
             tagsCollapsibleHeaderIcon.classList.add('mdi-notification-more');
             // tagsCollapsibleHeaderIcon.classList.add('mdi-action-label-outline');
-        
+
         var tagsCollapsibleBody = document.createElement('div');
             tagsCollapsibleBody.classList.add('collapsible-body');
 
@@ -250,14 +250,14 @@ var Display = function(data) {
 
 
         var summaryCollapsibleContainer = document.createElement('li');
-            
+
         var summaryCollapsibleHeader = document.createElement('div');
             summaryCollapsibleHeader.classList.add('collapsible-header', 'waves-effect', 'waves-green');
             summaryCollapsibleHeader.textContent = 'Summary';
-        
+
         var summaryCollapsibleHeaderIcon = document.createElement('i');
             summaryCollapsibleHeaderIcon.classList.add('mdi-action-speaker-notes');
-        
+
         var summaryCollapsibleBody = document.createElement('div');
             summaryCollapsibleBody.classList.add('collapsible-body');
 
@@ -267,19 +267,20 @@ var Display = function(data) {
             collapsibleContainer.appendChild(summaryCollapsibleContainer);
 
         var _description = createElement('p', manga.description);
+            _description.innerHTML = manga.description;
         summaryCollapsibleBody.appendChild(_description);
 
 
 
         var chapterCollapsibleContainer = document.createElement('li');
-            
+
         var chapterCollapsibleHeader = document.createElement('div');
             chapterCollapsibleHeader.classList.add('collapsible-header');
             chapterCollapsibleHeader.textContent = 'Chapter';
-        
+
         var chapterCollapsibleHeaderIcon = document.createElement('i');
             chapterCollapsibleHeaderIcon.classList.add('mdi-action-list');
-        
+
         var chapterCollapsibleBody = document.createElement('div');
             chapterCollapsibleBody.classList.add('collapsible-body');
 
@@ -299,23 +300,47 @@ var Display = function(data) {
 
 
         // <ul class="collection">
-        //   <li class="collection-item">Alvin</li>
+        //   <li class="collection-item">
+        //     <div>Alvin
+        //       <a href="#!" class="secondary-content">
+        //         <i class="mdi-content-send"></i>
+        //       </a>
+        //     </div></li>
         //   <li class="collection-item">Alvin</li>
         //   <li class="collection-item">Alvin</li>
         //   <li class="collection-item">Alvin</li>
         // </ul>
-            
+
         for (var i = manga.chapters.length - 1; i >= 0; i--) {
             var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
                 'CH ' + manga.chapters[i][0] :
                 'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
-            var _chapterButton = createElement('li', label);
-            // var _chapterButton = createElement('button', label);
-                _chapterButton.id = manga.chapters[i][3];
-                _chapterButton.onclick = loadChapter;
-                _chapterButton.classList.add('collection-item', 'waves-effect', 'waves-green');
-                // _chapterButton.classList.add('btn', 'btn-primary');
-            _chapters.appendChild(_chapterButton);
+
+            var _chapterListItem = createElement('li');
+            var _chapterDiv = document.createElement('div');
+                _chapterDiv.appendChild(document.createTextNode(label));
+            var _chapterA = document.createElement('a');
+                _chapterA.classList.add('secondary-content');
+            var _chapterIcon = document.createElement('i');
+
+            if (manga.chapters[i][4] === undefined) {
+                _chapterIcon.classList.add('mdi-action-bookmark-outline');
+            } else if (parseInt(manga.chapters[i][4]) >= 0) {
+                _chapterIcon.classList.add('mdi-action-bookmark');
+            } else {
+                _chapterIcon.classList.add('mdi-action-done');
+            }
+                _chapterA.appendChild(_chapterIcon);
+                _chapterDiv.appendChild(_chapterA);
+                _chapterListItem.appendChild(_chapterDiv);
+
+            // var _chapterListItem = createElement('button', label);
+                _chapterListItem.index = i;
+                _chapterListItem.id = manga.chapters[i][3];
+                _chapterListItem.onclick = loadChapter;
+                _chapterListItem.classList.add('collection-item', 'waves-effect', 'waves-green');
+                // _chapterListItem.classList.add('btn', 'btn-primary');
+            _chapters.appendChild(_chapterListItem);
         }
 
         main.appendChild(collapsibleContainer);
@@ -330,6 +355,8 @@ var Display = function(data) {
         });
 
         function loadChapter() {
+            data.readChapter(manga._id, this.index, 0);
+            flyleaf.setID('chapterIndex', this.index);
             page('/chapter/' + this.id);
         }
 
@@ -349,10 +376,26 @@ var Display = function(data) {
             images += '<img class="responsive-img" src="http://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
         }
         this.renderString(images);
+
+        var alreadyHit = false;
+        $(window).scroll(function() {
+            var pos = $(window).scrollTop() + $(window).height();
+            var bottom = $(document).height() - 150;
+            if (bottom < 1000) bottom = 1000;
+            if( pos > bottom) {
+                console.log('passed bottom');
+                if (alreadyHit) return;
+                alreadyHit = true;
+                var mangaID = flyleaf.getID('mangaID');
+                var chapterIndex = flyleaf.getID('chapterIndex');
+                data.readChapter(mangaID, chapterIndex, true);
+            }
+        });
+
     };
 
     this.startLoading = function (caller, process) {
-        var string = caller + ':: Loading > ' + process; 
+        var string = caller + ':: Loading > ' + process;
         console.log(string);
         this.renderString(string);
     };
