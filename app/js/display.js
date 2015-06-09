@@ -1,5 +1,5 @@
 'use strict';
-/* globals page, $, Materialize*/
+/* globals page, $, Materialize, Render*/
 var Display = function(data) {
     this.container = function () {
         var container = document.createElement('div');
@@ -20,22 +20,27 @@ var Display = function(data) {
         return link;
     };
 
+
     var makeListItem = function (manga, imageID, detail) {
-        var item = document.createElement('li');
-            item.classList.add('collection-item', 'avatar', 'waves-effect', 'waves-green');
-            item.id = manga._id;
-            item.onclick = function () { page('/manga/' + this.id); };
+        var item = Render.li({
+            classList: ['collection-item', 'avatar', 'waves-effect', 'waves-green'],
+            id: manga._id,
+            onclick: function () { page('/manga/' + this.id); }
+        });
 
-        var image = document.createElement('img');
-            image.src = 'http://cdn.mangaeden.com/mangasimg/' + imageID;
-            image.alt = manga.title;
-            image.classList.add('thumb-image');
-        item.appendChild(image);
+        var image = Render.img({
+            classList: 'thumb-image',
+            src: 'http://cdn.mangaeden.com/mangasimg/' + imageID,
+            alt: manga.title
+        });
 
-        var title = document.createElement('h6');
-            title.classList.add('title', 'flow-text', 'truncate');
-            title.textContent = manga.title;
-        item.appendChild(title);
+        var title = Render.h6({
+            classList: ['title', 'flow-text', 'truncate'],
+            text: manga.title
+        });
+
+        item.add(image)
+            .add(title);
 
         if (detail) {
             var details = document.createElement('p');
@@ -49,16 +54,6 @@ var Display = function(data) {
         return item;
     };
 
-    var makeListHeader = function (headerText) {
-        var header = document.createElement('div');
-            header.classList.add('collection-header');
-
-        var div = document.createElement('div');
-            div.textContent = headerText;
-
-        header.appendChild(div);
-        return header;
-    };
 
     this.data = data;
     this.mainView = document.querySelector('.main-view');
@@ -75,15 +70,16 @@ var Display = function(data) {
     };
 
     this.library = function () {
-        var main = document.createElement('div');
-        var listContainer = document.createElement('ul');
-            listContainer.id = 'library';
-            listContainer.classList.add('collection');
-        this.renderNode(main);
+        
+        var main = Render.div();
+        var listContainer = Render.ul({id: 'library', classList: 'collection'});
+        var header = Render.div({classList: 'collection-header'})
+                .add(Render.div({text:'My Library'}));
 
-        var header = makeListHeader('My Library');
-        main.appendChild(header);
-        main.appendChild(listContainer);
+        main.add(header)
+            .add(listContainer);
+
+
 
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
@@ -93,6 +89,7 @@ var Display = function(data) {
             }
         });
 
+        this.renderNode(main);
         Materialize.showStaggeredList('#library');
     };
 
@@ -100,31 +97,53 @@ var Display = function(data) {
         // add search filter
         // display list after each filter change
 
-        this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
+        // this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
+
+        var navWrapper = Render.div({classList: 'nav-wrapper'});
+        var buttonGroup = Render.div({classList: 'button-group'});
+        var inputField = Render.div({classList: 'input-field'});
+        var subView = Render.div({classList: 'sub-view'});
+
+        inputField
+            .add(Render.input({id: 'search', type: 'text', required: true}))
+            .add(Render.label({'for': 'search'})
+                .add(Render.i({classList: 'mdi-action-search'})));
+
+        buttonGroup
+            .add(Render.button({
+                classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                innerHTML: 'POP &#x21F5'}))
+            .add(Render.button({
+                classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                innerHTML: 'A-Z &#x21F5'}));
+
+        navWrapper
+            .add(Render.form().add(inputField))
+            .add(buttonGroup);
+
+        Render.view(navWrapper);
+        Render.node(subView);
 
         var inputView = $('#search');
-        var subView = $('.sub-view');
+        // var subView = $('.sub-view');
         inputView.on('input', function(event) {
-            console.log(this);
             var searchString = event.target.value;
             if (searchString === '' || searchString.length <= 2) {
                 if (this.lastRendered === 'default') return;
-                renderList(data.top('catalog', 10), subView[0]);
+                renderList(data.top('catalog', 10), subView);
                 this.lastRendered = 'default';
             } else {
-                renderList(data.search('catalog', searchString), subView[0]);
+                renderList(data.search('catalog', searchString), subView);
                 this.lastRendered = searchString;
             }
 
         });
 
-        renderList(data.top('catalog', 10), subView[0]);
+        renderList(data.top('catalog', 10), subView);
         inputView.lastRendered = 'default';
 
         function renderList (docs, view) {
             view.innerHTML = '';
-
-            console.log(docs);
 
             var listContainer = document.createElement('ul');
             for (var i = 0; i <= docs.length - 1; i++) {

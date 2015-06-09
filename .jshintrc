@@ -2,12 +2,12 @@
   "node": true,
   "browser": true,
   "esnext": true,
-  "globals": [
-    "page"
-    ],
   "globalstrict": true,
   "quotmark": true,
   "undef": true,
   "unused": true,
-  "jquery": true
+  "jquery": true,
+  "globals": {
+    "page": true,
+    }
 }
