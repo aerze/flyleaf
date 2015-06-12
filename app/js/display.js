@@ -72,8 +72,7 @@ var Display = function(data) {
 
 
 
-    this.library = function () {
-        
+    this.library = function () {  
         var main = Render.div();
         var listContainer = Render.ul({id: 'library', classList: 'collection'});
         var header = Render.div({classList: 'collection-header'})
@@ -82,6 +81,7 @@ var Display = function(data) {
         main.add(header)
             .add(listContainer);
 
+        this.renderNode(main);
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
                 var item = makeListItem(lib[i], lib[i].image, true);
@@ -90,7 +90,6 @@ var Display = function(data) {
             }
         });
 
-        this.renderNode(main);
         Materialize.showStaggeredList('#library');
     };
 
@@ -98,15 +97,12 @@ var Display = function(data) {
 
 
     this.search = function () {
-        // add search filter
-        // display list after each filter change
         var navWrapper = Render.div({classList: 'nav-wrapper'});
         var buttonGroup = Render.div({classList: 'button-group'});
         var collapsible = Render.ul({classList: 'collapsible', id: 'filter'})
             .set('data-collapsible', 'accordion');
         var inputField = Render.div({classList: 'input-field'});
         var listContainer = Render.ul({id: 'results', classList: 'collection'});
-
 
         inputField
             .add(Render.input({id: 'search', type: 'text', required: true}))
@@ -182,55 +178,43 @@ var Display = function(data) {
 
     this.manga = function(manga) {
         this.renderString('manga loaded');
-        var main = document.createElement('div');
 
+        var main = Render.div();
         // start parallax
 
-        var parallaxContainer = document.createElement('div');
-            parallaxContainer.classList.add('parallax-container');
+        var parallaxContainer = Render.div({classList: 'parallax-container'});
+        var parallaxDiv = Render.div({classList: 'parallax'});
+        var _image = Render.img({src: 'http://cdn.mangaeden.com/mangasimg/' + manga.image});
 
-        var parallaxDiv = document.createElement('div');
-            parallaxDiv.classList.add('parallax');
+        parallaxContainer
+            .add(parallaxDiv
+                .add(_image));
 
-        var _image = document.createElement('img');
-            _image.src = 'http://cdn.mangaeden.com/mangasimg/' + manga.image;
-
-        parallaxDiv.appendChild(_image);
-        parallaxContainer.appendChild(parallaxDiv);
-        main.appendChild(parallaxContainer);
+        main.add(parallaxContainer);
 
         // end parallax
         // start section
 
-        var sectionDiv = document.createElement('div');
-            sectionDiv.classList.add('container', 'white');
+        var sectionDiv = Render.div({classList: ['container', 'white']});
 
-        var _title = createElement('h3', manga.title);
-        sectionDiv.appendChild(_title);
-
-        var _author = createElement('h5', 'Author: ' + manga.author);
-        sectionDiv.appendChild(_author);
-
-        var _artist = createElement('h5', 'Artist: ' + manga.artist);
-        sectionDiv.appendChild(_artist);
+        sectionDiv
+            .add(Render.h3({text: manga.title}))
+            .add(Render.h5({text: 'Author: ' + manga.author}))
+            .add(Render.h5({text: 'Artist: ' + manga.artist}));
 
         //  start button
 
-        var _saveString = '';
-        var _saveIconString = '';
+        var _saveString = 'Save';
+        var _saveIconString = 'mdi-action-favorite-outline';
         if (data.checkLibrary(manga._id)) {
             _saveString = 'Saved';
             _saveIconString = 'mdi-action-favorite';
-        } else {
-            _saveString = 'Save';
-            _saveIconString = 'mdi-action-favorite-outline';
-        }
-        var _saveBook = createElement('button', _saveString);
-            _saveBook.classList.add('waves-effect', 'green', 'waves-light', 'btn');
-        var _saveIcon = createElement('i');
-            _saveIcon.classList.add(_saveIconString, 'left');
-            _saveBook.appendChild(_saveIcon);
-            _saveBook.onclick = function () {
+        } 
+
+        var _saveBook = Render.button({
+            classList: ['waves-effect', 'green', 'waves-light', 'btn'],
+            text: _saveString,
+            onclick: function () {
                 var text = this.textContent;
                 if (data.checkLibrary(manga._id)) {
                     // _saveBook.textContent = 'Already Saved!';
@@ -241,120 +225,63 @@ var Display = function(data) {
                         _saveBook.textContent = text;
                     });
                 }
-            };
-        sectionDiv.appendChild(_saveBook);
+            }
+        });
+        
+        sectionDiv
+            .add(_saveBook
+                .add(Render.i({classList: [ _saveIconString, 'left' ]})));
 
         // End button
-        main.appendChild(sectionDiv);
+        
 
         // end section
         // start collapsible
 
-        // <ul class="collapsible" data-collapsible="accordion">
-        //   <li>
-        //     <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>First</div>
-        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        //   </li>
-        //   <li>
-        //     <div class="collapsible-header"><i class="mdi-maps-place"></i>Second</div>
-        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        //   </li>
-        //   <li>
-        //     <div class="collapsible-header"><i class="mdi-social-whatshot"></i>Third</div>
-        //     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        //   </li>
-        // </ul>
+        var collapsibleContainer = Render.ul({classList: 'collapsible'})
+                .set('data-collapsible', 'accordion');
 
-        var collapsibleContainer = document.createElement('ul');
-            collapsibleContainer.classList.add('collapsible');
-            collapsibleContainer.setAttribute('data-collapsible', 'accordion');
 
-        var tagsCollapsibleContainer = document.createElement('li');
-
-        var tagsCollapsibleHeader = document.createElement('div');
-            tagsCollapsibleHeader.classList.add('collapsible-header', 'waves-effect', 'waves-green');
-            tagsCollapsibleHeader.textContent = 'Tags';
-
-        var tagsCollapsibleHeaderIcon = document.createElement('i');
-            tagsCollapsibleHeaderIcon.classList.add('mdi-notification-more');
-            // tagsCollapsibleHeaderIcon.classList.add('mdi-action-label-outline');
-
-        var tagsCollapsibleBody = document.createElement('div');
-            tagsCollapsibleBody.classList.add('collapsible-body');
-
-            tagsCollapsibleHeader.appendChild(tagsCollapsibleHeaderIcon);
-            tagsCollapsibleContainer.appendChild(tagsCollapsibleHeader);
-            tagsCollapsibleContainer.appendChild(tagsCollapsibleBody);
-            collapsibleContainer.appendChild(tagsCollapsibleContainer);
-
-        var _categories = document.createElement('ul');
-            _categories.classList.add('container');
-            _categories.innerHTML = '<li>' + manga.categories.join('</li><li>') + '</li>';
-        tagsCollapsibleBody.appendChild(_categories);
+        var tagsCollapsibleHeader = Render.div({
+            classList: ['collapsible-header', 'waves-effect', 'waves-green'],
+            text: 'Tags'
+        });
+        var tagsCollapsibleBody = Render.div({classList: 'collapsible-body'});
+        var _categories = Render.ul({classList: 'container'});
+        for (var i = manga.categories.length - 1; i >= 0; i--) {
+            _categories.add(Render.li({text:manga.categories[i]}));
+        }
+                
+            
+        collapsibleContainer
+            .add(Render.li()
+                .add(tagsCollapsibleHeader
+                    .add(Render.i({classList: 'mdi-notification-more'})))
+                .add(tagsCollapsibleBody
+                    .add(_categories)));
 
 
 
-        var summaryCollapsibleContainer = document.createElement('li');
+        var summaryCollapsibleHeader = Render.div({
+            classList: ['collapsible-header', 'waves-effect', 'waves-green'],
+            text: 'Summary'
+        });
+        var summaryCollapsibleBody = Render.div({classList: 'collapsible-body'});
+        var _description = Render.p({innerHTML: manga.description});
 
-        var summaryCollapsibleHeader = document.createElement('div');
-            summaryCollapsibleHeader.classList.add('collapsible-header', 'waves-effect', 'waves-green');
-            summaryCollapsibleHeader.textContent = 'Summary';
-
-        var summaryCollapsibleHeaderIcon = document.createElement('i');
-            summaryCollapsibleHeaderIcon.classList.add('mdi-action-speaker-notes');
-
-        var summaryCollapsibleBody = document.createElement('div');
-            summaryCollapsibleBody.classList.add('collapsible-body');
-
-            summaryCollapsibleHeader.appendChild(summaryCollapsibleHeaderIcon);
-            summaryCollapsibleContainer.appendChild(summaryCollapsibleHeader);
-            summaryCollapsibleContainer.appendChild(summaryCollapsibleBody);
-            collapsibleContainer.appendChild(summaryCollapsibleContainer);
-
-        var _description = createElement('p', manga.description);
-            _description.innerHTML = manga.description;
-        summaryCollapsibleBody.appendChild(_description);
+        collapsibleContainer
+            .add(Render.li()
+                .add(summaryCollapsibleHeader
+                    .add(Render.i({classList: 'mdi-action-speaker-notes'})))
+                .add(summaryCollapsibleBody
+                    .add(_description)));
 
 
-
-        var chapterCollapsibleContainer = document.createElement('li');
-
-        var chapterCollapsibleHeader = document.createElement('div');
-            chapterCollapsibleHeader.classList.add('collapsible-header');
-            chapterCollapsibleHeader.textContent = 'Chapter';
-
-        var chapterCollapsibleHeaderIcon = document.createElement('i');
-            chapterCollapsibleHeaderIcon.classList.add('mdi-action-list');
-
-        var chapterCollapsibleBody = document.createElement('div');
-            chapterCollapsibleBody.classList.add('collapsible-body');
-
-            chapterCollapsibleHeader.appendChild(chapterCollapsibleHeaderIcon);
-            chapterCollapsibleContainer.appendChild(chapterCollapsibleHeader);
-            chapterCollapsibleContainer.appendChild(chapterCollapsibleBody);
-            // collapsibleContainer.appendChild(chapterCollapsibleContainer);
-
-        var _chapters = document.createElement('ul');
-            _chapters.classList.add('collection');
-        var _chaptersHeader = document.createElement('li');
-            _chaptersHeader.classList.add('collection-header');
-
-        var _chaptersH4 = createElement('h5', 'Chapters');
-        _chaptersHeader.appendChild(_chaptersH4);
-        _chapters.appendChild(_chaptersHeader);
-
-
-        // <ul class="collection">
-        //   <li class="collection-item">
-        //     <div>Alvin
-        //       <a href="#!" class="secondary-content">
-        //         <i class="mdi-content-send"></i>
-        //       </a>
-        //     </div></li>
-        //   <li class="collection-item">Alvin</li>
-        //   <li class="collection-item">Alvin</li>
-        //   <li class="collection-item">Alvin</li>
-        // </ul>
+        var _chapters = Render.ul({classList: 'collection'});
+            
+        _chapters
+            .add(Render.li({classList: 'collection-header'})
+                .add(Render.h4({text: 'Chapters'})));
 
         for (var i = manga.chapters.length - 1; i >= 0; i--) {
             var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
@@ -388,11 +315,12 @@ var Display = function(data) {
             _chapters.appendChild(_chapterListItem);
         }
 
-        main.appendChild(collapsibleContainer);
-        main.appendChild(_chapters);
-        // chapterCollapsibleBody.appendChild(_chapters);
+        main
+            .add(sectionDiv)
+            .add(collapsibleContainer)
+            .appendChild(_chapters);
 
-        this.renderNode(main);
+        Render.view(main);
 
         $(document).ready(function(){
           $('.parallax').parallax();
