@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 /* globals page, $, Materialize, Render*/
 var Display = function(data) {
     this.container = function () {
@@ -69,6 +69,9 @@ var Display = function(data) {
         this.mainView.appendChild(node);
     };
 
+
+
+
     this.library = function () {
         
         var main = Render.div();
@@ -78,8 +81,6 @@ var Display = function(data) {
 
         main.add(header)
             .add(listContainer);
-
-
 
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
@@ -93,21 +94,39 @@ var Display = function(data) {
         Materialize.showStaggeredList('#library');
     };
 
+
+
+
     this.search = function () {
         // add search filter
         // display list after each filter change
-
-        // this.renderString('<div class="nav-wrapper"><form><div class="input-field"><input id="search" type="text" required><label for="search"><i class="mdi-action-search"></i></label></div></form><div class="button-group"><button class="waves-effect waves-light green btn"> POP &#x21F5 </button><button class="waves-effect waves-light green btn"> A-Z &#x21F5 </button></div></div><div class="sub-view"></div>');
-
         var navWrapper = Render.div({classList: 'nav-wrapper'});
         var buttonGroup = Render.div({classList: 'button-group'});
+        var collapsible = Render.ul({classList: 'collapsible', id: 'filter'})
+            .set('data-collapsible', 'accordion');
         var inputField = Render.div({classList: 'input-field'});
-        var subView = Render.div({classList: 'sub-view'});
+        var listContainer = Render.ul({id: 'results', classList: 'collection'});
+
 
         inputField
             .add(Render.input({id: 'search', type: 'text', required: true}))
             .add(Render.label({'for': 'search'})
                 .add(Render.i({classList: 'mdi-action-search'})));
+
+        collapsible
+            .add(Render.li()
+                .add(Render.div({classList: 'collapsible-header'})
+                    .add(Render.i({classList: 'mdi-content-filter-list'}))
+                    .add(Render.text('Filter')))
+                .add(Render.div({classList: 'collapsible-body'})
+                    .add(Render.p({text: 'this is a filter'}))))
+            .add(Render.li()
+                .add(Render.div({classList: 'collapsible-header'})
+                    .add(Render.i({classList: 'mdi-content-sort'}))
+                    .add(Render.text('Sort')))
+                .add(Render.div({classList: 'collapsible-body'})
+                    .add(Render.p()
+                        .add(buttonGroup))));
 
         buttonGroup
             .add(Render.button({
@@ -119,40 +138,47 @@ var Display = function(data) {
 
         navWrapper
             .add(Render.form().add(inputField))
-            .add(buttonGroup);
+            .add(collapsible);
 
         Render.view(navWrapper);
-        Render.node(subView);
+        $('#filter').collapsible();
 
         var inputView = $('#search');
-        // var subView = $('.sub-view');
         inputView.on('input', function(event) {
             var searchString = event.target.value;
             if (searchString === '' || searchString.length <= 2) {
                 if (this.lastRendered === 'default') return;
-                renderList(data.top('catalog', 10), subView);
+                renderList(data.top('catalog', 10), listContainer);
                 this.lastRendered = 'default';
+                // Materialize.showStaggeredList('#search');
             } else {
-                renderList(data.search('catalog', searchString), subView);
-                this.lastRendered = searchString;
+                renderList(data.search('catalog', searchString), listContainer);
+                this.lastRendered = listContainer;
             }
 
         });
 
-        renderList(data.top('catalog', 10), subView);
+        renderList(data.top('catalog', 10), listContainer);
         inputView.lastRendered = 'default';
 
-        function renderList (docs, view) {
-            view.innerHTML = '';
+        function renderList (docs, listContainer) {
+            console.dir(docs);
+            listContainer.innerHTML = '';
 
-            var listContainer = document.createElement('ul');
             for (var i = 0; i <= docs.length - 1; i++) {
                 var item = makeListItem(docs[i], docs[i].coverImage);
+                item.style.opacity='0';
                 listContainer.appendChild(item);
             }
-            view.appendChild(listContainer);
+
+            Render.node(listContainer);
+            Materialize.showStaggeredList('#results');
         }
     };
+
+
+
+
 
     this.manga = function(manga) {
         this.renderString('manga loaded');

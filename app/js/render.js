@@ -44,6 +44,10 @@ var Render = {
                 node.appendChild(this);
                 return this;
             };
+            element.set = function (key, value) {
+                this.setAttribute(key, value);
+                return this;
+            };
 
         if (options) {
             if (options.classList) {
