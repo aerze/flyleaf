@@ -162,11 +162,23 @@ var Display = function(data) {
             listContainer.innerHTML = '';
 
             for (var i = 0; i <= docs.length - 1; i++) {
-                var item = makeListItem(docs[i], docs[i].coverImage);
+                // var item = makeListItem(docs[i], docs[i].coverImage);
+                // var item = makeListItem(docs[i], docs[i].coverImage);
+
+                var item = Render.li({
+                    classList: ['collection-item', 'waves-effect', 'waves-green'],
+                    id: docs[i]._id,
+                    onclick: click
+                });
+                item.add(Render.h6({
+                    classList: ['title', 'flow-text', 'truncate'],
+                    text: docs[i].title
+                }));
+
                 item.style.opacity='0';
                 listContainer.appendChild(item);
             }
-
+            function click () { page('/manga/' + this.id); }
             Render.node(listContainer);
             Materialize.showStaggeredList('#results');
         }

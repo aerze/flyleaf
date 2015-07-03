@@ -26,6 +26,7 @@ var Flyleaf = function() {
                     data.indexCollection('catalog', function (err) {
                         if (err) console.log('Index creation failed, minor failure may impact catalog search times.');
                         _initalLoad = true;
+                        $('.cover').remove();
                         next();
                     });
                 }
