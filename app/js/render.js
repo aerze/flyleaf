@@ -1,4 +1,5 @@
 'use strict';
+/*jshint browser: true, jquery: true */
 
 var Render = {
     view: function (node, view) {

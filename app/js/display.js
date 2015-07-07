@@ -175,12 +175,12 @@ var Display = function(data) {
                     text: docs[i].title
                 }));
 
-                item.style.opacity='0';
+/*                 item.style.opacity='0'; */
                 listContainer.appendChild(item);
             }
             function click () { page('/manga/' + this.id); }
             Render.node(listContainer);
-            Materialize.showStaggeredList('#results');
+/*             Materialize.showStaggeredList('#results'); */
         }
     };
 

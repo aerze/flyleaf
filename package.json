@@ -24,6 +24,7 @@
   "homepage": "https://github.com/aerze/flyleaf",
   "dependencies": {
     "express": "^4.11.2",
+    "firebase": "^2.2.7",
     "materialize-css": "^0.96.1",
     "morgan": "^1.5.1",
     "stylus": "^0.51.1"
