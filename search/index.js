@@ -25,19 +25,24 @@ var searchHandler = {
             else res.json(data); 
         });
     },
-
-
+	
+	sorts: function (req, res) {
+		search.sortOptions(function (err, data) {
+			if (err) res.json(err);
+			else res.json(data);
+		})	;
+	},
 
 
 
     alias: function (req, res) {
         var term = req.params.term || '',
+            end = req.params.end || 10,
+            start = req.params.start || -1,
             filter = (req.body.goodGenres || req.body.badGenres) ? false: true,
             sort = req.body.sort || 'hits',
             goodGenres = req.body.good || [],
             badGenres = req.body.bad || [];
-
-            console.log(filter);
 
         var results = search.term(term);
 
@@ -48,7 +53,11 @@ var searchHandler = {
 
         if (sort) results.sortBy(sort);
         
-
+        if (start >  -1) {
+            var diff = end - start;
+            results = results.splice(start, diff);
+        } else results = results.splice(0, end); 
+        
         res.json(results);
     }
 };

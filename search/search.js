@@ -8,6 +8,7 @@ var mangaRef = mangaedenRef.child('manga');
 
 var catalog = [],
     genres = [],
+	sorts = ['hits'],
     lastUpdated = null,
     updating = false;
 
@@ -52,6 +53,27 @@ var search = {
         }
     },
 
+	sortOptions: function (callback) {
+		if (sorts.length > 0) {
+            callback(null, sorts);
+            return;
+        } else {
+            mangaedenRef.child('meta').child('sorts').once('value', function (snap) {
+                var array = [],
+                    object = snap.val();
+                for (var key in object) {
+                    if (object.hasOwnProperty(key)) {
+                        array.push(key);
+                    }
+                }
+                callback(null, array);
+                sorts = array;
+            }, function (err) {
+                callback(err, null);
+            });
+        }
+	},
+
     genres: function (callback) {
         if (genres.length > 0) {
             callback(null, genres);
@@ -73,7 +95,6 @@ var search = {
         }
     },
 
-
     top: function (req, res) {
         var start   = parseInt(req.params.start) - 1  || 0,
             end     = parseInt(req.params.end) -1    || 10,
@@ -94,9 +115,6 @@ var search = {
             res.send(clean);
         }
     },
-
-
-
 
     title: function (req, res) {
         var start   = parseInt(req.params.start) - 1  || 0,
