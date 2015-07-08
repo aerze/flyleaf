@@ -7,6 +7,8 @@
  * @constructor
  */
 var MangaEden = function() {
+	var mangaRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden/manga');
+	var metaRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden/meta');
     var net = Object.create(Net);
 
 
@@ -15,7 +17,20 @@ var MangaEden = function() {
      * @param  {Callback} callback callback(err, mangaList, totalManga)
      */
     this.getFullList = function(callback) {
-        console.log('MangaEden:: getting full list, this may take a while');
+		mangaRef.once('value', function (mangaSnap) {
+			var manga = mangaSnap.val();
+			var clean = [];
+			for ( var key in manga) {
+				if (manga.hasOwnProperty(key)) {
+					clean.push(manga[key]);
+				}
+			}
+			callback(null, clean, clean.length);
+		}, function (err) {
+			callback(err, null);
+		});
+		
+/*         console.log('MangaEden:: getting full list, this may take a while');
         var path = 'http://www.mangaeden.com/api/list/0/';
         net.get(path, function(err, data) {
             if (err) callback(err, null);
@@ -34,8 +49,8 @@ var MangaEden = function() {
                 });
             }
             list.manga = null;
-            callback(null, manga, list.total);
-        });
+            callback(null, manga, list.total); 
+        }); */
     };
 
     /**
