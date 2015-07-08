@@ -97,7 +97,7 @@ var Display = function(data) {
 
 
     this.search = function () {
-        var navWrapper = Render.div({classList: 'nav-wrapper'});
+        var formWrapper = Render.div({classList: 'form-wrapper'});
         var buttonGroup = Render.div({classList: 'button-group'});
         var collapsible = Render.ul({classList: 'collapsible', id: 'filter'})
             .set('data-collapsible', 'accordion');
@@ -132,11 +132,11 @@ var Display = function(data) {
                 classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
                 innerHTML: 'A-Z &#x21F5'}));
 
-        navWrapper
+        formWrapper
             .add(Render.form().add(inputField))
             .add(collapsible);
 
-        Render.view(navWrapper);
+        Render.view(formWrapper);
         $('#filter').collapsible();
 
         var inputView = $('#search');
