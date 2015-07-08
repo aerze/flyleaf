@@ -8,7 +8,7 @@ var mangaRef = mangaedenRef.child('manga');
 
 var catalog = [],
     genres = [],
-	sorts = ['hits'],
+	sorts = [],
     lastUpdated = null,
     updating = false;
 
