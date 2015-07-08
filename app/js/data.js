@@ -17,6 +17,7 @@ var Data = function () {
     var db = {};
     var library = {};
     var catalog = {};
+	var info = {};
 
     /**
      * Connect to ForerunnerDB, or create a new instance for this domain name.
@@ -26,6 +27,7 @@ var Data = function () {
         db = new ForerunnerDB();
         library = db.collection('library');
         catalog = db.collection('catalog');
+		info  = db.collection('info');
     };
 
 
@@ -57,7 +59,7 @@ var Data = function () {
             if (err) callback(err, null);
             else {
                 catalog.loaded = catalog.count();
-
+                
                 if (catalog.loaded === 0) {
                     console.log('Forerunner:: Loading Catalog for first time');
                     downloadCatalog(function (err, total) {
