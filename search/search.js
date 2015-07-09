@@ -2,14 +2,25 @@
 /*jshint node:true*/
 
 var Firebase = require('firebase');
+var mangaEdenUpdate = require('./mangaedenUpdate');
 
 var mangaedenRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden');
 var mangaRef = mangaedenRef.child('manga');
+
+mangaRef.on('value', function (snap) {
+    catalog = objToArray(snap.val())
+        .sort(sortFunctions.hitsAscending);
+    lastUpdated = new Date();
+    console.log('Search:: Local catalog up-to-date');
+}, function (err) {
+    console.log(err);
+});
 
 var catalog = [],
     genres = [],
 	sorts = [],
     lastUpdated = null,
+    firebaseLastUpdated = null,
     updating = false;
 
 
@@ -24,32 +35,13 @@ var objToArray = function (object) {
 
 var sortFunctions = {
     hitsAscending: function (a, b) {
-  return b.hits - a.hits;
-}
+      return b.hits - a.hits;
+    }
 };
 
 var search = {
-    updateCatalog: function (callback) {
-        var hour = 1000*60*60;
-        var newDate = new Date();
-        if (updating === true) return;
-        if ( (newDate - lastUpdated >= hour ) || lastUpdated === null) {
-            updating = true;
-            mangaRef.once('value', function (snap) {
-                catalog = objToArray(snap.val())
-                    .sort(sortFunctions.hitsAscending);
-                lastUpdated = new Date();
-                console.log('Search:: catalog updated');
-                updating = false;
-                callback(null);
-
-            }, function (err) {
-                callback(err);
-            });
-        } else {
-            console.log('Search:: catalog unchanged');
-            callback(null);
-        }
+    updateCatalog: function () {
+        mangaEdenUpdate();
     },
 
 	sortOptions: function (callback) {

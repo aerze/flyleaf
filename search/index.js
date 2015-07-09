@@ -10,9 +10,7 @@ search.updateCatalog(function (err) {
 
 var searchHandler = {
     update: function (req, res, next) {
-        search.updateCatalog(function (err) {
-            if (err) console.log(err);
-        });
+        search.updateCatalog();
         next();
     },
 
