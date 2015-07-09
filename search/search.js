@@ -22,12 +22,11 @@ var objToArray = function (object) {
     } return array;
 };
 
-var hitsAscending = function (a, b) {
+var sortFunctions = {
+    hitsAscending: function (a, b) {
   return b.hits - a.hits;
+}
 };
-
-
-
 
 var search = {
     updateCatalog: function (callback) {
@@ -38,7 +37,7 @@ var search = {
             updating = true;
             mangaRef.once('value', function (snap) {
                 catalog = objToArray(snap.val())
-                    .sort(hitsAscending);
+                    .sort(sortFunctions.hitsAscending);
                 lastUpdated = new Date();
                 console.log('Search:: catalog updated');
                 updating = false;
@@ -95,65 +94,22 @@ var search = {
         }
     },
 
-    top: function (req, res) {
-        var start   = parseInt(req.params.start) - 1  || 0,
-            end     = parseInt(req.params.end) -1    || 10,
-            diff    = end - start;
-        var clean   = [];
-
-        if (diff < 0) res.status(400).send('Bad Request - End is before Start');
-
-        for (var i = start; i <= end; i++) {
-            clean.push(catalog[i]);
-        }
-
-        console.log(start, end, diff);
-
-        if (req.query) {
-            res.send(queryFilter(clean, req.query));
-        } else {
-            res.send(clean);
-        }
-    },
-
-    title: function (req, res) {
-        var start   = parseInt(req.params.start) - 1  || 0,
-            end     = parseInt(req.params.end) -1    || 10,
-            diff    = end - start;
-            if (diff < 0) res.status(400).send('Bad Request - End is before Start');
-
-        var term = req.params.term || '';
-        var clean = [];
-        var re = new RegExp('^' + term + '.*', 'i');
-
-        if (term === '') {
-            console.log('Search:: searching for: all');
-            clean = catalog.slice(0);
-        } else {
-            console.log('Search:: searching for: ' + term);
-            for (var i = 0; i <= catalog.length - 1; i++) {
-                if (re.test(catalog[i].alias)) {
-                    clean[clean.length] = catalog[i];
-                }
-            }
-        }
-
-        if (req.query) {
-            res.send(queryFilter(clean, req.query));
-        } else {
-            res.send(clean);
-        }
-    },
-
     term: function (term) {
         var books = [],
             re = new RegExp('^' + term + '.*', 'i');
 
-        for (var i = catalog.length - 1; i >= 0; i--) {
-            if (term.length < 1 || re.test(catalog[i].alias) || re.test(catalog[i].title)) {
+        if (term.length < 1 || term === '_all') {
+            for (var i = catalog.length - 1; i >= 0; i--) {
                 books.push(catalog[i]);
             }
+        } else {
+            for (var i = catalog.length - 1; i >= 0; i--) {
+                if (term.length < 1 || re.test(catalog[i].alias) || re.test(catalog[i].title)) {
+                    books.push(catalog[i]);
+                }
+            }
         }
+        
         
         books.remove = function (badGenres) {
             for (var i = this.length - 1; i >= 0; i--) {
@@ -205,85 +161,12 @@ var search = {
 
         books.sortBy = function (type) {
             if (type === 'hits') {
-                this.sort(hitsAscending);
+                this.sort(sortFunctions.hitsAscending);
             }
         };
 
         return books;
     },
-
-    sort: function () {
-
-    }
-};
-
-var queryFilter = function (array, queryObj) {
-    var goodGenres = [],
-        badGenres = [];
-    for (var key in queryObj) {
-        if (queryObj.hasOwnProperty(key)) {
-            if (queryObj[key] === 'true') goodGenres.push(key);
-            else if (queryObj[key] === 'false') badGenres.push(key);
-        }
-    }
-    return filter(array, goodGenres, badGenres);
-};
-
-var filter = function (books, goodGenres, badGenres) {
-    for (var i = goodGenres.length - 1; i >= 0; i--) {
-        books = goodGenreFilter(books, goodGenres[i]);
-    }
-
-    if (badGenres) {
-        for (var j = badGenres.length - 1; j >= 0; j--) {
-            books = badGenreFilter(books, badGenres[j]);
-        }
-    }
-    return books;
-};
-
-var goodGenreFilter = function (bookArray, filterGenre) {
-    var filterArray = [];
-
-    for (var i = bookArray.length - 1; i >= 0; i--) {
-        var currentBook = bookArray[i];
-
-        for (var key in currentBook.genre) {
-           if (currentBook.genre.hasOwnProperty(key)) {
-                var currentGenre = key;
-
-                if (filterGenre.toLowerCase() === currentGenre.toLowerCase()) {
-                    filterArray.push(currentBook);
-                    break;
-                }
-            }
-        }
-    }
-    console.log(filterArray.length);
-    return filterArray;
-};
-
-var badGenreFilter = function (bookArray, filterGenre) {
-    var filterArray = [];
-
-    for (var i = bookArray.length - 1; i >= 0; i--) {
-        var currentBook = bookArray[i];
-
-        for (var key in currentBook.genre) {
-           if (currentBook.genre.hasOwnProperty(key)) {
-                var currentGenre = key;
-
-                if (filterGenre !== currentGenre) {
-                    filterArray.push(currentBook);
-                    break;
-                }
-            }
-        }
-    }
-    return filterArray;
 };
 
 module.exports = search;
-
-
-var Books = {};
