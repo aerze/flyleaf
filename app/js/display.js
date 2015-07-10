@@ -148,7 +148,14 @@ var Display = function(data) {
                 this.lastRendered = 'default';
                 // Materialize.showStaggeredList('#search');
             } else {
-                renderList(data.search('catalog', searchString), listContainer);
+/*                 renderList(data.search('catalog', searchString), listContainer); */
+                var search = {
+                    string: searchString
+                };
+                
+                data.searchF(search, function (data) {
+                    renderList(data, listContainer);
+                });
                 this.lastRendered = listContainer;
             }
 

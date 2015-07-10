@@ -181,7 +181,12 @@ var Data = function () {
         return list;
     };
 
-
+    this.searchF = function (search, callback) {
+        var path = '/search/alias/' + search.string;
+        Net.getJson(path, function (err, data) {
+            callback(data);
+        });
+    };
 
     /**
      * Return a sample record from a collection.

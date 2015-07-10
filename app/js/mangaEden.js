@@ -29,6 +29,7 @@ var MangaEden = function() {
 		}, function (err) {
 			callback(err, null);
 		});
+    };
 		
 /*         console.log('MangaEden:: getting full list, this may take a while');
         var path = 'http://www.mangaeden.com/api/list/0/';
@@ -51,7 +52,6 @@ var MangaEden = function() {
             list.manga = null;
             callback(null, manga, list.total); 
         }); */
-    };
 
     /**
      * Downloads detailed manga information based on _id

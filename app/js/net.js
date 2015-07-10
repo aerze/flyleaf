@@ -24,8 +24,8 @@ var netProto  = {
     },
 
     getJson: function (path, callback) {
-        this.get(path, function (data) {
-            callback(JSON.parse(data));
+        this.get(path, function (err, data) {
+            callback(err, JSON.parse(data));
         });
     }
 };

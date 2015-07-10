@@ -16,7 +16,7 @@ var update = function () {
         var lastUpdate = new Date(snap.val());
         var now = new Date();
         
-        if (now - lastUpdate >= 1000*60*60 ) {
+        if (now - lastUpdate >= 1000*60+60 ) {
             updateFirebase();
         }
     });
@@ -33,6 +33,7 @@ var updateFirebase = function () {
             data = JSON.parse(data);
             console.log('Firebase Catalog Update: ' + data.manga.length + ' books');
             var manga = {};
+            var titles = {};
                 for (var i = 0; i <= data.manga.length - 1; i+=1) {
                     manga[data.manga[i].i] = {
                        title: data.manga[i].t,
@@ -44,7 +45,7 @@ var updateFirebase = function () {
                        lastChapterDate: data.manga[i].ld ||null,
                        status: data.manga[i].s
                     };
-
+                    titles[data.manga[i].a.replace(/\./g, '')] = data.manga[i].t;
                     var genreObj = {};
                     for (var j = manga[data.manga[i].i].genre.length - 1; j >= 0; j--) {
                       if (!genres[ manga[data.manga[i].i].genre[j] ]) {
@@ -59,6 +60,7 @@ var updateFirebase = function () {
             delete data.manga;
 
             mangaRef.set(manga);
+            metaRef.child('titles').set(titles);
             metaRef.child('length').set(parseInt(data.total));
             metaRef.child('genres').set(genres);
             metaRef.child('sorts').set({'hits': true});
