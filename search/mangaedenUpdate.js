@@ -16,7 +16,7 @@ var update = function () {
         var lastUpdate = new Date(snap.val());
         var now = new Date();
         
-        if (now - lastUpdate >= 1000*60+60 ) {
+        if (now - lastUpdate >= 1000*60*60 ) {
             updateFirebase();
         }
     });

@@ -103,6 +103,7 @@ var Display = function(data) {
             .set('data-collapsible', 'accordion');
         var inputField = Render.div({classList: 'input-field'});
         var listContainer = Render.ul({id: 'results', classList: 'collection'});
+        var searchForm = Render.form().add(inputField);
 
         inputField
             .add(Render.input({id: 'search', type: 'text', required: true}))
@@ -132,16 +133,19 @@ var Display = function(data) {
                 classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
                 innerHTML: 'A-Z &#x21F5'}));
 
+        
         formWrapper
-            .add(Render.form().add(inputField))
+            .add(searchForm)
             .add(collapsible);
 
         Render.view(formWrapper);
         $('#filter').collapsible();
 
         var inputView = $('#search');
-        inputView.on('input', function(event) {
-            var searchString = event.target.value;
+        var searchInput = function(event) {
+            event.preventDefault();
+            var searchString = inputView.val();
+            console.log(searchString);
             if (searchString === '' || searchString.length <= 2) {
                 if (this.lastRendered === 'default') return;
                 renderList(data.top('catalog', 10), listContainer);
@@ -158,9 +162,11 @@ var Display = function(data) {
                 });
                 this.lastRendered = listContainer;
             }
-
-        });
-
+        };
+/*         inputView.on('input', searchInput); */
+        $(inputView).on('input', searchInput);
+        $(searchForm).on('submit', searchInput);
+        
         renderList(data.top('catalog', 10), listContainer);
         inputView.lastRendered = 'default';
 
