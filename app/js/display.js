@@ -96,104 +96,87 @@ var Display = function(data) {
 
 
 
-    this.search = function () {
-        var formWrapper = Render.div({classList: 'form-wrapper'});
-        var buttonGroup = Render.div({classList: 'button-group'});
-        var collapsible = Render.ul({classList: 'collapsible', id: 'filter'})
-            .set('data-collapsible', 'accordion');
-        var inputField = Render.div({classList: 'input-field'});
-        var listContainer = Render.ul({id: 'results', classList: 'collection'});
-        var searchForm = Render.form().add(inputField);
+    this.search = { 
+        init: function (callback) {
+            console.log('test');
+            // Render Form + Filters
+            var formWrapper = Render.div({classList: 'form-wrapper'});
+            var buttonGroup = Render.div({classList: 'button-group'});
+            var collapsible = Render.ul({classList: 'collapsible', id: 'filter'})
+                .set('data-collapsible', 'accordion');
+            var inputField = Render.div({classList: 'input-field'});
+            var searchForm = Render.form().add(inputField);
 
-        inputField
-            .add(Render.input({id: 'search', type: 'text', required: true}))
-            .add(Render.label({'for': 'search'})
-                .add(Render.i({classList: 'mdi-action-search'})));
+            inputField
+                .add(Render.input({id: 'search', type: 'text', required: true}))
+                .add(Render.label({'for': 'search'})
+                    .add(Render.i({classList: 'mdi-action-search'})));
 
-        collapsible
-            .add(Render.li()
-                .add(Render.div({classList: 'collapsible-header'})
-                    .add(Render.i({classList: 'mdi-content-filter-list'}))
-                    .add(Render.text('Filter')))
-                .add(Render.div({classList: 'collapsible-body'})
-                    .add(Render.p({text: 'this is a filter'}))))
-            .add(Render.li()
-                .add(Render.div({classList: 'collapsible-header'})
-                    .add(Render.i({classList: 'mdi-content-sort'}))
-                    .add(Render.text('Sort')))
-                .add(Render.div({classList: 'collapsible-body'})
-                    .add(Render.p()
-                        .add(buttonGroup))));
+            collapsible
+                .add(Render.li()
+                    .add(Render.div({classList: 'collapsible-header'})
+                        .add(Render.i({classList: 'mdi-content-filter-list'}))
+                        .add(Render.text('Filter')))
+                    .add(Render.div({classList: 'collapsible-body'})
+                        .add(Render.p({text: 'this is a filter'}))))
+                .add(Render.li()
+                    .add(Render.div({classList: 'collapsible-header'})
+                        .add(Render.i({classList: 'mdi-content-sort'}))
+                        .add(Render.text('Sort')))
+                    .add(Render.div({classList: 'collapsible-body'})
+                        .add(Render.p()
+                            .add(buttonGroup))));
 
-        buttonGroup
-            .add(Render.button({
-                classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
-                innerHTML: 'POP &#x21F5'}))
-            .add(Render.button({
-                classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
-                innerHTML: 'A-Z &#x21F5'}));
+            buttonGroup
+                .add(Render.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'POP &#x21F5'}))
+                .add(Render.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'A-Z &#x21F5'}));
 
-        
-        formWrapper
-            .add(searchForm)
-            .add(collapsible);
 
-        Render.view(formWrapper);
-        $('#filter').collapsible();
+            var header = Render.div({classList: 'collection-header'})
+                    .add(Render.div({text:'Search'}));
 
-        var inputView = $('#search');
-        var searchInput = function(event) {
-            event.preventDefault();
-            var searchString = inputView.val();
-            console.log(searchString);
-            if (searchString === '' || searchString.length <= 2) {
-                if (this.lastRendered === 'default') return;
-                renderList(data.top('catalog', 10), listContainer);
-                this.lastRendered = 'default';
-                // Materialize.showStaggeredList('#search');
-            } else {
-/*                 renderList(data.search('catalog', searchString), listContainer); */
-                var search = {
-                    string: searchString
-                };
-                
-                data.searchF(search, function (data) {
-                    renderList(data, listContainer);
-                });
-                this.lastRendered = listContainer;
+            formWrapper
+                .add(header)
+                .add(searchForm)
+                .add(collapsible);
+
+            Render.view(formWrapper);
+            $('#filter').collapsible();
+            callback();
+        },
+
+        renderList: function (docs) {
+            var listContainer  = $('#results')[0];
+            if (listContainer === undefined) {
+                Render.node(Render.ul({id: 'results', classList: 'collection'}));
+                listContainer  = $('#results')[0];
             }
-        };
-/*         inputView.on('input', searchInput); */
-        $(inputView).on('input', searchInput);
-        $(searchForm).on('submit', searchInput);
-        
-        renderList(data.top('catalog', 10), listContainer);
-        inputView.lastRendered = 'default';
 
-        function renderList (docs, listContainer) {
+            // || Render.ul({id: 'results', classList: 'collection'});
             console.dir(docs);
             listContainer.innerHTML = '';
 
+            var onclick = function () { page('/manga/' + this.id); };
             for (var i = 0; i <= docs.length - 1; i++) {
-                // var item = makeListItem(docs[i], docs[i].coverImage);
-                // var item = makeListItem(docs[i], docs[i].coverImage);
-
                 var item = Render.li({
                     classList: ['collection-item', 'waves-effect', 'waves-green'],
                     id: docs[i]._id,
-                    onclick: click
+                    onclick: onclick
                 });
                 item.add(Render.h6({
                     classList: ['title', 'flow-text', 'truncate'],
                     text: docs[i].title
                 }));
 
-/*                 item.style.opacity='0'; */
+                 // item.style.opacity='0'; 
                 listContainer.appendChild(item);
             }
-            function click () { page('/manga/' + this.id); }
             Render.node(listContainer);
-/*             Materialize.showStaggeredList('#results'); */
+             // Materialize.showStaggeredList('#results'); 
         }
     };
 
@@ -408,4 +391,7 @@ var Display = function(data) {
         this.renderString(string);
     };
 
+    this.reveal = function () {
+        $('.cover').slideUp('slow');
+    };
 };

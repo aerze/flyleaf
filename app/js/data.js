@@ -24,9 +24,9 @@ var Data = function () {
      * Must be run before using any other methods will work.
      */
     this.connect = function () {
+        console.log('Data:: Initializing Forerunner + Collections');
         db = new ForerunnerDB();
         library = db.collection('library');
-        catalog = db.collection('catalog');
 		info  = db.collection('info');
     };
 
@@ -40,55 +40,24 @@ var Data = function () {
      */
     this.loadDB = function (callback) {
         library.loaded = -1;
-        catalog.loaded = -1;
 
         library.load(function (err) {
             if (err) callback(err, null);
             else {
                 library.loaded = library.count();
-                if (catalog.loaded >= 0 ) {
-                    callback(null, {
-                        library: library.loaded,
-                        catalog: catalog.loaded
-                    });
-                }
+                console.log('Data:: Library loaded: ' + library.loaded);
+                callback(null, {library: library.loaded});
             }
-        });
-
-        catalog.load(function (err) {
-            if (err) callback(err, null);
-            else {
-                catalog.loaded = catalog.count();
-                
-                if (catalog.loaded === 0) {
-                    console.log('Forerunner:: Loading Catalog for first time');
-                    downloadCatalog(function (err, total) {
-                        if (err) callback(err, null);
-                        else {
-                            console.log(total);
-                            callback(null, {
-                                library: library.loaded,
-                                catalog: catalog.loaded
-                            });
-                        }
-                    });
-                } else if (library.loaded >= 0) {
-                    callback(null, {
-                        library: library.loaded,
-                        catalog: catalog.loaded
-                    });
-                }
-            }
-        });
+        }); return;
     };
 
 
 
-     /*
-      * Downloads the Catalog from the MangaEden API Calls back when the DB has
-      * been loaded or error has occurred.
-      * @param  {Function} callback callback(err, totalSaved<int>)
-      */
+    /*
+    * Downloads the Catalog from the MangaEden API Calls back when the DB has
+    * been loaded or error has occurred.
+    * @param  {Function} callback callback(err, totalSaved<int>)
+    */
     var downloadCatalog = function (callback) {
         mangaEden.getFullList(function (err, mangaList, total) {
             if (err) callback(err, null);
@@ -96,7 +65,7 @@ var Data = function () {
             catalog.save(function (err) {
                 if (err) callback(err, null);
                 else {
-                    catalog.loaded = total;
+                    
                     callback(null, total);
                 }
             });
@@ -105,11 +74,11 @@ var Data = function () {
 
 
 
-     /**
-      * Gets amount of records in collection.
-      * @param  {CollectionName} name Name of the collection
-      * @return {Int} Amount of records in the collection
-      */
+    /**
+    * Gets amount of records in collection.
+    * @param  {CollectionName} name Name of the collection
+    * @return {Int} Amount of records in the collection
+    */
     this.count = function (name) {
         return db.collection(name).count();
     };
@@ -151,13 +120,8 @@ var Data = function () {
      * @param  {Int} amount Amount of records to return
      * @return {Array}  An array of records
      */
-    this.top = function (name, amount) {
-        name = name || 'catalog';
-        return db.collection(name).find({},{
-            $orderBy: {
-                hits: -1
-            },
-        }).slice(0, amount);
+    this.top = function (amount, callback) {
+       this.searchF({string: ''}, {sort: 'hits'}, callback);
     };
 
 
@@ -181,11 +145,26 @@ var Data = function () {
         return list;
     };
 
-    this.searchF = function (search, callback) {
+    this.searchF = function (search, options, callback) {
         var path = '/search/alias/' + search.string;
-        Net.getJson(path, function (err, data) {
-            callback(data);
-        });
+        var json = {};
+
+        if (options) {
+            if (options.all) path += '/-1';
+            if (options.end) path = '/search/alias/' + search.string + '/' + options.end;
+            if (options.start) path += '/' + options.start;
+            if (options.sort) json.sort = options.sort;
+        }
+
+        if (json) {
+            Net.postJson(path, json, function (err, data) {
+                callback(data);
+            });
+        } else {
+            Net.getJson(path, function (err, data) {
+                callback(data);
+            });
+        }
     };
 
     /**

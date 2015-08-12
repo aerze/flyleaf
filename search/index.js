@@ -41,7 +41,7 @@ var searchHandler = {
             sort = req.body.sort || 'hits',
             goodGenres = req.body.good || [],
             badGenres = req.body.bad || [];
-
+        
         var results = search.term(term);
 
         if (filter) {
@@ -50,11 +50,17 @@ var searchHandler = {
         }
 
         if (sort) results.sortBy(sort);
+ 
+        if (end) end = parseInt(end);
+        if (start) start = parseInt(start);
         
         if (start >  -1) {
             var diff = end - start;
             results = results.splice(start, diff);
-        } else results = results.splice(0, end); 
+        } else {
+            if (end === -1) end = results.length;
+            results = results.splice(0, end); 
+        }
         
         res.json(results);
     }

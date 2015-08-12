@@ -6,30 +6,22 @@ var Flyleaf = function() {
     this.data = data;
 
     var display = new Display(data);
+    this.display = display;
 
     var _initalLoad = false;
 
     // Runs on every page change
     this.init = function (context, next) {
         if (_initalLoad) {
-            console.log('Forerunner:: already connected.');
+            console.log('Flyleaf:: ' + context.path);
             next();
         } else {
-            console.log('Flyleaf:: initializing *bbbzzzpptt*');
-            console.log('Forerunner:: connecting');
+            console.log('Flyleaf:: InitalLoad running');
             data.connect();
 
             data.loadDB(function (err, count) {
-                if (err) display.error(err.toString());
-                else {
-                    console.log('Forerunner:: \n\tmyBooks: ' + count.myBooks + '\n\tmanga: ' + count.manga);
-                    data.indexCollection('catalog', function (err) {
-                        if (err) console.log('Index creation failed, minor failure may impact catalog search times.');
-                        _initalLoad = true;
-                        $('.cover').slideUp('slow');
-                        next();
-                    });
-                }
+                display.reveal();
+                next();
             });
         }
     };
@@ -38,8 +30,7 @@ var Flyleaf = function() {
             page('/myBooks');
     };
 
-    this.myBooks = function (context) {
-        console.log('Flyleaf:: at ' + context.path);
+    this.myBooks = function () {
         if (data.count('library') > 0) {
             display.library();
         } else {
@@ -48,13 +39,36 @@ var Flyleaf = function() {
     };
 
     this.search = function() {
-        var check = data.count('catalog');
-            if (check > 0) {
-                display.search();
+        var renderList = display.search.renderList;
+        var handleSearch = function (event) {
+
+            event.preventDefault();
+            var searchString = $('#search').val();
+            console.log('Display:: searching: ' + searchString);
+
+            if (searchString === '' || searchString.length <= 2) {
+                if (this.lastRendered === 'default') return;
+
+                this.lastRendered = 'default';
+                data.top(10, function (docs) {
+                    renderList(docs);
+                });
             } else {
-                console.log(check);
-                display.error('No Manga found, I have no idea what happened.');
+                if (this.lastRendered === searchString) return;
+                var search = {string: searchString};
+                var options = {all: true};
+                this.lastRendered = searchString;
+                data.searchF(search, options, function (docs) {
+                    renderList(docs);
+                });
             }
+        };
+
+        display.search.init(function () {
+            $('.input-field').on('input', handleSearch);
+            $('form').on('submit', handleSearch);
+            $('form').submit();
+        });
     };
 
     this.settings = function () {

@@ -27,6 +27,11 @@ var netProto  = {
         this.get(path, function (err, data) {
             callback(err, JSON.parse(data));
         });
+    },
+    postJson: function (path, json, callback) {
+        this.xhr('post', path, json, function (err, data) {
+            callback(err, JSON.parse(data));
+        });
     }
 };
 var Net = Object.create(netProto);
