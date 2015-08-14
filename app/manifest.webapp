@@ -1,0 +1,19 @@
+{
+  "version": "0.1",
+  "name": "Flyleaf.co",
+  "description": "Manga reader",
+  "launch_path": "/index.html",
+    "type" : "privileged",
+  "icons": {
+    "16": "/icons/drawing_32.png",
+    "48": "/icons/drawing_32.png",
+    "128": "/icons/drawing_120.png"
+  },
+  "developer": {
+    "name": "Gus Suarez",
+    "url": "http://mythril.co"
+  },
+  "default_locale": "en",
+  "fullscreen": "true",
+  "orientation": ["portrait-primary"]
+}

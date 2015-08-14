@@ -16,7 +16,7 @@ var Data = function () {
     var mangaEden = new MangaEden();
     var db = {};
     var library = {};
-    var catalog = {};
+    var cache = {};
 	var info = {};
 
     /**
@@ -27,6 +27,7 @@ var Data = function () {
         console.log('Data:: Initializing Forerunner + Collections');
         db = new ForerunnerDB();
         library = db.collection('library');
+        cache = db.collection('cache');
 		info  = db.collection('info');
     };
 
@@ -300,10 +301,19 @@ var Data = function () {
 
     this.readChapter = function (id, chapterPos, page) {
         var book = library.find({_id: id});
+        if (book.length < 1) return; 
         var array = book[0].chapters;
             array[chapterPos][4] = page;
+            console.log(array);
         library.updateById(id, {chapters: array});
         library.save();
+    };
+
+    this.getGenres = function (callback) {
+        Net.getJson('/search/genres', function (err, data) {
+            if (err) callback(err, null);
+            else callback(null, data);
+        });
     };
 };
 

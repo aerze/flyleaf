@@ -106,6 +106,24 @@ var Display = function(data) {
                 .set('data-collapsible', 'accordion');
             var inputField = Render.div({classList: 'input-field'});
             var searchForm = Render.form().add(inputField);
+            var filters = Render.div({classList: 'filters'});
+            var genre = Render.div({classList: 'genres'})
+                .add(Render.h6({text: 'Genres'}));
+            var genreLeft = Render.div({classList: 'genresLeft'});
+            var genreRight = Render.div({classList: 'genresRight'});
+
+            var newFilter = function (name) {
+                return Render.p()
+                    .add(Render.input({id: 'f'+name, type: 'checkbox', classList: 'filled-in'}))
+                    .add(Render.label({'for': 'f'+name, text: name}));
+            };
+
+            data.getGenres(function (err, genres) {
+                for (var i = 0; i < genres.length; i++) {
+                    if (i%2 !== 0) genreRight.add(newFilter(genres[i])); 
+                    else genreLeft.add(newFilter(genres[i]));
+                }
+            });
 
             inputField
                 .add(Render.input({id: 'search', type: 'text', required: true}))
@@ -118,7 +136,10 @@ var Display = function(data) {
                         .add(Render.i({classList: 'mdi-content-filter-list'}))
                         .add(Render.text('Filter')))
                     .add(Render.div({classList: 'collapsible-body'})
-                        .add(Render.p({text: 'this is a filter'}))))
+                        .add(filters
+                            .add(genre
+                                .add(genreLeft)
+                                .add(genreRight)))))
                 .add(Render.li()
                     .add(Render.div({classList: 'collapsible-header'})
                         .add(Render.i({classList: 'mdi-content-sort'}))
@@ -392,6 +413,8 @@ var Display = function(data) {
     };
 
     this.reveal = function () {
-        $('.cover').slideUp('slow');
+        $('.center h5').delay(500).fadeIn();
+        // $('.center .preloader-wrapper').delay(1000).fadeOut('slow');
+        $('.cover').delay(1500).fadeOut('slow');
     };
 };

@@ -20,6 +20,7 @@ var Flyleaf = function() {
             data.connect();
 
             data.loadDB(function (err, count) {
+                _initalLoad = true;
                 display.reveal();
                 next();
             });

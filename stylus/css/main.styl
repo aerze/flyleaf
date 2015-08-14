@@ -5,7 +5,11 @@ patrick = 'Patrick Hand', cursive;
 shortStack = 'Short Stack', cursive;
 
 // colors
-green = #4CAF50;
+brighterGreen = #4CAF50;
+darkishGreen = #04975F;
+blueGreen = #0D9D76;
+.green
+    background-color: darkishGreen !important
 
 body 
     background-color: #FFF;
@@ -17,8 +21,8 @@ body
       width: 100%;
       height: 100%;
       z-index: 1000;
-      background-color: green;
-      background-image: url('/images/WIP-logo-black.png');
+      background-color: white;
+      background-image: url('/images/WIP-logo-green.png');
       background-repeat: no-repeat;
       background-size: auto 300px;
       background-position: 52% 23%;
@@ -90,3 +94,15 @@ body
 
 #filter, #results
     margin: 0px;
+    
+
+// FILTERSSSS
+.filters 
+    padding: 0.8em;
+.genres 
+    h6
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+    p 
+        padding: 0.5em;
+    div
+        display: inline-block;
