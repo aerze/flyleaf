@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "name": "Flyleaf.co",
+  "name": "Flyleaf",
   "description": "Manga reader",
   "launch_path": "/index.html",
     "type" : "privileged",
