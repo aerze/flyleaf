@@ -85,12 +85,12 @@ var Display = function(data) {
         data.getLibrary(function (err, lib) {
             for (var i = 0; i <= lib.length - 1; i++) {
                 var item = makeListItem(lib[i], lib[i].image, true);
-                item.style.opacity='0';
+                // item.style.opacity='0';
                 listContainer.appendChild(item);
             }
         });
 
-        Materialize.showStaggeredList('#library');
+        // Materialize.showStaggeredList('#library');
     };
 
 
@@ -98,7 +98,6 @@ var Display = function(data) {
 
     this.search = { 
         init: function (callback) {
-            console.log('test');
             // Render Form + Filters
             var formWrapper = Render.div({classList: 'form-wrapper'});
             var buttonGroup = Render.div({classList: 'button-group'});
@@ -128,13 +127,15 @@ var Display = function(data) {
             inputField
                 .add(Render.input({id: 'search', type: 'text', required: true}))
                 .add(Render.label({'for': 'search'})
-                    .add(Render.i({classList: 'mdi-action-search'})));
+                    .add(Render.i({classList: 'mdi-action-search'})))
+                .add(Render.div({classList: 'form-button'})
+                    .add(Render.i({classList: 'mdi-content-send'})));
 
             collapsible
                 .add(Render.li()
                     .add(Render.div({classList: 'collapsible-header'})
                         .add(Render.i({classList: 'mdi-content-filter-list'}))
-                        .add(Render.text('Filter')))
+                        .add(Render.text('Genre Filter')))
                     .add(Render.div({classList: 'collapsible-body'})
                         .add(filters
                             .add(genre
@@ -167,6 +168,36 @@ var Display = function(data) {
 
             Render.view(formWrapper);
             $('#filter').collapsible();
+
+            var screenHeight = $(window).innerHeight();
+
+            var updateListView = function (extra) {
+                var top = $(window).scrollTop() - extra;
+                var bottom = top + screenHeight + extra;
+                var items = $('.collection-item');
+
+                for (var i = items.length - 1; i >= 0; i--) {
+                    var windowOffset = parseInt(items[i].offsetTop) +250;
+
+                    if (items[i].style.visibility !== '') {
+                        if (windowOffset < top) continue;
+                        if (windowOffset + items[i].offsetHeight > bottom) continue;
+                        items[i].style.visibility = '';
+                    } else if (items[i].style.visibility === '') {
+                        if (windowOffset > top) continue;
+                        if (items[i].offsetHeight < bottom) continue;
+                        items[i].style.visibility = 'hidden';
+                    }
+                    // console.log(items[i].height);
+                    // console.log('Top: ' + top, 'ItemOffset: ' + windowOffset, 'Bottom: ' + bottom);
+                }
+            };
+
+            $( window ).scroll(function(event) {
+
+                updateListView(150);
+            });
+            
             callback();
         },
 
@@ -178,7 +209,7 @@ var Display = function(data) {
             }
 
             // || Render.ul({id: 'results', classList: 'collection'});
-            console.dir(docs);
+            // console.dir(docs);
             listContainer.innerHTML = '';
 
             var onclick = function () { page('/manga/' + this.id); };
@@ -193,9 +224,12 @@ var Display = function(data) {
                     text: docs[i].title
                 }));
 
-                 // item.style.opacity='0'; 
+                // visibility: hidden;
+                // item.style.visibility = 'hidden'; 
                 listContainer.appendChild(item);
             }
+
+            console.log('Display:: drawing to screen');
             Render.node(listContainer);
              // Materialize.showStaggeredList('#results'); 
         }

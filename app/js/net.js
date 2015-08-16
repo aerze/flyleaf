@@ -2,11 +2,14 @@
 
 var netProto  = {
     xhr: function (type, path, data, callback) {
-        if (data === null || data === undefined) {
-            data = '';
-        }
         var request = new XMLHttpRequest();
         request.open(type, path, true);
+        if (data === null || data === undefined) {
+            data = '';
+        } else {
+            request.setRequestHeader('Content-Type', 'application/json');
+            data = JSON.stringify(data);
+        }
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status !== 200) callback(new Error('XHR Failed: ' + path), null);
             if (request.readyState !== 4 || request.status !== 200) return;

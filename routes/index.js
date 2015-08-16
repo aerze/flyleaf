@@ -8,8 +8,8 @@ module.exports = exports = function(app) {
 
     app.use('/search/*', searchHandler.update);
     
-    app.post('/search/alias/:term?/:end?/:start?', searchHandler.alias);
-    app.get('/search/alias/:term?/:end?/:start?', searchHandler.alias);
+    app.post('/search/alias/:term?/', searchHandler.alias);
+    app.get('/search/alias/:term?/', searchHandler.alias);
     
 
     app.post('/search/genres/', searchHandler.genres);

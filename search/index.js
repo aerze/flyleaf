@@ -35,19 +35,23 @@ var searchHandler = {
 
     alias: function (req, res) {
         var term = req.params.term || '',
-            end = req.params.end || 10,
-            start = req.params.start || -1,
-            filter = (req.body.goodGenres || req.body.badGenres) ? false: true,
+            end = req.body.end || 10,
+            start = req.body.start || -1,
+            filter = (req.body.good || req.body.bad) ? true: false,
             sort = req.body.sort || 'hits',
             goodGenres = req.body.good || [],
             badGenres = req.body.bad || [];
         
         var results = search.term(term);
-
+        
+        console.log( results.length );
+        console.log('Filtering: ' + JSON.stringify(goodGenres));
         if (filter) {
             results.keep(goodGenres);
             results.remove(badGenres);
         }
+
+        console.log( results.length );
 
         if (sort) results.sortBy(sort);
  

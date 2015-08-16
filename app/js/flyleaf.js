@@ -41,32 +41,77 @@ var Flyleaf = function() {
 
     this.search = function() {
         var renderList = display.search.renderList;
+        var generateSearchHash = function (options) {
+            var string = 'searching';
+            if (options.string) string += ':' + options.string;
+            if (options.genres.good.length > 0) {
+                string += ':';
+                for (var i = options.genres.good.length - 1; i >= 0; i--) {
+                    string += '|' + options.genres.good[i];
+                }
+            }
+            return string;
+        };
         var handleSearch = function (event) {
-
             event.preventDefault();
-            var searchString = $('#search').val();
-            console.log('Display:: searching: ' + searchString);
+            // close options boxes
+            $('.collapsible-header.active').trigger('click.collapse');
 
-            if (searchString === '' || searchString.length <= 2) {
-                if (this.lastRendered === 'default') return;
+            // get last request hash
+            var lastRendered = $('form')[0].lastRendered;
 
-                this.lastRendered = 'default';
+            var genreInputs = $('.genres input');
+            
+            // set default search options
+            var options = {
+                all: null,
+                end: null,
+                start: null,
+                sort: 'hits',
+                genres: {good: [], bad: []},
+                string: $('#search').val()
+            };
+
+            // check for any checked boxes
+            for (var i = genreInputs.length - 1; i >= 0; i--) {
+                var genre = genreInputs[i];
+                if (genre.checked) options.genres.good.push(genre.id.substr(1, genre.id.length));
+                else options.genres.bad.push(genre.id.substr(1, genre.id.length));
+            }
+
+            // Return if we just searched for these options
+            if (lastRendered === generateSearchHash(options)) return;
+
+            // if everything is default, just return the top 10 mangas
+            if (options.string === '' && options.genres.good.length === 0) {
+                $('form')[0].lastRendered = generateSearchHash(options);
                 data.top(10, function (docs) {
                     renderList(docs);
                 });
             } else {
-                if (this.lastRendered === searchString) return;
-                var search = {string: searchString};
-                var options = {all: true};
-                this.lastRendered = searchString;
-                data.searchF(search, options, function (docs) {
+                // return all the matching mangas
+                options.all = true;
+
+                // set the new hash, and log it to see the options used.
+                var hash = generateSearchHash(options);
+                $('form')[0].lastRendered = hash;
+                console.log(hash);
+
+                data.searchF(options, function (docs) {
+                    console.log('Flyleaf:: rendering data');
                     renderList(docs);
                 });
             }
         };
 
         display.search.init(function () {
-            $('.input-field').on('input', handleSearch);
+            $('.input-field').on('input', function (event) {
+                if ($('#search').val().length < 3) {
+                    event.preventDefault();
+                    return;
+                } else handleSearch(event);
+            });
+            $('.form-button').on('click', handleSearch);
             $('form').on('submit', handleSearch);
             $('form').submit();
         });

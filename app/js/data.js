@@ -122,7 +122,7 @@ var Data = function () {
      * @return {Array}  An array of records
      */
     this.top = function (amount, callback) {
-       this.searchF({string: ''}, {sort: 'hits'}, callback);
+       this.searchF({string: '', sort: 'hits'}, callback);
     };
 
 
@@ -146,19 +146,26 @@ var Data = function () {
         return list;
     };
 
-    this.searchF = function (search, options, callback) {
-        var path = '/search/alias/' + search.string;
+    this.searchF = function (options, callback) {
+        var path = '/search/alias/' + options.string;
         var json = {};
 
         if (options) {
-            if (options.all) path += '/-1';
-            if (options.end) path = '/search/alias/' + search.string + '/' + options.end;
-            if (options.start) path += '/' + options.start;
+            if (options.end) json.end = options.end;
+            if (options.start) json.start = options.start;
+            if (options.all ) json.end = -1; json.start = -1;
             if (options.sort) json.sort = options.sort;
+            if (options.genres) {
+                if (options.genres.good.length > 0) {
+                    json.good = options.genres.good;
+                }
+            }
         }
 
         if (json) {
+            console.log('Data:: sending json');
             Net.postJson(path, json, function (err, data) {
+                console.log('Data:: got json');
                 callback(data);
             });
         } else {

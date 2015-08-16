@@ -135,7 +135,6 @@ var search = {
                     for (var key in currentBook.genre) {
                        if (currentBook.genre.hasOwnProperty(key)) {
                             var currentGenre = key;
-
                             if (goodGenres[j].toLowerCase() === currentGenre.toLowerCase()) {
                                 match = true;
                             }
