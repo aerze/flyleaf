@@ -113,7 +113,11 @@ var Flyleaf = function() {
             });
             $('.form-button').on('click', handleSearch);
             $('form').on('submit', handleSearch);
-            $('form').submit();
+            var prevSearch = flyleaf.getID('searchCache');
+            if (prevSearch !== undefined) {
+                renderList(prevSearch);
+                console.log('Flyleaf:: rendering with prev data');
+            } else $('form').submit();
         });
     };
 

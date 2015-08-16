@@ -202,6 +202,7 @@ var Display = function(data) {
         },
 
         renderList: function (docs) {
+            flyleaf.setID('searchCache', docs);
             var listContainer  = $('#results')[0];
             if (listContainer === undefined) {
                 Render.node(Render.ul({id: 'results', classList: 'collection'}));
@@ -228,8 +229,7 @@ var Display = function(data) {
                 // item.style.visibility = 'hidden'; 
                 listContainer.appendChild(item);
             }
-
-            console.log('Display:: drawing to screen');
+            
             Render.node(listContainer);
              // Materialize.showStaggeredList('#results'); 
         }

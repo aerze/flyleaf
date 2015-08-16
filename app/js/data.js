@@ -163,9 +163,7 @@ var Data = function () {
         }
 
         if (json) {
-            console.log('Data:: sending json');
             Net.postJson(path, json, function (err, data) {
-                console.log('Data:: got json');
                 callback(data);
             });
         } else {
@@ -317,7 +315,10 @@ var Data = function () {
     };
 
     this.getGenres = function (callback) {
+        var prevGenre = flyleaf.getID('genreCache');
+        if (prevGenre !== undefined) { callback(null, prevGenre); return; }
         Net.getJson('/search/genres', function (err, data) {
+            flyleaf.setID('genreCache', data);
             if (err) callback(err, null);
             else callback(null, data);
         });
