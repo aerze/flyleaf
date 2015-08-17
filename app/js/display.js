@@ -345,11 +345,11 @@ var Display = function(data) {
         _chapters
             .add(Render.li({classList: 'collection-header'})
                 .add(Render.h4({text: 'Chapters'})));
-
-        for (var i = manga.chapters.length - 1; i >= 0; i--) {
-            var label = (manga.chapters[i][2] === null || manga.chapters[i][2] === manga.chapters[i][0].toString()) ?
-                'CH ' + manga.chapters[i][0] :
-                'CH ' + manga.chapters[i][0] + ': ' + manga.chapters[i][2];
+        for (var j = 0; j < manga.chapters.length; j++) {
+        // for (var j = manga.chapters.length - 1; j >= 0; j--) {
+            var label = (manga.chapters[j][2] === null || manga.chapters[j][2] === manga.chapters[j][0].toString()) ?
+                'CH ' + manga.chapters[j][0] :
+                'CH ' + manga.chapters[j][0] + ': ' + manga.chapters[j][2];
 
             var _chapterListItem = createElement('li');
             var _chapterDiv = document.createElement('div');
@@ -358,9 +358,9 @@ var Display = function(data) {
                 _chapterA.classList.add('secondary-content');
             var _chapterIcon = document.createElement('i');
 
-            if (manga.chapters[i][4] === undefined) {
+            if (manga.chapters[j][4] === undefined) {
                 _chapterIcon.classList.add('mdi-action-bookmark-outline');
-            } else if (parseInt(manga.chapters[i][4]) >= 0) {
+            } else if (parseInt(manga.chapters[j][4]) >= 0) {
                 _chapterIcon.classList.add('mdi-action-bookmark');
             } else {
                 _chapterIcon.classList.add('mdi-action-done');
@@ -370,8 +370,8 @@ var Display = function(data) {
                 _chapterListItem.appendChild(_chapterDiv);
 
             // var _chapterListItem = createElement('button', label);
-                _chapterListItem.index = i;
-                _chapterListItem.id = manga.chapters[i][3];
+                _chapterListItem.index = j;
+                _chapterListItem.id = manga.chapters[j][3];
                 _chapterListItem.onclick = loadChapter;
                 _chapterListItem.classList.add('collection-item', 'waves-effect', 'waves-green');
                 // _chapterListItem.classList.add('btn', 'btn-primary');
