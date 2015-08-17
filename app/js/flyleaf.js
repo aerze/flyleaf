@@ -32,6 +32,7 @@ var Flyleaf = function() {
     };
 
     this.myBooks = function () {
+        display.setNavButton('menu');
         if (data.count('library') > 0) {
             display.library();
         } else {
@@ -40,6 +41,7 @@ var Flyleaf = function() {
     };
 
     this.search = function() {
+        display.setNavButton('menu');
         var renderList = display.search.renderList;
         var generateSearchHash = function (options) {
             var string = 'searching';
@@ -122,10 +124,12 @@ var Flyleaf = function() {
     };
 
     this.settings = function () {
+        display.setNavButton('menu');
         display.renderString('Nothing here yet');
     };
 
     this.aboutUs = function () {
+        display.setNavButton('menu');
         var container = display.container();
         container.classList.add('section');
         container.add(display.textNode('This was made by '))
@@ -143,6 +147,7 @@ var Flyleaf = function() {
     };
 
     this.manga = function (req) {
+        display.setNavButton('back');
         current.mangaID = req.params.id;
         data.getMangaInfo(req.params.id, function (err, mangaInfo) {
             setNavTitle(mangaInfo.title);
@@ -152,6 +157,7 @@ var Flyleaf = function() {
     };
 
     this.chapter = function (req) {
+        display.setNavButton('back');
         current.chapterID = req.params.id;
         data.getChapterInfo(req.params.id, function (err, chapterInfo) {
             if (err) display.error(err);

@@ -451,4 +451,26 @@ var Display = function(data) {
         // $('.center .preloader-wrapper').delay(1000).fadeOut('slow');
         $('.cover').delay(1500).fadeOut('slow');
     };
+
+    this.setNavButton = function (type) {
+        var button = $('.button-collapse');
+        var icon = $('.button-collapse i');
+        var backClass = 'mdi-navigation-chevron-left';
+        var menuClass = 'mdi-navigation-menu';
+
+        button.off('click');
+        if (type === 'back') {
+            icon.removeClass(menuClass);
+            icon.addClass(backClass);
+            button.on('click', function(event) {
+                event.preventDefault();
+                window.history.back();
+            });
+        } else if (type === 'menu') {
+            icon.removeClass(backClass);
+            icon.addClass(menuClass);
+            button.sideNav({menuWidth: 240, activationWidth: 70, closeOnClick: true});
+        }
+
+    };
 };
