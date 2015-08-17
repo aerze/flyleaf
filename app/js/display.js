@@ -247,7 +247,7 @@ var Display = function(data) {
 
         var parallaxContainer = Render.div({classList: 'parallax-container'});
         var parallaxDiv = Render.div({classList: 'parallax'});
-        var _image = Render.img({src: 'http://cdn.mangaeden.com/mangasimg/' + manga.image});
+        var _image = Render.img({src: 'http://cdn.mangaeden.com/mangasimg/' + manga.image, classList: 'z-depth-5'});
 
         parallaxContainer
             .add(parallaxDiv
