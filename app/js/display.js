@@ -54,7 +54,7 @@ var Display = function(data) {
         return item;
     };
     this.makeListItem = makeListItem;
-    
+
     this.data = data;
     this.mainView = document.querySelector('.main-view');
 
@@ -82,15 +82,6 @@ var Display = function(data) {
             .add(listContainer);
 
         this.renderNode(main);
-        // data.getLibrary(function (err, lib) {
-        //     for (var i = 0; i <= lib.length - 1; i++) {
-        //         var item = makeListItem(lib[i], lib[i].image, true);
-        //         // item.style.opacity='0';
-        //         listContainer.appendChild(item);
-        //     }
-        // });
-
-        // Materialize.showStaggeredList('#library');
     };
 
 
@@ -241,7 +232,6 @@ var Display = function(data) {
 
     this.manga = function(manga) {
         this.renderString('manga loaded');
-
         var main = Render.div();
         // start parallax
 
@@ -339,6 +329,14 @@ var Display = function(data) {
                 .add(summaryCollapsibleBody
                     .add(_description)));
 
+        var loadChapter = function () {
+            flyleaf.data.readChapter(manga._id, this.index, 0);
+            flyleaf.setID('chapterIndex', this.index);
+            var chapterNumber = this.textContent.split(':')[0];
+            flyleaf.display.setNavTitle(chapterNumber);
+            
+            page('/chapter/' + this.id);
+        };
 
         var _chapters = Render.ul({classList: 'collection'});
             
@@ -346,7 +344,6 @@ var Display = function(data) {
             .add(Render.li({classList: 'collection-header'})
                 .add(Render.h4({text: 'Chapters'})));
         for (var j = 0; j < manga.chapters.length; j++) {
-        // for (var j = manga.chapters.length - 1; j >= 0; j--) {
             var label = (manga.chapters[j][2] === null || manga.chapters[j][2] === manga.chapters[j][0].toString()) ?
                 'CH ' + manga.chapters[j][0] :
                 'CH ' + manga.chapters[j][0] + ': ' + manga.chapters[j][2];
@@ -369,12 +366,10 @@ var Display = function(data) {
                 _chapterDiv.appendChild(_chapterA);
                 _chapterListItem.appendChild(_chapterDiv);
 
-            // var _chapterListItem = createElement('button', label);
                 _chapterListItem.index = j;
                 _chapterListItem.id = manga.chapters[j][3];
                 _chapterListItem.onclick = loadChapter;
                 _chapterListItem.classList.add('collection-item', 'waves-effect', 'waves-green');
-                // _chapterListItem.classList.add('btn', 'btn-primary');
             _chapters.appendChild(_chapterListItem);
         }
 
@@ -390,11 +385,6 @@ var Display = function(data) {
           $('.collapsible').collapsible();
         });
 
-        function loadChapter() {
-            data.readChapter(manga._id, this.index, 0);
-            flyleaf.setID('chapterIndex', this.index);
-            page('/chapter/' + this.id);
-        }
 
         function createElement (elem, text) {
             var element = document.createElement(elem);
@@ -419,7 +409,7 @@ var Display = function(data) {
             var bottom = $(document).height() - 150;
             if (bottom < 1000) bottom = 1000;
             if( pos > bottom) {
-                console.log('passed bottom');
+                console.log('hit bottom');
                 if (alreadyHit) return;
                 alreadyHit = true;
                 var mangaID = flyleaf.getID('mangaID');
