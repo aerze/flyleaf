@@ -53,8 +53,8 @@ var Display = function(data) {
 
         return item;
     };
-
-
+    this.makeListItem = makeListItem;
+    
     this.data = data;
     this.mainView = document.querySelector('.main-view');
 
@@ -72,7 +72,7 @@ var Display = function(data) {
 
 
 
-    this.library = function () {  
+    this.initLibrary = function () {  
         var main = Render.div();
         var listContainer = Render.ul({id: 'library', classList: 'collection'});
         var header = Render.div({classList: 'collection-header'})
@@ -82,13 +82,13 @@ var Display = function(data) {
             .add(listContainer);
 
         this.renderNode(main);
-        data.getLibrary(function (err, lib) {
-            for (var i = 0; i <= lib.length - 1; i++) {
-                var item = makeListItem(lib[i], lib[i].image, true);
-                // item.style.opacity='0';
-                listContainer.appendChild(item);
-            }
-        });
+        // data.getLibrary(function (err, lib) {
+        //     for (var i = 0; i <= lib.length - 1; i++) {
+        //         var item = makeListItem(lib[i], lib[i].image, true);
+        //         // item.style.opacity='0';
+        //         listContainer.appendChild(item);
+        //     }
+        // });
 
         // Materialize.showStaggeredList('#library');
     };
@@ -475,6 +475,12 @@ var Display = function(data) {
             button.sideNav({menuWidth: 240, activationWidth: 70, closeOnClick: true});
         }
 
+    };
+
+    this.setNavTitle = function (title) {
+        title = title || 'Flyleaf.co';
+        var navTitle = $('.nav-title');
+        navTitle.text(title);
     };
 };
 

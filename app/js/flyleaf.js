@@ -10,15 +10,18 @@ var Flyleaf = function() {
 
     var _initalLoad = false;
 
+
+
+
+
     // Runs on every page change
     this.init = function (context, next) {
         if (_initalLoad) {
             console.log('Flyleaf:: ' + context.path);
             next();
         } else {
-            console.log('Flyleaf:: InitalLoad running');
+            console.log('Flyleaf:: Initial Load');
             data.connect();
-
             data.loadDB(function (err, count) {
                 _initalLoad = true;
                 display.reveal();
@@ -27,18 +30,42 @@ var Flyleaf = function() {
         }
     };
 
+
+
+
+
     this.home = function () {
             page('/myBooks');
     };
 
+
+
+
+
     this.myBooks = function () {
         display.setNavButton('menu');
-        if (data.count('library') > 0) {
-            display.library();
-        } else {
-            display.error('No Books saved!<br/>Go to the search page to find some.');
-        }
+        display.setNavTitle();
+        display.initLibrary();
+
+        data.getLibrary(function (err, lib) {
+            if (lib.length < 1) {
+                display.error('No Books saved!<br/>Go to the search page to find some.'); 
+                return;
+            }
+            var $libraryList = $('#library'),
+                item, i;
+
+            for (i = 0; i <= lib.length - 1; i++) {
+                item = display.makeListItem(lib[i], lib[i].image, true);    
+                $libraryList.append(item);
+            }
+
+        });
     };
+
+
+
+
 
     this.search = function() {
         display.setNavButton('menu');
@@ -123,10 +150,18 @@ var Flyleaf = function() {
         });
     };
 
+
+
+
+
     this.settings = function () {
         display.setNavButton('menu');
         display.renderString('Nothing here yet');
     };
+
+
+
+
 
     this.aboutUs = function () {
         display.setNavButton('menu');
@@ -146,6 +181,10 @@ var Flyleaf = function() {
         display.renderNode(container);
     };
 
+
+
+
+
     this.manga = function (req) {
         display.setNavButton('back');
         current.mangaID = req.params.id;
@@ -156,6 +195,10 @@ var Flyleaf = function() {
         });
     };
 
+
+
+
+
     this.chapter = function (req) {
         display.setNavButton('back');
         current.chapterID = req.params.id;
@@ -165,23 +208,43 @@ var Flyleaf = function() {
         });
     };
 
+
+
+
+
     var current = {
         mangaID: '',
         chapterID:'',
     };
 
+
+
+
+
     this.setID = function (key, value) {
         current[key] = value;
     };
+
+
+
+
 
     this.getID = function (key) {
         return current[key];
     };
 
+
+
+
+
     var setNavTitle = function (string) {
         var navTitle = document.querySelector('.nav-title');
         navTitle.textContent = string;
     };
+
+
+
+
     this.setNavTitle = setNavTitle;
 
     // this._sortByHits = function(mangaArray) {
