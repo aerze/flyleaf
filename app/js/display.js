@@ -404,11 +404,18 @@ var Display = function(data) {
         this.renderString(images);
 
         var alreadyHit = false;
-        $(window).scroll(function() {
-            var pos = $(window).scrollTop() + $(window).height();
-            var bottom = $(document).height() - 150;
+        var bottom = $(document).height() - 200;
+        var currentPos = 0;
+        var fullScreen = false;
+        var $window = $(window);
+        var $mainView = $('.main-view');
+
+        var checkScroll = function() {
+            currentPos = $(this).scrollTop() + $(this).height();
+            console.log(currentPos, ' > ', bottom);
+            
             if (bottom < 1000) bottom = 1000;
-            if( pos > bottom) {
+            if( currentPos > bottom) {
                 console.log('hit bottom');
                 if (alreadyHit) return;
                 alreadyHit = true;
@@ -416,11 +423,28 @@ var Display = function(data) {
                 var chapterIndex = flyleaf.getID('chapterIndex');
                 data.readChapter(mangaID, chapterIndex, true);
             }
-        });
+        };
+
+        $window.scroll(checkScroll);
+        $mainView.scroll(checkScroll);
 
         $('.main-view > img').on('click', function () {
             toggleFullScreen($('.main-view')[0]);
+            // if (isFullScreen()) {
+            //     var windowPos = $window.scrollTop();
+            //     console.log('Display:: is now fullScreen', 'window:', windowPos);
+            //     console.log(mainView);
+            //     console.log($mainView);
+            //     $('.main-view').scrollTop(windowPos);
+            // } else {
+            //     var mainViewPos = $mainView.scrollTop();
+            //     toggleFullScreen($('.main-view')[0]);
+            //     console.log('Display:: is now normal', 'main-view:', mainViewPos);
+            //     $(window).scrollTop(mainViewPos);
+            // }
+            // console.log('window:', windowPos, 'mainView:', mainViewPos);
         });
+
     };
 
     this.startLoading = function (caller, process) {
@@ -474,9 +498,13 @@ var Display = function(data) {
     };
 };
 
+var isFullScreen = function () {
+   return (document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen);
+};
+
 var toggleFullScreen = function (elem) {
     // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+    if ( isFullScreen() ) {
         if (elem.requestFullScreen) {
             elem.requestFullScreen();
         } else if (elem.mozRequestFullScreen) {
