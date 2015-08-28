@@ -167,6 +167,16 @@ var Flyleaf = function() {
 
 
 
+    this.myAccount = function () {
+        display.setNavButton('menu');
+        display.setNavTitle('My Account');
+        display.renderString('TESTING');
+    };
+
+
+
+
+
     this.aboutUs = function () {
         display.setNavButton('menu');
         display.setNavTitle();

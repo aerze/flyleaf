@@ -10,6 +10,7 @@ page('/', flyleaf.home);
 page('/myBooks', flyleaf.myBooks);
 page('/search', flyleaf.search);
 page('/settings', flyleaf.settings);
+page('/myAccount', flyleaf.myAccount);
 page('/aboutUs', flyleaf.aboutUs);
 page('/manga/:id', flyleaf.manga);
 page('/chapter/:id', flyleaf.chapter);

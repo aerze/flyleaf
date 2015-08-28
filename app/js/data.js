@@ -14,10 +14,12 @@
 var Data = function () {
 
     var mangaEden = new MangaEden();
-    var db = {};
+    var auth = new Auth();
     var library = {};
     var cache = {};
-	var info = {};
+    var info = {};
+    var db = {};
+    var userRef;
 
     /**
      * Connect to ForerunnerDB, or create a new instance for this domain name.
@@ -322,6 +324,40 @@ var Data = function () {
             if (err) callback(err, null);
             else callback(null, data);
         });
+    };
+
+    this.pushLibrary = function (callback) {
+        var authData = auth.getAuth();
+        if (authData) {
+
+            userRef = userRef || new Firebase('https://flyleafco.firebaseio.com/users/' + authData.uid);
+            var lib = library.find();
+            var array = [];
+            
+            for (var i = 0; i < lib.length; i++) array.push(lib[i]);
+
+            userRef.set(array, function(err) {
+                if (err) callback(err);
+                else callback(null);
+            });
+        }
+    };
+
+    this.pullLibrary = function (callback) {
+        var authData = auth.getAuth();
+        if (authData) {
+            userRef = userRef || new Firebase('https://flyleafco.firebaseio.com/users/' + authData.uid + '/library');
+            userRef.once('value', function(snapshot) {
+                library.insert(snapshot.val());
+                library.save();
+                callback(null);
+            }, function (err) {
+                callback(err);
+            }, this);
+        } else {
+            console.log('User Not Authenticated');
+            callback(null)
+        }
     };
 };
 

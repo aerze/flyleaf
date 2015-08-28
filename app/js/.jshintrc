@@ -3,6 +3,7 @@
     "devel": true,
     "jquery": true,
     "globals": {
-        "flyleaf": true
+        "flyleaf": true,
+        "Firebase": true
     }
 }
