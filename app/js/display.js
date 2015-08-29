@@ -496,6 +496,100 @@ var Display = function(data) {
         var navTitle = $('.nav-title');
         navTitle.text(title);
     };
+
+    this.showLogin = function () {
+        var login = function () {
+            console.log(data);
+        };
+
+        var main = Render.div()
+            .add(Render.div({classList: 'row', id: 'login'})
+                .add(Render.div({classList: ['input-field', 'col', 's12']})
+                    .add(Render.input({id:'email', type:'email', classList:'validate'}))
+                    .add(Render.label({for: 'email', text: 'Email'}))
+                    )
+
+                .add(Render.div({classList: ['input-field', 'col', 's12']})
+                    .add(Render.input({id: 'password', type: 'password'}))
+                    .add(Render.label({for: 'password', text: 'Password'}))
+                    )
+
+                .add(Render.div({classList: ['input-field', 'col', 's6']})
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Sign In', id: 'signin'}))
+                    )
+                .add(Render.div({classList: ['input-field', 'col', 's6']})
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Sign Up', id: 'signup'}))
+                    )
+
+                .add(Render.div({classList: ['input-field', 'col', 's12']})
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Sign Out', id: 'signout'}))
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Save Library', id: 'pushLibrary'}))
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Refresh Library', id: 'pullLibrary'}))
+                    )
+                );
+
+        Render.view(main);
+
+        var auth = new Auth();
+
+        var $email = $('#email');
+        var $pass = $('#password');
+
+        var $signin = $('#signin');
+        var $signup = $('#signup');
+        var $signout = $('#signout');
+        var $pushLibrary = $('#pushLibrary');
+        var $pullLibrary = $('#pullLibrary');
+
+
+        $signin.on('click', function () {
+            var email = $email.val();
+            var pass = $pass.val();
+            console.log(email, pass);
+            auth.signIn(email, pass, function (err, authData) {
+                if (err) console.log(err);
+                else {
+                    console.log(authData);
+                }
+            });
+        });
+
+        $signout.on('click', function () {
+            auth.signOut();
+        });
+
+        $signup.on('click', function () {
+            var email = $email.val();
+            var pass = $pass.val();
+            auth.signUp(email, pass, function (err, userData) {
+                if (err) console.log(err);
+                else console.log(userData);
+            });
+        });
+
+        $pushLibrary.on('click', function () {
+            data.pushLibrary(function (err) {
+                if (err) console.log(err);
+            });
+        });
+
+        $pullLibrary.on('click', function () {
+            data.pullLibrary(function (err) {
+                if (err) console.log(err);
+            });
+        });
+
+    };
 };
 
 var isFullScreen = function () {

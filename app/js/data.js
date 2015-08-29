@@ -330,7 +330,7 @@ var Data = function () {
         var authData = auth.getAuth();
         if (authData) {
 
-            userRef = userRef || new Firebase('https://flyleafco.firebaseio.com/users/' + authData.uid);
+            userRef = userRef || new Firebase('https://flyleafco.firebaseio.com/users/' + authData.uid + '/library');
             var lib = library.find();
             var array = [];
             
@@ -338,8 +338,14 @@ var Data = function () {
 
             userRef.set(array, function(err) {
                 if (err) callback(err);
-                else callback(null);
+                else {
+                    console.log('Save successful');
+                    callback(null);
+                }
             });
+        } else {
+            console.log('User Not Authenticated');
+            callback(new Error('User Not Authenticated'));
         }
     };
 
@@ -348,15 +354,17 @@ var Data = function () {
         if (authData) {
             userRef = userRef || new Firebase('https://flyleafco.firebaseio.com/users/' + authData.uid + '/library');
             userRef.once('value', function(snapshot) {
+                console.log('snap', snapshot.val());
                 library.insert(snapshot.val());
                 library.save();
+                console.log('Refresh successful');
                 callback(null);
             }, function (err) {
                 callback(err);
             }, this);
         } else {
             console.log('User Not Authenticated');
-            callback(null)
+            callback(new Error('User Not Authenticated'));
         }
     };
 };
