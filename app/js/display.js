@@ -540,6 +540,10 @@ var Display = function(data) {
 
         Render.view(main);
 
+        var toast = function (text) {
+            Materialize.toast(text, 4000);
+        };
+
         var auth = new Auth();
 
         var $email = $('#email');
@@ -557,8 +561,11 @@ var Display = function(data) {
             var pass = $pass.val();
             console.log(email, pass);
             auth.signIn(email, pass, function (err, authData) {
-                if (err) console.log(err);
-                else {
+                if (err) {
+                    toast('Sign In Error');
+                    console.log(err);
+                } else {
+                    toast('Signed In');
                     console.log(authData);
                 }
             });
@@ -566,26 +573,42 @@ var Display = function(data) {
 
         $signout.on('click', function () {
             auth.signOut();
+            toast('Signed Out');
         });
 
         $signup.on('click', function () {
             var email = $email.val();
             var pass = $pass.val();
             auth.signUp(email, pass, function (err, userData) {
-                if (err) console.log(err);
-                else console.log(userData);
+                if (err) {
+                    toast('Sign Up Unsuccessful');
+                    console.log(err);
+                } else {
+                    toast('Sign Up Successful');
+                    console.log(userData);
+                }
             });
         });
 
         $pushLibrary.on('click', function () {
             data.pushLibrary(function (err) {
-                if (err) console.log(err);
+                if (err) {
+                    toast('Error Saving Library');
+                    console.log(err);
+                } else {
+                    toast('Library Saved');
+                }
             });
         });
 
         $pullLibrary.on('click', function () {
             data.pullLibrary(function (err) {
-                if (err) console.log(err);
+                if (err) {
+                    toast('Error Refreshing Library');
+                    console.log(err);
+                } else {
+                    toast('Library Updated');
+                }
             });
         });
 
