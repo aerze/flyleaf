@@ -1,9 +1,10 @@
 #Flyleaf
+###An open source comic reader
+-----
 
 [![Join the chat at https://gitter.im/aerze/flyleaf](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aerze/flyleaf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-*An app for reading things!*
 
------
+
 ##Front End
 Because I've decided not to use big frameworks like Angular or React, I'll be using many small libraries or
 I'll be making them myself. Expecially the renderer, because it's not going to be a very dynamic app, we can
