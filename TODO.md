@@ -46,3 +46,16 @@ In order to be able to pull from multiple sources (different APIs and RSS feeds)
          - Warning Info Graphic - they can still save manga, but it will not persist across devices
          - NEXT > Stored Path
 
+
+
+##Rotues
+
+'*'             > flyleaf.init);
+'/'             > flyleaf.home);
+'/myBooks'      > flyleaf.myBooks);
+'/search'       > flyleaf.search);
+'/settings'     > flyleaf.settings);
+'/myAccount'    > flyleaf.myAccount);
+'/aboutUs'      > flyleaf.aboutUs);
+'/manga/:id'    > flyleaf.manga);
+'/chapter/:id'  > flyleaf.chapter);

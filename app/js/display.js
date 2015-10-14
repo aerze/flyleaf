@@ -395,26 +395,57 @@ var Display = function(data) {
     };
 
     this.chapter = function(chapterInfo) {
-        this.renderString('chapter loaded');
-        var images = '';
+        // this.renderString('chapter loaded');
+        var container = Render.div();
+        // var images = '';
 
         for (var i = chapterInfo.images.length - 1; i >= 0; i--) {
-            images += '<img class="responsive-img" src="http://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
+            container
+                .add(Render.img({
+                    classList: ['page', 'responsive-img'],
+                    src: 'http://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] 
+                }))
+                .add(Render.br());
+    
+            // images += '<img class="page responsive-img" src="http://cdn.mangaeden.com/mangasimg/' + chapterInfo.images[i][1] + '"></img><br>';
         }
-        this.renderString(images);
-
+        // this.renderString(images);
+        this.renderNode(container);
+        
         var alreadyHit = false;
         var bottom = $(document).height() - 200;
         var currentPos = 0;
         var fullScreen = false;
         var $window = $(window);
         var $mainView = $('.main-view');
-
+        var $images = $('.page');
+        var stops = [];
+        var setupPages = function () {
+            var pages = [];
+            for (var i = stops.length; i--; ) {
+                pages[stops[i].index] = stops[i].height;
+            }
+            console.log(pages);
+            var step = 0;
+            for (var j = 0; j < stops.length; j+= 1 ) {
+                step += pages[j];
+                stops[j] = step;
+            }
+            console.log(stops, bottom);
+            bottom = stops[stops.length -1];
+            
+            $window.scroll(checkScroll);
+            $mainView.scroll(checkScroll);
+            $('.main-view div > img').on('click', function () {
+                toggleFullScreen($('.main-view')[0]);
+            });
+            console.log('Flyleaf: Pages: loaded');
+        };
+        
         var checkScroll = function() {
             currentPos = $(this).scrollTop() + $(this).height();
             console.log(currentPos, ' > ', bottom);
             
-            if (bottom < 1000) bottom = 1000;
             if( currentPos > bottom) {
                 console.log('hit bottom');
                 if (alreadyHit) return;
@@ -424,12 +455,20 @@ var Display = function(data) {
                 data.readChapter(mangaID, chapterIndex, true);
             }
         };
+        
+        $images.each(function (index, elem) {
+            $(elem).load(function () {
+                stops.push({
+                    index: index,
+                    height: this.height
+                });
+                if (stops.length === $images.length) {
+                    setupPages();
+                }
+            });
+        });
 
-        $window.scroll(checkScroll);
-        $mainView.scroll(checkScroll);
 
-        $('.main-view > img').on('click', function () {
-            toggleFullScreen($('.main-view')[0]);
             // if (isFullScreen()) {
             //     var windowPos = $window.scrollTop();
             //     console.log('Display:: is now fullScreen', 'window:', windowPos);
@@ -443,7 +482,6 @@ var Display = function(data) {
             //     $(window).scrollTop(mainViewPos);
             // }
             // console.log('window:', windowPos, 'mainView:', mainViewPos);
-        });
 
     };
 
@@ -463,10 +501,10 @@ var Display = function(data) {
         this.renderString(string);
     };
 
-    this.reveal = function () {
+    this.reveal = function (callback) {
         $('.center h5').delay(500).fadeIn();
         // $('.center .preloader-wrapper').delay(1000).fadeOut('slow');
-        $('.cover').delay(1500).fadeOut('slow');
+        $('.cover').delay(1500).fadeOut('slow', callback);
     };
 
     this.setNavButton = function (type) {
@@ -612,6 +650,127 @@ var Display = function(data) {
             });
         });
 
+    };
+    
+    this.loginModal = function () {
+        
+        var main = Render.div()
+            .add(Render.form({classList: 'row', id: 'login'})
+                .add(Render.h5({text: 'Login'}))
+                .add(Render.div({classList: ['input-field', 'col', 's12']})
+                    .add(Render.input({id:'email', type:'email', classList:'validate'}))
+                    .add(Render.label({for: 'email', text: 'Email'}))
+                    )
+                .add(Render.div({classList: ['input-field', 'col', 's12']})
+                    .add(Render.input({id: 'password', type: 'password'}))
+                    .add(Render.label({for: 'password', text: 'Password'}))
+                    )
+                // .add(Render.div({classList: ['input-field', 'col', 's12', 'checkbox']})
+                //     .add(Render.input({id: 'remember', type: 'checkbox', classList: 'filled-in'}))
+                //     .add(Render.label({for: 'remember', text: 'Stay logged in?'}))
+                //     )
+                .add(Render.div({classList: ['input-field', 'col', 's6']})
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Sign In', id: 'signin'}))
+                    )
+                .add(Render.div({classList: ['input-field', 'col', 's6']})
+                    .add(Render.button({
+                        classList:['btn', 'green', 'waves-effect', 'waves-light'], 
+                        text:'Sign Up', id: 'signup'}))
+                    )
+                );
+
+        var footer = Render.a({
+            id: 'nah',
+            href: '',
+            classList: [
+                'modal-action',
+                'modal-close',
+                'waves-effect',
+                'waves-green',
+                'btn-flat'],
+            text: 'Nah Im good'
+        });
+        
+        var modal = Render.modal('authModal', main, footer);
+        $('body').append(modal)
+        
+        $('#authModal').openModal();
+        
+        var toast = function (text) {
+            console.log(text);
+            Materialize.toast(text, 4000);
+        };
+        var auth = new Auth();
+
+        var $email = $('#email');
+        var $pass = $('#password');
+        
+        var $form = $('#login');
+        var $signin = $('#signin');
+        var $signup = $('#signup');
+        var $nah = $('#nah');
+        var unbind = function () {
+            $form.off();
+            $signin.off();
+            $signup.off();
+            $nah.off();
+        };
+
+        var signIn = function (e) {
+            e.preventDefault();
+            var email = $email.val();
+            var pass = $pass.val();
+            console.log(email, pass);
+            auth.signIn(email, pass, function (err, authData) {
+                if (err) {
+                    toast('Sign In Error');
+                    console.log(err);
+                } else {
+                    toast('Signed In');
+                    unbind();
+                    $('#authModal').closeModal();
+                     data.pullLibrary(function (err) {
+                        if (err) {
+                            toast('Error Refreshing Library');
+                            console.log(err);
+                        } else {
+                            toast('Library Updated');
+                            flyleaf.myBooks();
+                        }
+                    });
+                }
+            });
+        };
+        
+        $signin.on('click', signIn);
+        $form.on('submit', signIn);
+        
+        $signup.on('click', function (e) {
+            e.preventDefault();
+            var email = $email.val();
+            var pass = $pass.val();
+            auth.signUp(email, pass, function (err, userData) {
+                if (err) {
+                    toast('Sign Up Unsuccessful');
+                    console.log(err);
+                } else {
+                    toast('Sign Up Successful, Please Sign In');
+                    $('#signup')
+                        .off()
+                        .addClass('disabled')
+                        .removeClass('green');
+                    console.log(userData);
+                }
+            });
+        });
+
+        $nah.on('click', function () {
+            unbind();
+            $('#authModal').closeModal();
+            toast('Fine then! ( T-T)');
+        });
     };
 };
 

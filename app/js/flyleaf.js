@@ -8,7 +8,8 @@ var Flyleaf = function() {
     var display = new Display(data);
     this.display = display;
 
-    var _initalLoad = false;
+    var _initalLoad = false,
+        _authCheck = false;
 
 
 
@@ -24,7 +25,6 @@ var Flyleaf = function() {
             data.connect();
             data.loadDB(function (err, count) {
                 _initalLoad = true;
-                display.reveal();
                 next();
             });
         }
@@ -34,6 +34,29 @@ var Flyleaf = function() {
 
 
 
+    this.authCheck = function (context, next) {
+        if (_authCheck) {
+            console.log('Flyleaf:: Auth Check: True');
+            next();
+        } else {
+            console.log('Flyleaf:: Auth Check: False');
+            var checkAuth = function () {
+                var auth = new Auth();
+                var authData = auth.getAuth();
+                console.log(authData);
+                if (!authData) display.loginModal();
+                _authCheck = true;
+            }
+            display.reveal(checkAuth);
+            next();
+        }
+    };
+    
+
+
+
+
+    
     this.home = function () {
             page('/myBooks');
     };

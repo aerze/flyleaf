@@ -84,6 +84,7 @@ var Render = {
     h5: function (options) { return this.element('h5', options); },
     h6: function (options) { return this.element('h6', options); },
     hr: function (options) { return this.element('hr', options); },
+    br: function (options) { return this.element('br', options); },
     ul: function (options) { return this.element('ul', options); },
     li: function (options) { return this.element('li', options); },
     div:    function (options) { return this.element('div', options); },
@@ -91,6 +92,16 @@ var Render = {
     form:   function (options) { return this.element('form', options); },
     legend: function (options) { return this.element('legend', options); },
     fieldset: function (options) { return this.element('fieldset', options); },
+
+    a: function (options) {
+        var a = this.element('a', options);
+        if (options) {
+            if (options.href) {
+                a.setAttribute('href', options.href);
+            }
+        }
+        return a;
+    },
 
     img: function (options) {
         var img = this.element('img', options);
@@ -127,5 +138,26 @@ var Render = {
             }
         }
         return button;
+    },
+    
+    modal: function (id, content, footer) {
+        
+        var modal = this.div({ id: id, classList: 'modal'});
+        var modalContent = this.div({classList: 'modal-content'}).add(content);
+        var modalFooter = this.div({classList: 'modal-footer'}).add(footer);
+        
+        modal.add(modalContent);
+        if (footer) modal.add(modalFooter);
+        
+        return modal;
+        // <div id="modal1" class="modal">
+        //     <div class="modal-content">
+        //       <h4>Modal Header</h4>
+        //       <p>A bunch of text</p>
+        //     </div>
+        //     <div class="modal-footer">
+        //       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        //     </div>
+        // </div>
     }
 };

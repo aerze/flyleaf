@@ -4,8 +4,12 @@
     */
 'use strict';
 var flyleaf = new Flyleaf();
+// This is the App namespace, I'm not sure why it's a class...
 
-page('*', flyleaf.init);
+// load local database
+// check authorization
+page('*', flyleaf.init, flyleaf.authCheck);
+
 page('/', flyleaf.home);
 page('/myBooks', flyleaf.myBooks);
 page('/search', flyleaf.search);

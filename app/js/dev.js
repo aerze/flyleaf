@@ -23,6 +23,12 @@ var devProto = {
     },
     window: function (string) {
         if (window[string] !== undefined) console.log('Object is global');
+    },
+    
+    reset: function () {
+        var auth = new Auth();
+        flyleaf.data.deleteCollection('library', true); 
+        auth.signOut();
     }
 };
 var Dev = Object.create(devProto);
