@@ -54,7 +54,7 @@
 	page('*', viewHandler.init);
 
 	// redirect to library
-	page('/', function () { page('/library') });
+	page('/', function () { page('/library'); });
 	page('/library', viewHandler.library);
 
 	page.start({hashbang: true});
@@ -1581,20 +1581,20 @@
 	var data = __webpack_require__(12);
 
 	var ViewHandler = {
-	    
+
 	    init: function (context, next) {
-	        
+
 	        if (context.init) view.init();
 	        next();
-	        
+
 	    },
-	    
-	    
-	    library: function(context, next) {
+
+
+	    library: function() {
 	        view.navbar.setType('menu');
 	        view.navbar.setTitle('Library');
 	        view.library.init();
-	        
+
 	        data.library.load(function (err, lib) {
 	            if (lib.length < 1) {
 	                view.library.error('Error: No Books Saved');
@@ -1713,6 +1713,18 @@
 	        
 	        error: function (error) {
 	            this.header.innerText = error;
+	        },
+	        
+	        makeListItem: function () {
+	            // TODO: generate a new li
+	        },
+	        
+	        update: function () {
+	            // TODO: update list using an array
+	        },
+	        
+	        append: function () {
+	            // TODO: append item individually
 	        }
 	    }
 	};

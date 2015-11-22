@@ -1,7 +1,7 @@
 'use strict';
 /* jshint node:true */
 
-var Express     = require('express'),
+var express     = require('express'),
     path        = require('path'),
     morgan      = require('morgan'),
     stylus      = require('stylus'),
@@ -11,45 +11,42 @@ var Express     = require('express'),
     multer      = require('multer'),
     webpack     = require('webpack');
 
-var app = Express();
+var app = express();
 
 if (process.env.DEV) {
-    
+
     // compiles stylus files to css on the fly
     app.use(stylus.middleware({
-        
-        src: path.join(__dirname, '/stylus'),
-        dest: path.join(__dirname, '/dist'),
-        compile: function (string, path) {
-            return stylus(string)
-            .set('filename', path)
-            .set('compress', true);
-        }
-        
+
+        src: path.join(__dirname, '/client/'),
+        dest: path.join(__dirname, '/dist/'),
+        compress: true,
+        serve: true
+
     }));
-    
+
     // webpack files on the fly too
     var webpackCompiler = webpack({
-        
+
         context: path.join(__dirname, '/client'),
-        entry: "./index.js",
+        entry: './index.js',
         output: {
-            path: __dirname + "/dist",
-            filename: "bundle.js"
+            path: __dirname + '/dist',
+            filename: 'bundle.js'
         }
-        
+
     });
-    
+
     app.use(function(req, res, next) {
-        
+
         webpackCompiler.run(function (err, stats) {
-            
+
             if (err) console.log(err);
             // console.log(stats);
             next();
-            
+
         });
-        
+
     });
 }
 
@@ -60,9 +57,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(multer());
 
 app.use(morgan('dev'));
-app.use(Express.static(path.join(__dirname + '/dist')));
-app.use('/docs', Express.static(path.join(__dirname + '/docs/flyleaf/0.1.0')));
-app.use('/material', Express.static(path.join(__dirname + '/node_modules/materialize-css')));
+app.use(express.static(path.join(__dirname + '/dist')));
+app.use('/docs', express.static(path.join(__dirname + '/docs/flyleaf/0.1.0')));
+app.use('/material', express.static(path.join(__dirname + '/node_modules/materialize-css')));
 
 routes(app);
 
