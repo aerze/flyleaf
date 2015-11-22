@@ -1578,6 +1578,7 @@
 	'use strict';
 
 	var view = __webpack_require__(9);
+	var data = __webpack_require__(12);
 
 	var ViewHandler = {
 	    
@@ -1593,6 +1594,13 @@
 	        view.navbar.setType('menu');
 	        view.navbar.setTitle('Library');
 	        view.library.init();
+	        
+	        data.library.load(function (err, lib) {
+	            if (lib.length < 1) {
+	                view.library.error('Error: No Books Saved');
+	                return;
+	            }
+	        });
 	    }
 	};
 
@@ -1689,17 +1697,22 @@
 	    
 	    
 	    library: {
-	        init: function (context, next) {
+	        init: function () {
 	            var mainContainer = material.div();
 	            var listContainer = material.ul({id: 'library', classList: 'collection'});
-	            var header = material.div({classList: 'collection-header'})
-	                .add(material.div({text: 'Loading..'}));
+	            var header = material.div({classList: 'collection-header', text: 'Loading..'});
+	                // .add(material.div({}));
 	                
 	            mainContainer
 	                .add(header)
 	                .add(listContainer);
 	                
 	           material.renderView(mainContainer);
+	           this.header = header;
+	        },
+	        
+	        error: function (error) {
+	            this.header.innerText = error;
 	        }
 	    }
 	};
@@ -1928,6 +1941,25 @@
 	};
 
 	module.exports = Render;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+
+	var Data = {
+	    library: {
+	        load: function (callback) {
+	            
+	            callback(null, []);
+	        }
+	    }
+	}
+
+
+	module.exports = Data;
 
 /***/ }
 /******/ ]);

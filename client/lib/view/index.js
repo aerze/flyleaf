@@ -84,17 +84,34 @@ var View = {
     
     
     library: {
-        init: function (context, next) {
+        init: function () {
             var mainContainer = material.div();
             var listContainer = material.ul({id: 'library', classList: 'collection'});
-            var header = material.div({classList: 'collection-header'})
-                .add(material.div({text: 'Loading..'}));
+            var header = material.div({classList: 'collection-header', text: 'Loading..'});
+                // .add(material.div({}));
                 
             mainContainer
                 .add(header)
                 .add(listContainer);
                 
            material.renderView(mainContainer);
+           this.header = header;
+        },
+        
+        error: function (error) {
+            this.header.innerText = error;
+        },
+        
+        makeListItem: function () {
+            // TODO: generate a new li
+        },
+        
+        update: function () {
+            // TODO: update list using an array
+        },
+        
+        append: function () {
+            // TODO: append item individually
         }
     }
 };
