@@ -8,6 +8,6 @@
   "unused": true,
   "jquery": true,
   "globals": {
-    "page": true,
+    "page": true
     }
 }
