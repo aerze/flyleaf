@@ -11,4 +11,8 @@ page('*', viewHandler.init);
 page('/', function () { page('/library'); });
 page('/library', viewHandler.library);
 
+page('/search', viewHandler.search);
+
+// page('/settings')
+
 page.start({hashbang: true});

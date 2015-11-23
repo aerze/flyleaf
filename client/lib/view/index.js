@@ -94,7 +94,7 @@ var View = {
                 .add(header)
                 .add(listContainer);
                 
-           material.renderView(mainContainer);
+           material.materialView(mainContainer);
            this.header = header;
         },
         
@@ -112,6 +112,81 @@ var View = {
         
         append: function () {
             // TODO: append item individually
+        }
+    },
+    
+    
+    search: {
+        init: function () {
+            var formWrapper = material.div({classList: 'form-wrapper'});
+            var buttonGroup = material.div({classList: 'button-group'});
+            var collapsible = material.ul({classList: 'collapsible', id: 'filter'})
+                .set('data-collapsible', 'accordion');
+            var inputField = material.div({classList: 'input-field'});
+            var searchForm = material.form().add(inputField);
+            var filters = material.div({classList: 'filters'});
+            var genre = material.div({classList: 'genres'})
+                .add(material.h6({text: 'Genres'}));
+            var genreLeft = material.div({classList: 'genresLeft'});
+            var genreRight = material.div({classList: 'genresRight'});
+
+            // var newFilter = function (name) {
+            //     return material.p()
+            //         .add(material.input({id: 'f'+name, type: 'checkbox', classList: 'filled-in'}))
+            //         .add(material.label({'for': 'f'+name, text: name}));
+            // };
+
+            // data.getGenres(function (err, genres) {
+            //     for (var i = 0; i < genres.length; i++) {
+            //         if (i%2 !== 0) genreRight.add(newFilter(genres[i])); 
+            //         else genreLeft.add(newFilter(genres[i]));
+            //     }
+            // });
+
+            inputField
+                .add(material.input({id: 'search', type: 'text', required: true}))
+                .add(material.label({'for': 'search'})
+                    .add(material.i({classList: 'mdi-action-search'})))
+                .add(material.div({classList: 'form-button'})
+                    .add(material.i({classList: 'mdi-content-send'})));
+
+            collapsible
+                .add(material.li()
+                    .add(material.div({classList: 'collapsible-header'})
+                        .add(material.i({classList: 'mdi-content-filter-list'}))
+                        .add(material.text('Genre Filter')))
+                    .add(material.div({classList: 'collapsible-body'})
+                        .add(filters
+                            .add(genre
+                                .add(genreLeft)
+                                .add(genreRight)))))
+                .add(material.li()
+                    .add(material.div({classList: 'collapsible-header'})
+                        .add(material.i({classList: 'mdi-content-sort'}))
+                        .add(material.text('Sort')))
+                    .add(material.div({classList: 'collapsible-body'})
+                        .add(material.p()
+                            .add(buttonGroup))));
+
+            buttonGroup
+                .add(material.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'POP &#x21F5'}))
+                .add(material.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'A-Z &#x21F5'}));
+
+
+            var header = material.div({classList: 'collection-header'})
+                    .add(material.div({text:'Search'}));
+
+            formWrapper
+                .add(header)
+                .add(searchForm)
+                .add(collapsible);
+
+            material.view(formWrapper);
+            $('#filter').collapsible();
         }
     }
 };

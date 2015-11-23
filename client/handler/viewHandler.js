@@ -24,6 +24,13 @@ var ViewHandler = {
                 return;
             }
         });
+    },
+    
+    
+    search: function() {
+        view.navbar.setType('menu');
+        view.navbar.setTitle('Search');
+        view.search.init();
     }
 };
 
