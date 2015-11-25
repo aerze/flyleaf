@@ -37,6 +37,7 @@ var Render = {
     // },
     element: function (elementType, options) {
         var element = document.createElement(elementType);
+        console.log(element);
             element.add = function (node) {
                 if (Array.isArray(node)) {
                     for (var i = 0; i <= node.length - 1; i+=1) {

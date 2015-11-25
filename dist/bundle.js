@@ -59,6 +59,15 @@
 
 	page('/search', viewHandler.search);
 
+
+	page('/settings', viewHandler.settings);
+
+	page('/account', viewHandler.account);
+
+	page('/about', viewHandler.about);
+
+	// page('/settings')
+
 	page.start({hashbang: true});
 
 /***/ },
@@ -1610,6 +1619,27 @@
 	        view.navbar.setType('menu');
 	        view.navbar.setTitle('Search');
 	        view.search.init();
+	    },
+	    
+	    
+	    settings: function () {
+	        view.navbar.setType('menu');
+	        view.navbar.setTitle('Settings');
+	        view.settings.init();
+	    },
+	    
+	    
+	    account: function () {
+	        view.navbar.setType('menu');
+	        view.navbar.setTitle('My Account');
+	        view.account.init();
+	    },
+	    
+	    
+	    about: function () {
+	        view.navbar.setType('menu');
+	        view.navbar.setTitle('About Us');
+	        view.about.init();
 	    }
 	};
 
@@ -1752,18 +1782,6 @@
 	            var genreLeft = material.div({classList: 'genresLeft'});
 	            var genreRight = material.div({classList: 'genresRight'});
 
-	            // var newFilter = function (name) {
-	            //     return material.p()
-	            //         .add(material.input({id: 'f'+name, type: 'checkbox', classList: 'filled-in'}))
-	            //         .add(material.label({'for': 'f'+name, text: name}));
-	            // };
-
-	            // data.getGenres(function (err, genres) {
-	            //     for (var i = 0; i < genres.length; i++) {
-	            //         if (i%2 !== 0) genreRight.add(newFilter(genres[i])); 
-	            //         else genreLeft.add(newFilter(genres[i]));
-	            //     }
-	            // });
 
 	            inputField
 	                .add(material.input({id: 'search', type: 'text', required: true}))
@@ -1809,6 +1827,53 @@
 
 	            material.view(formWrapper);
 	            $('#filter').collapsible();
+	            
+	            // var newFilter = function (name) {
+	            //     return material.p()
+	            //         .add(material.input({id: 'f'+name, type: 'checkbox', classList: 'filled-in'}))
+	            //         .add(material.label({'for': 'f'+name, text: name}));
+	            // };
+
+	            // data.getGenres(function (err, genres) {
+	            //     for (var i = 0; i < genres.length; i++) {
+	            //         if (i%2 !== 0) genreRight.add(newFilter(genres[i])); 
+	            //         else genreLeft.add(newFilter(genres[i]));
+	            //     }
+	            // });
+	        }
+	    },
+	    
+	    
+	    settings: {
+	        init: function () {
+	            material.view(material.p({text: 'Nothing here yet', classList: 'container'}));
+	        }
+	    },
+	    
+	    
+	    account: {
+	        init: function () {
+	            material.view(material.p({text: 'Nothing here yet.', classList: 'container'}));
+	        }
+	    },
+	    
+	    
+	    about: {
+	        init: function () {
+	            var mainContainer = material.div({classList: ['container', 'section']});
+	            mainContainer
+	                .add(material.text('Flyleaf.co is made by '))
+	                .add(material.a({text: '@mythrilco', href: 'https://twitter.com/MythrilCo'}))
+	                .add(material.br())
+	                .add(material.text('Tweet at me if you have any issues.'))
+	                .add(material.br())
+	                .add(material.text('If you know what Github is and have an account, you can report issues '))
+	                .add(material.a({text: 'here.', href: 'https://github.com/aerze/flyleaf/issues'}))
+	                .add(material.br())
+	                .add(material.br())
+	                .add(material.p({text: 'Thanks for reading! :)'}));
+	            
+	            material.view(mainContainer);
 	        }
 	    }
 	};
@@ -1918,6 +1983,7 @@
 	    // },
 	    element: function (elementType, options) {
 	        var element = document.createElement(elementType);
+	        console.log(element);
 	            element.add = function (node) {
 	                if (Array.isArray(node)) {
 	                    for (var i = 0; i <= node.length - 1; i+=1) {

@@ -13,6 +13,13 @@ page('/library', viewHandler.library);
 
 page('/search', viewHandler.search);
 
+
+page('/settings', viewHandler.settings);
+
+page('/account', viewHandler.account);
+
+page('/about', viewHandler.about);
+
 // page('/settings')
 
 page.start({hashbang: true});
