@@ -28,16 +28,16 @@ var View = {
         
         // create column that holds nav
         var column12 = material.div({classList: ['col', 's12']})
-                .add(material.a({classList: 'nav-title', text: 'Flyleaf.co'}))
-                .add(material.a({classList: 'button-collapse', href: '/menu', data: { activates: 'mobile-nav' }})
-                    .add(material.i({classList: 'mdi-navigation-menu'})))
-                .add(ulTopNav)
-                .add(ulSideNav);
+            .add(material.a({classList: 'nav-title', text: 'Flyleaf.co'}))
+            .add(material.a({classList: 'button-collapse', href: '/menu', data: { activates: 'mobile-nav' }})
+                .add(material.i({classList: 'mdi-navigation-menu'})))
+            .add(ulTopNav)
+            .add(ulSideNav);
         
         var navbar = material.div({classList: 'navbar-fixed'})
-                .add(material.nav()
-                    .add(material.div({classList: ['nav-wrapper', 'green']})
-                        .add(column12)));
+            .add(material.nav()
+                .add(material.div({classList: ['nav-wrapper', 'green']})
+                    .add(column12)));
                         
         material.render(navbar, document.body);
         material.render(material.div({classList: 'main-view'}), document.body);
@@ -78,7 +78,7 @@ var View = {
         this.navbar.setTitle = function (title) {
             title = title || 'Flyleaf.co';
             var navTitle = document.querySelector('.nav-title');
-            navTitle.innerText = title;
+            navTitle.innerHTML = title;
         }
     },
     
@@ -94,12 +94,14 @@ var View = {
                 .add(header)
                 .add(listContainer);
                 
-           material.materialView(mainContainer);
+           material.view(mainContainer);
            this.header = header;
         },
         
         error: function (error) {
-            this.header.innerText = error;
+            
+            material.view(material.p({text: error.toString()}));
+            
         },
         
         makeListItem: function () {

@@ -4,8 +4,9 @@ var page = require('page');
 var auth = require('./lib/auth');
 
 var viewHandler = require('./handler/viewHandler');
+var dataHandler = require('./handler/dataHandler');
 
-page('*', viewHandler.init);
+page('*', viewHandler.init, dataHandler.init);
 
 // redirect to library
 page('/', function () { page('/library'); });
