@@ -98,18 +98,57 @@ var View = {
            this.header = header;
         },
         
-        error: function (error) {
-            
-            material.view(material.p({text: error.toString()}));
+        empty: function (err) {
+            if (err) console.log(err);
+            material.view(material.p({text: 'You don\'t have books fool!'}));
             
         },
         
-        makeListItem: function () {
-            // TODO: generate a new li
+        makeListItem: function (manga) {
+            
+            var item = material.li({
+                classList: ['collection-item', 'avatar', 'waves-effect', 'waves-green'],
+                id: manga._id,
+                onclick: function () { 
+                    // page('/manga/' + this.id); 
+                    console.log('test');
+                }
+            });
+    
+            var image = material.img({
+                classList: 'thumb-image',
+                src: 'http://cdn.mangaeden.com/mangasimg/' + manga.image,
+                alt: manga.title
+            });
+    
+            var title = material.h6({
+                classList: ['title', 'flow-text', 'truncate'],
+                text: manga.title
+            });
+    
+            item.add(image)
+                .add(title);
+    
+            
+            var details = document.createElement('p');
+                details.classList.add('flow-text');
+                details.innerHTML  = 'Author: ' + manga.author + '<br>' +
+                // 'Artist: ' + manga.artist + '<br>' +
+                'Latest Chapter: ' + manga.chapters_len;
+            item.appendChild(details);
+            
+    
+            return item;
         },
         
-        update: function () {
-            // TODO: update list using an array
+        update: function (libArray) {
+            
+            var $library = $('#library'),
+                item, i;
+            for (i=0; i <= libArray.length -1; i++) {
+                item = this.makeListItem(libArray[i]);
+                $library.append(item);
+            }
         },
         
         append: function () {

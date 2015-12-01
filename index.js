@@ -32,22 +32,26 @@ if (process.env.DEV) {
         entry: './index.js',
         output: {
             path: __dirname + '/dist',
-            filename: 'bundle.js'
-        }
-
+            filename: 'bundle.min.js'
+        },
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({minimize: true}),
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(true)
+        ]
     });
 
-    app.use(function(req, res, next) {
+    // app.use(function(req, res, next) {
 
-        webpackCompiler.run(function (err, stats) {
+    //     webpackCompiler.run(function (err, stats) {
 
-            if (err) console.log(err);
-            // console.log(stats);
-            next();
+    //         if (err) console.log(err);
+    //         // console.log(stats);
+    //         next();
 
-        });
+    //     });
 
-    });
+    // });
 }
 
 

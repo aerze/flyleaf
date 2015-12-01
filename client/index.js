@@ -10,7 +10,7 @@ page('*', viewHandler.init, dataHandler.init);
 
 // redirect to library
 page('/', function () { page('/library'); });
-page('/library', viewHandler.library);
+page('/library', dataHandler.library, viewHandler.library);
 
 page('/search', viewHandler.search);
 

@@ -6,24 +6,24 @@ var data = require('../lib/data');
 var ViewHandler = {
 
     init: function (context, next) {
-
+        
         if (context.init) view.init();
+        context.state.init = {};
+        context.state.init.view = true;
+        context.save();
+        
         next();
 
     },
 
 
-    library: function() {
+    library: function(context, next) {
+        
         view.navbar.setType('menu');
         view.navbar.setTitle('Library');
         view.library.init();
-
-        data.library.load(function (err, lib) {
-            if (lib.length < 1) {
-                view.library.error('Error: No Books Saved');
-                return;
-            }
-        });
+        if (context.state.libraryCount > 0 ) view.library.update(data.library.db.find());
+        else view.library.empty();
     },
     
     

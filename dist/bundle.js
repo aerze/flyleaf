@@ -97,10 +97,10 @@
 
 	'use strict';
 
-	var page = __webpack_require__(1);
-	var auth = __webpack_require__(5);
+	var page = __webpack_require__(2);
+	var auth = __webpack_require__(6);
 
-	var viewHandler = __webpack_require__(8);
+	var viewHandler = __webpack_require__(9);
 	var dataHandler = __webpack_require__(159);
 
 	page('*', viewHandler.init, dataHandler.init);
@@ -123,7 +123,8 @@
 	page.start({hashbang: true});
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {  /* globals require, module */
@@ -134,7 +135,7 @@
 	   * Module dependencies.
 	   */
 
-	  var pathtoRegexp = __webpack_require__(3);
+	  var pathtoRegexp = __webpack_require__(4);
 
 	  /**
 	   * Module exports.
@@ -746,10 +747,10 @@
 
 	  page.sameOrigin = sameOrigin;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -846,10 +847,10 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isarray = __webpack_require__(4)
+	var isarray = __webpack_require__(5)
 
 	/**
 	 * Expose `pathToRegexp`.
@@ -1242,7 +1243,7 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -1251,13 +1252,13 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Firebase = __webpack_require__(6);
-	var net = __webpack_require__(7);
+	var Firebase = __webpack_require__(7);
+	var net = __webpack_require__(8);
 
 	var Auth = Object.create(net);
 
@@ -1310,7 +1311,7 @@
 	module.exports = Auth;
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.3.2
@@ -1584,7 +1585,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1635,18 +1636,18 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var view = __webpack_require__(9);
-	var data = __webpack_require__(12);
+	var view = __webpack_require__(10);
+	var data = __webpack_require__(13);
 
 	var ViewHandler = {
 
 	    init: function (context, next) {
-
+	        console.log('VIEWHandler:: init');
 	        if (context.init) view.init();
 	        next();
 
@@ -1657,8 +1658,10 @@
 	        view.navbar.setType('menu');
 	        view.navbar.setTitle('Library');
 	        view.library.init();
-
+	        console.log('test');
 	        data.library.load(function (err, lib) {
+	            console.log('test');
+	            if (err) console.error(err);
 	            if (lib.length < 1) {
 	                view.library.error('Error: No Books Saved');
 	                return;
@@ -1699,12 +1702,12 @@
 	module.exports = ViewHandler;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var material = __webpack_require__(10);
+	var material = __webpack_require__(11);
 
 	var View = {
 	    
@@ -1936,12 +1939,12 @@
 	module.exports = View;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var render = __webpack_require__(11);
+	var render = __webpack_require__(12);
 
 	var Material = Object.create(render);
 
@@ -1995,7 +1998,7 @@
 	module.exports = Material;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2158,12 +2161,12 @@
 	module.exports = Render;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var ForerunnerDB = __webpack_require__(13);
+	var ForerunnerDB = __webpack_require__(14);
 	var fdb = new ForerunnerDB();
 	var db = fdb.db('flyleafco');
 
@@ -2194,14 +2197,14 @@
 	module.exports = Data;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Core = __webpack_require__(14),
-		CollectionGroup = __webpack_require__(41),
-		View = __webpack_require__(42),
-		Highchart = __webpack_require__(44),
-		Persist = __webpack_require__(45),
+	var Core = __webpack_require__(15),
+		CollectionGroup = __webpack_require__(42),
+		View = __webpack_require__(43),
+		Highchart = __webpack_require__(45),
+		Persist = __webpack_require__(46),
 		Document = __webpack_require__(111),
 		Overview = __webpack_require__(112),
 		Grid = __webpack_require__(113),
@@ -2215,11 +2218,11 @@
 	module.exports = Core;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Core = __webpack_require__(15),
-		ShimIE8 = __webpack_require__(40);
+	var Core = __webpack_require__(16),
+		ShimIE8 = __webpack_require__(41);
 
 	if (typeof window !== 'undefined') {
 		window.ForerunnerDB = Core;
@@ -2227,7 +2230,7 @@
 	module.exports = Core;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2248,8 +2251,8 @@
 		Overload,
 		_instances = [];
 
-	Shared = __webpack_require__(16);
-	Overload = __webpack_require__(17);
+	Shared = __webpack_require__(17);
+	Overload = __webpack_require__(18);
 
 	/**
 	 * Creates a new ForerunnerDB instance. Core instances handle the lifecycle of
@@ -2471,8 +2474,8 @@
 	Shared.mixin(Core.prototype, 'Mixin.Common');
 	Shared.mixin(Core.prototype, 'Mixin.Constants');
 
-	Db = __webpack_require__(29);
-	Metrics = __webpack_require__(31);
+	Db = __webpack_require__(30);
+	Metrics = __webpack_require__(32);
 
 	/**
 	 * Gets / sets the name of the instance. This is primarily used for
@@ -2538,12 +2541,12 @@
 	module.exports = Core;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Overload = __webpack_require__(17);
+	var Overload = __webpack_require__(18);
 
 	/**
 	 * A shared object that can be used to store arbitrary data between class
@@ -2710,16 +2713,16 @@
 		 * @memberof Shared
 		 */
 		mixins: {
-			'Mixin.Common': __webpack_require__(18),
-			'Mixin.Events': __webpack_require__(20),
-			'Mixin.ChainReactor': __webpack_require__(21),
-			'Mixin.CRUD': __webpack_require__(22),
-			'Mixin.Constants': __webpack_require__(23),
-			'Mixin.Triggers': __webpack_require__(24),
-			'Mixin.Sorting': __webpack_require__(25),
-			'Mixin.Matching': __webpack_require__(26),
-			'Mixin.Updating': __webpack_require__(27),
-			'Mixin.Tags': __webpack_require__(28)
+			'Mixin.Common': __webpack_require__(19),
+			'Mixin.Events': __webpack_require__(21),
+			'Mixin.ChainReactor': __webpack_require__(22),
+			'Mixin.CRUD': __webpack_require__(23),
+			'Mixin.Constants': __webpack_require__(24),
+			'Mixin.Triggers': __webpack_require__(25),
+			'Mixin.Sorting': __webpack_require__(26),
+			'Mixin.Matching': __webpack_require__(27),
+			'Mixin.Updating': __webpack_require__(28),
+			'Mixin.Tags': __webpack_require__(29)
 		}
 	};
 
@@ -2729,7 +2732,7 @@
 	module.exports = Shared;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2895,14 +2898,14 @@
 	module.exports = Overload;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var idCounter = 0,
-		Overload = __webpack_require__(17),
-		Serialiser = __webpack_require__(19),
+		Overload = __webpack_require__(18),
+		Serialiser = __webpack_require__(20),
 		Common,
 		serialiser = new Serialiser();
 
@@ -3165,7 +3168,7 @@
 	module.exports = Common;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3355,12 +3358,12 @@
 	module.exports = Serialiser;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Overload = __webpack_require__(17);
+	var Overload = __webpack_require__(18);
 
 	/**
 	 * Provides event emitter functionality including the methods: on, off, once, emit, deferEmit.
@@ -3567,7 +3570,7 @@
 	module.exports = Events;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3671,7 +3674,7 @@
 	module.exports = ChainReactor;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3689,7 +3692,7 @@
 	module.exports = CRUD;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3710,12 +3713,12 @@
 	module.exports = Constants;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Overload = __webpack_require__(17);
+	var Overload = __webpack_require__(18);
 
 	/**
 	 * Provides trigger functionality methods.
@@ -4134,7 +4137,7 @@
 	module.exports = Triggers;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4188,7 +4191,7 @@
 	module.exports = Sorting;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4594,7 +4597,7 @@
 	module.exports = Matching;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4778,7 +4781,7 @@
 	module.exports = Updating;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4887,7 +4890,7 @@
 	module.exports = Tags;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4899,8 +4902,8 @@
 		Crc,
 		Overload;
 
-	Shared = __webpack_require__(16);
-	Overload = __webpack_require__(17);
+	Shared = __webpack_require__(17);
+	Overload = __webpack_require__(18);
 
 	/**
 	 * Creates a new ForerunnerDB database instance.
@@ -5037,9 +5040,9 @@
 	Shared.mixin(Db.prototype, 'Mixin.Tags');
 
 	Core = Shared.modules.Core;
-	Collection = __webpack_require__(30);
-	Metrics = __webpack_require__(31);
-	Crc = __webpack_require__(38);
+	Collection = __webpack_require__(31);
+	Metrics = __webpack_require__(32);
+	Crc = __webpack_require__(39);
 
 	Db.prototype._isServer = false;
 
@@ -5526,7 +5529,7 @@
 	module.exports = Db;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5542,7 +5545,7 @@
 		Overload,
 		ReactorIO;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	/**
 	 * Creates a new collection. Collections store multiple documents and
@@ -5606,15 +5609,15 @@
 	Shared.mixin(Collection.prototype, 'Mixin.Updating');
 	Shared.mixin(Collection.prototype, 'Mixin.Tags');
 
-	Metrics = __webpack_require__(31);
-	KeyValueStore = __webpack_require__(34);
-	Path = __webpack_require__(33);
-	IndexHashMap = __webpack_require__(35);
-	IndexBinaryTree = __webpack_require__(36);
-	Crc = __webpack_require__(38);
+	Metrics = __webpack_require__(32);
+	KeyValueStore = __webpack_require__(35);
+	Path = __webpack_require__(34);
+	IndexHashMap = __webpack_require__(36);
+	IndexBinaryTree = __webpack_require__(37);
+	Crc = __webpack_require__(39);
 	Db = Shared.modules.Db;
-	Overload = __webpack_require__(17);
-	ReactorIO = __webpack_require__(39);
+	Overload = __webpack_require__(18);
+	ReactorIO = __webpack_require__(40);
 
 	/**
 	 * Returns a checksum of a string.
@@ -9000,13 +9003,13 @@
 	module.exports = Collection;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
-		Operation = __webpack_require__(32);
+	var Shared = __webpack_require__(17),
+		Operation = __webpack_require__(33);
 
 	/**
 	 * The metrics class used to store details about operations.
@@ -9079,13 +9082,13 @@
 	module.exports = Metrics;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
-		Path = __webpack_require__(33);
+	var Shared = __webpack_require__(17),
+		Path = __webpack_require__(34);
 
 	/**
 	 * The operation class, used to store details about an operation being
@@ -9230,12 +9233,12 @@
 	module.exports = Operation;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16);
+	var Shared = __webpack_require__(17);
 
 	/**
 	 * Path object used to resolve object paths and retrieve data from
@@ -9680,12 +9683,12 @@
 	module.exports = Path;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16);
+	var Shared = __webpack_require__(17);
 
 	/**
 	 * The key value store class used when storing basic in-memory KV data,
@@ -9899,13 +9902,13 @@
 	module.exports = KeyValueStore;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
-		Path = __webpack_require__(33);
+	var Shared = __webpack_require__(17),
+		Path = __webpack_require__(34);
 
 	/**
 	 * The index class used to instantiate hash map indexes that the database can
@@ -10262,7 +10265,7 @@
 	module.exports = IndexHashMap;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10276,9 +10279,9 @@
 	lookup
 	*/
 
-	var Shared = __webpack_require__(16),
-		Path = __webpack_require__(33),
-		BinaryTree = __webpack_require__(37),
+	var Shared = __webpack_require__(17),
+		Path = __webpack_require__(34),
+		BinaryTree = __webpack_require__(38),
 		treeInstance = new BinaryTree(),
 		btree = function () {};
 
@@ -10563,13 +10566,13 @@
 	module.exports = IndexBinaryTree;
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
-		Path = __webpack_require__(33);
+	var Shared = __webpack_require__(17),
+		Path = __webpack_require__(34);
 
 	var BinaryTree = function (data, compareFunc, hashFunc) {
 		this.init.apply(this, arguments);
@@ -11000,7 +11003,7 @@
 	module.exports = BinaryTree;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -11037,12 +11040,12 @@
 	};
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16);
+	var Shared = __webpack_require__(17);
 
 	/**
 	 * Provides chain reactor node linking so that a chain reaction can propagate
@@ -11122,7 +11125,7 @@
 	module.exports = ReactorIO;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports) {
 
 	/* jshint strict:false */
@@ -11246,7 +11249,7 @@
 	module.exports = {};
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11257,7 +11260,7 @@
 		DbInit,
 		Collection;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	/**
 	 * Creates a new collection group. Collection groups allow single operations to be
@@ -11286,7 +11289,7 @@
 	Shared.mixin(CollectionGroup.prototype, 'Mixin.Triggers');
 	Shared.mixin(CollectionGroup.prototype, 'Mixin.Tags');
 
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 	Db = Shared.modules.Db;
 	DbInit = Shared.modules.Db.prototype.init;
 
@@ -11590,7 +11593,7 @@
 	module.exports = CollectionGroup;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11605,7 +11608,7 @@
 		ReactorIO,
 		ActiveBucket;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	/**
 	 * Creates a new view instance.
@@ -11643,10 +11646,10 @@
 	Shared.mixin(View.prototype, 'Mixin.Triggers');
 	Shared.mixin(View.prototype, 'Mixin.Tags');
 
-	Collection = __webpack_require__(30);
-	CollectionGroup = __webpack_require__(41);
-	ActiveBucket = __webpack_require__(43);
-	ReactorIO = __webpack_require__(39);
+	Collection = __webpack_require__(31);
+	CollectionGroup = __webpack_require__(42);
+	ActiveBucket = __webpack_require__(44);
+	ReactorIO = __webpack_require__(40);
 	CollectionInit = Collection.prototype.init;
 	Db = Shared.modules.Db;
 	DbInit = Db.prototype.init;
@@ -12723,12 +12726,12 @@
 	module.exports = View;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Shared = __webpack_require__(16);
+	var Shared = __webpack_require__(17);
 
 	/**
 	 * Creates an always-sorted multi-key bucket that allows ForerunnerDB to
@@ -12989,7 +12992,7 @@
 	module.exports = ActiveBucket;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -13000,8 +13003,8 @@
 		CollectionInit,
 		Overload;
 
-	Shared = __webpack_require__(16);
-	Overload = __webpack_require__(17);
+	Shared = __webpack_require__(17);
+	Overload = __webpack_require__(18);
 
 	/**
 	 * The constructor.
@@ -13621,15 +13624,15 @@
 	module.exports = Highchart;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	// Import external names locally
-	var Shared = __webpack_require__(16),
-		async = __webpack_require__(46),
-		localforage = __webpack_require__(48),
+	var Shared = __webpack_require__(17),
+		async = __webpack_require__(47),
+		localforage = __webpack_require__(49),
 		FdbCompress = __webpack_require__(59),// jshint ignore:line
 		FdbCrypto = __webpack_require__(76),// jshint ignore:line
 		Db,
@@ -13694,9 +13697,9 @@
 	Shared.mixin(Persist.prototype, 'Mixin.Common');
 
 	Db = Shared.modules.Db;
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 	CollectionDrop = Collection.prototype.drop;
-	CollectionGroup = __webpack_require__(41);
+	CollectionGroup = __webpack_require__(42);
 	CollectionInit = Collection.prototype.init;
 	DbInit = Db.prototype.init;
 	DbDrop = Db.prototype.drop;
@@ -14246,7 +14249,7 @@
 	module.exports = Persist;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, setImmediate, process) {/*!
@@ -15510,13 +15513,13 @@
 
 	}());
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(47).setImmediate, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(48).setImmediate, __webpack_require__(3)))
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(2).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(3).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -15592,10 +15595,10 @@
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47).setImmediate, __webpack_require__(47).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48).setImmediate, __webpack_require__(48).clearImmediate))
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;(function() {
@@ -15604,7 +15607,7 @@
 	    // Promises!
 	    var Promise = (typeof module !== 'undefined' && module.exports &&
 	                   "function" !== 'undefined') ?
-	                  __webpack_require__(49) : this.Promise;
+	                  __webpack_require__(50) : this.Promise;
 
 	    // Custom drivers are stored here when `defineDriver()` is called.
 	    // They are shared across all instances of localForage.
@@ -15931,18 +15934,18 @@
 	                    // We allow localForage to be declared as a module or as a
 	                    // library available without AMD/require.js.
 	                    if (moduleType === ModuleType.DEFINE) {
-	                        __webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(56)(driverName)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));});
+	                        __webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(1)(driverName)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));});
 	                    } else if (moduleType === ModuleType.EXPORT) {
 	                        // Making it browserify friendly
 	                        switch (driverName) {
 	                            case self.INDEXEDDB:
-	                                resolve(__webpack_require__(52));
-	                                break;
-	                            case self.LOCALSTORAGE:
 	                                resolve(__webpack_require__(53));
 	                                break;
+	                            case self.LOCALSTORAGE:
+	                                resolve(__webpack_require__(54));
+	                                break;
 	                            case self.WEBSQL:
-	                                resolve(__webpack_require__(55));
+	                                resolve(__webpack_require__(56));
 	                                break;
 	                        }
 	                    } else {
@@ -16018,15 +16021,15 @@
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	//This file contains then/promise specific extensions to the core promise API
 
-	var Promise = __webpack_require__(50)
-	var asap = __webpack_require__(51)
+	var Promise = __webpack_require__(51)
+	var asap = __webpack_require__(52)
 
 	module.exports = Promise
 
@@ -16204,12 +16207,12 @@
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var asap = __webpack_require__(51)
+	var asap = __webpack_require__(52)
 
 	module.exports = Promise
 	function Promise(fn) {
@@ -16315,7 +16318,7 @@
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {
@@ -16432,10 +16435,10 @@
 	module.exports = asap;
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(47).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(48).setImmediate))
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;// Some code originally from async_storage.js in
@@ -16447,7 +16450,7 @@
 
 	    // Promises!
 	    var Promise = (typeof module !== 'undefined' && module.exports && "function" !== 'undefined') ?
-	                  __webpack_require__(49) : this.Promise;
+	                  __webpack_require__(50) : this.Promise;
 
 	    // Initialize IndexedDB; fall back to vendor-prefixed versions if needed.
 	    var indexedDB = indexedDB || this.indexedDB || this.webkitIndexedDB ||
@@ -17001,7 +17004,7 @@
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;// If IndexedDB isn't available, we'll fall back to localStorage.
@@ -17013,7 +17016,7 @@
 
 	    // Promises!
 	    var Promise = (typeof module !== 'undefined' && module.exports && "function" !== 'undefined') ?
-	                  __webpack_require__(49) : this.Promise;
+	                  __webpack_require__(50) : this.Promise;
 
 	    var globalObject = this;
 	    var serializer = null;
@@ -17076,7 +17079,7 @@
 	                !/* require */(/* empty */function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module \"localforageSerializer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}());
 	            } else if (moduleType === ModuleType.EXPORT) {
 	                // Making it browserify friendly
-	                resolve(__webpack_require__(54));
+	                resolve(__webpack_require__(55));
 	            } else {
 	                resolve(globalObject.localforageSerializer);
 	            }
@@ -17336,7 +17339,7 @@
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;(function() {
@@ -17616,7 +17619,7 @@
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -17633,7 +17636,7 @@
 
 	    // Promises!
 	    var Promise = (typeof module !== 'undefined' && module.exports && "function" !== 'undefined') ?
-	                  __webpack_require__(49) : this.Promise;
+	                  __webpack_require__(50) : this.Promise;
 
 	    var globalObject = this;
 	    var serializer = null;
@@ -17684,7 +17687,7 @@
 	                !/* require */(/* empty */function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module \"localforageSerializer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}());
 	            } else if (moduleType === ModuleType.EXPORT) {
 	                // Making it browserify friendly
-	                resolve(__webpack_require__(54));
+	                resolve(__webpack_require__(55));
 	            } else {
 	                resolve(globalObject.localforageSerializer);
 	            }
@@ -18039,7 +18042,6 @@
 
 
 /***/ },
-/* 56 */,
 /* 57 */,
 /* 58 */,
 /* 59 */
@@ -18047,7 +18049,7 @@
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
+	var Shared = __webpack_require__(17),
 		pako = __webpack_require__(60);
 
 	var Plugin = function () {
@@ -24627,7 +24629,7 @@
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
+	var Shared = __webpack_require__(17),
 		CryptoJS = __webpack_require__(77);
 
 	var Plugin = function () {
@@ -31466,7 +31468,7 @@
 		Collection,
 		Db;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	/**
 	 * Creates a new Document instance. Documents allow you to create individual
@@ -31496,7 +31498,7 @@
 	Shared.mixin(FdbDocument.prototype, 'Mixin.Updating');
 	Shared.mixin(FdbDocument.prototype, 'Mixin.Tags');
 
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 	Db = Shared.modules.Db;
 
 	/**
@@ -31922,7 +31924,7 @@
 		Collection,
 		DbDocument;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	var Overview = function () {
 		this.init.apply(this, arguments);
@@ -31949,7 +31951,7 @@
 	Shared.mixin(Overview.prototype, 'Mixin.Events');
 	Shared.mixin(Overview.prototype, 'Mixin.Tags');
 
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 	DbDocument = __webpack_require__(111);
 	Db = Shared.modules.Db;
 
@@ -32220,7 +32222,7 @@
 		ReactorIO;
 
 	//Shared = ForerunnerDB.shared;
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	/**
 	 * Creates a new grid instance.
@@ -32257,10 +32259,10 @@
 	Shared.mixin(Grid.prototype, 'Mixin.Events');
 	Shared.mixin(Grid.prototype, 'Mixin.Tags');
 
-	Collection = __webpack_require__(30);
-	CollectionGroup = __webpack_require__(41);
-	View = __webpack_require__(42);
-	ReactorIO = __webpack_require__(39);
+	Collection = __webpack_require__(31);
+	CollectionGroup = __webpack_require__(42);
+	View = __webpack_require__(43);
+	ReactorIO = __webpack_require__(40);
 	CollectionInit = Collection.prototype.init;
 	Db = Shared.modules.Db;
 	DbInit = Db.prototype.init;
@@ -32908,7 +32910,7 @@
 
 	"use strict";
 
-	var Shared = __webpack_require__(16),
+	var Shared = __webpack_require__(17),
 		RestClient = __webpack_require__(115),
 		mime = __webpack_require__(143),
 		Db,
@@ -33003,9 +33005,9 @@
 	Shared.mixin(Rest.prototype, 'Mixin.ChainReactor');
 
 	Db = Shared.modules.Db;
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 	CollectionDrop = Collection.prototype.drop;
-	CollectionGroup = __webpack_require__(41);
+	CollectionGroup = __webpack_require__(42);
 	CollectionInit = Collection.prototype.init;
 	DbInit = Db.prototype.init;
 	Overload = Shared.overload;
@@ -33764,7 +33766,7 @@
 /* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
 	/** @author Brian Cavalier */
 	/** @author John Hann */
 
@@ -33838,7 +33840,7 @@
 	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	}(__webpack_require__(118)));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 123 */
@@ -35754,7 +35756,7 @@
 	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	}(__webpack_require__(118)));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 138 */
@@ -37802,7 +37804,7 @@
 	var Shared,
 		Collection;
 
-	Shared = __webpack_require__(16);
+	Shared = __webpack_require__(17);
 
 	var Odm = function () {
 		this.init.apply(this, arguments);
@@ -37826,7 +37828,7 @@
 	Shared.mixin(Odm.prototype, 'Mixin.Constants');
 	Shared.mixin(Odm.prototype, 'Mixin.Events');
 
-	Collection = __webpack_require__(30);
+	Collection = __webpack_require__(31);
 
 	Shared.synthesize(Odm.prototype, 'name');
 	Shared.synthesize(Odm.prototype, 'state');
@@ -37971,7 +37973,7 @@
 
 	'use strict';
 
-	var data = __webpack_require__(12);
+	var data = __webpack_require__(13);
 
 	var DataHandler = {
 	    
@@ -37986,4 +37988,4 @@
 	module.exports = DataHandler;
 
 /***/ }
-/******/ ]);
+/******/ ]);]);
