@@ -3,7 +3,7 @@
 var material = require('./material');
 
 var View = {
-    
+    navbar: {},
     // Start navbar and side menu
     init: function (context, next) {
         
@@ -79,7 +79,7 @@ var View = {
             title = title || 'Flyleaf.co';
             var navTitle = document.querySelector('.nav-title');
             navTitle.innerHTML = title;
-        }
+        };
     },
     
     
@@ -264,6 +264,57 @@ var View = {
             
             material.view(mainContainer);
         }
+    },
+    
+    
+    manga: {
+        init: function () {
+            var mainContainer = material.div({classList: ['container', 'section']});
+            mainContainer
+                .add(material.text('Flyleaf.co is made by '))
+                .add(material.a({text: '@mythrilco', href: 'https://twitter.com/MythrilCo'}))
+                .add(material.br())
+                .add(material.text('Tweet at me if you have any issues.'))
+                .add(material.br())
+                .add(material.text('If you know what Github is and have an account, you can report issues '))
+                .add(material.a({text: 'here.', href: 'https://github.com/aerze/flyleaf/issues'}))
+                .add(material.br())
+                .add(material.br())
+                .add(material.p({text: 'Thanks for reading! :)'}));
+            
+            material.view(mainContainer);
+        }
+    },
+    
+    
+    chapter: {
+        init: function () {
+            var mainContainer = material.div({classList: ['container', 'section']});
+            mainContainer
+                .add(material.text('Flyleaf.co is made by '))
+                .add(material.a({text: '@mythrilco', href: 'https://twitter.com/MythrilCo'}))
+                .add(material.br())
+                .add(material.text('Tweet at me if you have any issues.'))
+                .add(material.br())
+                .add(material.text('If you know what Github is and have an account, you can report issues '))
+                .add(material.a({text: 'here.', href: 'https://github.com/aerze/flyleaf/issues'}))
+                .add(material.br())
+                .add(material.br())
+                .add(material.p({text: 'Thanks for reading! :)'}));
+            
+            material.view(mainContainer);
+        }
+    },
+    
+    
+    error: function (error) {
+        console.dir(error);
+        this.navbar.setTitle('Oh Snap!');
+        var mainContainer = material.div({classList: ['container', 'section']});
+            mainContainer
+                .add(material.h5({text:error.message}))
+                .add(material.h6({text:error.stack}));
+            material.view(mainContainer);
     }
 };
 

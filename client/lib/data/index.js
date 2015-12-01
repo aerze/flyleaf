@@ -23,6 +23,15 @@ var Data = {
         }
         
         
+    },
+    
+    manga: {
+        get: function (id, callback) {
+            
+            if (!id || id === '123') callback(new Error('MangaID Missing'), null);
+            else callback(null, {id: id});
+            
+        }
     }
 }
 
