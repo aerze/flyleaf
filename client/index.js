@@ -6,14 +6,13 @@ var auth = require('./lib/auth');
 var viewHandler = require('./handler/viewHandler');
 var dataHandler = require('./handler/dataHandler');
 
-page('*', viewHandler.init, dataHandler.init);
+page('*', viewHandler.init, dataHandler.init); // on every page load
 
-// redirect to library
-page('/', function () { page('/library'); });
+page('/', function () { page('/library'); }); // redirect to library
+
 page('/library', dataHandler.library, viewHandler.library);
 
-page('/search', viewHandler.search);
-
+page('/search', dataHandler.search, viewHandler.search);
 
 page('/settings', viewHandler.settings);
 
@@ -21,7 +20,7 @@ page('/account', viewHandler.account);
 
 page('/about', viewHandler.about);
 
-page('/manga/:id', viewHandler.manga);
+page('/manga/:id', dataHandler.manga, viewHandler.manga);
 
 page('/chapter/:id', viewHandler.chapter);
 

@@ -1,9 +1,12 @@
 'use strict';
 
 var material = require('./material');
+var page = require('page');
 
 var View = {
+    
     navbar: {},
+    
     // Start navbar and side menu
     init: function (context, next) {
         
@@ -88,7 +91,6 @@ var View = {
             var mainContainer = material.div();
             var listContainer = material.ul({id: 'library', classList: 'collection'});
             var header = material.div({classList: 'collection-header', text: 'Loading..'});
-                // .add(material.div({}));
                 
             mainContainer
                 .add(header)
@@ -100,7 +102,10 @@ var View = {
         
         empty: function (err) {
             if (err) console.log(err);
-            material.view(material.p({text: 'You don\'t have books fool!'}));
+            var mainContainer = material.div({classList: ['container', 'section']});
+            mainContainer
+                .add(material.p({text: 'You don\'t have books fool!'}));
+            material.view(mainContainer);
             
         },
         
@@ -160,16 +165,9 @@ var View = {
     search: {
         init: function () {
             var formWrapper = material.div({classList: 'form-wrapper'});
-            var buttonGroup = material.div({classList: 'button-group'});
-            var collapsible = material.ul({classList: 'collapsible', id: 'filter'})
-                .set('data-collapsible', 'accordion');
+            
             var inputField = material.div({classList: 'input-field'});
             var searchForm = material.form().add(inputField);
-            var filters = material.div({classList: 'filters'});
-            var genre = material.div({classList: 'genres'})
-                .add(material.h6({text: 'Genres'}));
-            var genreLeft = material.div({classList: 'genresLeft'});
-            var genreRight = material.div({classList: 'genresRight'});
 
 
             inputField
@@ -179,43 +177,14 @@ var View = {
                 .add(material.div({classList: 'form-button'})
                     .add(material.i({classList: 'mdi-content-send'})));
 
-            collapsible
-                .add(material.li()
-                    .add(material.div({classList: 'collapsible-header'})
-                        .add(material.i({classList: 'mdi-content-filter-list'}))
-                        .add(material.text('Genre Filter')))
-                    .add(material.div({classList: 'collapsible-body'})
-                        .add(filters
-                            .add(genre
-                                .add(genreLeft)
-                                .add(genreRight)))))
-                .add(material.li()
-                    .add(material.div({classList: 'collapsible-header'})
-                        .add(material.i({classList: 'mdi-content-sort'}))
-                        .add(material.text('Sort')))
-                    .add(material.div({classList: 'collapsible-body'})
-                        .add(material.p()
-                            .add(buttonGroup))));
-
-            buttonGroup
-                .add(material.button({
-                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
-                    innerHTML: 'POP &#x21F5'}))
-                .add(material.button({
-                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
-                    innerHTML: 'A-Z &#x21F5'}));
-
-
             var header = material.div({classList: 'collection-header'})
                     .add(material.div({text:'Search'}));
 
             formWrapper
                 .add(header)
-                .add(searchForm)
-                .add(collapsible);
+                .add(searchForm);
 
             material.view(formWrapper);
-            $('#filter').collapsible();
             
             // var newFilter = function (name) {
             //     return material.p()
@@ -229,6 +198,97 @@ var View = {
             //         else genreLeft.add(newFilter(genres[i]));
             //     }
             // });
+        },
+        
+        genres: function (genres) {
+            
+            var i = 0;
+            var $formWrapper = $('.form-wrapper');
+            var collapsible = material.ul({classList: 'collapsible', id: 'filter'})
+                .set('data-collapsible', 'accordion');
+                
+            var buttonGroup = material.div({classList: 'button-group'});
+            var filters = material.div({classList: 'filters'});
+            var genre = material.div({classList: 'genres'});
+                
+            var genreLeft = material.div({classList: 'genresLeft'});
+            var genreRight = material.div({classList: 'genresRight'});
+            
+            var newGenre = function (name) {
+                return material.p()
+                    .add(material.input({id: 'g'+name, type: 'checkbox', classList: 'filled-in'}))
+                    .add(material.label({'for': 'g'+name, text: name}));
+            };
+            
+            collapsible
+                .add(material.li()
+                    .add(material.div({classList: 'collapsible-header'})
+                        .add(material.i({classList: 'mdi-content-filter-list'}))
+                        .add(material.text('Genres')))
+                    .add(material.div({classList: 'collapsible-body'})
+                        .add(filters
+                            .add(genre
+                                .add(genreLeft)
+                                .add(genreRight)))))
+                .add(material.li()
+                    .add(material.div({classList: 'collapsible-header'})
+                        .add(material.i({classList: 'mdi-content-sort'}))
+                        .add(material.text('Sort')))
+                    .add(material.div({classList: 'collapsible-body'})
+                        .add(material.p()
+                            .add(buttonGroup))));
+                            
+            buttonGroup
+                .add(material.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'POP &#x21F5'}))
+                .add(material.button({
+                    classList: ['waves-effect', 'waves-light', 'green', 'btn'], 
+                    innerHTML: 'A-Z &#x21F5'}));
+            
+            for (i = 0; i < genres.length; i+=1) {
+                if (i%2 !== 0) genreRight.add(newGenre(genres[i]));
+                else genreLeft.add(newGenre(genres[i]));
+            }
+            
+            
+            $formWrapper.append(collapsible);
+            $('#filter').collapsible();
+            
+        },
+        
+        updateList: function (mangaList) {
+            var listContainer = $('#results')[0];
+            if (listContainer === undefined) {
+                material.node(material.ul({id: 'results', classList: 'collection'}));
+                listContainer  = $('#results')[0];
+            }
+            
+            listContainer.innerHTML = '';
+            
+            var onclick = function () { 
+                console.log(page);
+                page('/manga/' + this.id); 
+                
+            };
+            
+            for (var i = 0; i <= mangaList.length - 1; i++) {
+                
+                var item = material.li({
+                    classList: ['collection-item', 'waves-effect', 'waves-green'],
+                    id: mangaList[i]._id,
+                    onclick: onclick
+                });
+                
+                item.add(material.h6({
+                    classList: ['title', 'flow-text', 'truncate'],
+                    text: mangaList[i].title
+                }));
+                
+                listContainer.appendChild(item);
+            }
+            
+            material.node(listContainer);
         }
     },
     
@@ -268,21 +328,167 @@ var View = {
     
     
     manga: {
-        init: function () {
-            var mainContainer = material.div({classList: ['container', 'section']});
-            mainContainer
-                .add(material.text('Flyleaf.co is made by '))
-                .add(material.a({text: '@mythrilco', href: 'https://twitter.com/MythrilCo'}))
-                .add(material.br())
-                .add(material.text('Tweet at me if you have any issues.'))
-                .add(material.br())
-                .add(material.text('If you know what Github is and have an account, you can report issues '))
-                .add(material.a({text: 'here.', href: 'https://github.com/aerze/flyleaf/issues'}))
-                .add(material.br())
-                .add(material.br())
-                .add(material.p({text: 'Thanks for reading! :)'}));
+        init: function (manga) {
+            var main = material.div();
+            // start parallax
+    
+            var parallaxContainer = material.div({classList: 'parallax-container'});
+            var parallaxDiv = material.div({classList: 'parallax'});
+            var _image = material.img({src: 'http://cdn.mangaeden.com/mangasimg/' + manga.image, classList: 'z-depth-5'});
+    
+            parallaxContainer
+                .add(parallaxDiv
+                    .add(_image));
+    
+            main.add(parallaxContainer);
+    
+            // end parallax
+            // start section
+    
+            var sectionDiv = material.div({classList: ['container', 'white']});
+    
+            sectionDiv
+                .add(material.h3({text: manga.title}))
+                .add(material.h5({text: 'Author: ' + manga.author}))
+                .add(material.h5({text: 'Artist: ' + manga.artist}));
+    
+            //  start button
+    
+            // var _saveString = 'Save';
+            // var _saveIconString = 'mdi-action-favorite-outline';
+            // if (data.checkLibrary(manga._id)) {
+            //     _saveString = 'Saved';
+            //     _saveIconString = 'mdi-action-favorite';
+            // } 
+    
+            // var _saveBook = material.button({
+            //     classList: ['waves-effect', 'green', 'waves-light', 'btn'],
+            //     text: _saveString,
+            //     onclick: function () {
+            //         var text = this.textContent;
+            //         if (data.checkLibrary(manga._id)) {
+            //             // _saveBook.textContent = 'Already Saved!';
+            //         } else {
+            //             data.saveBook(manga, function (err) {
+            //                 if (err) text = 'ERROR: Could Not Save';
+            //                 else text = 'Saved!';
+            //                 _saveBook.textContent = text;
+            //             });
+            //         }
+            //     }
+            // });
             
-            material.view(mainContainer);
+            // sectionDiv
+            //     .add(_saveBook
+            //         .add(material.i({classList: [ _saveIconString, 'left' ]})));
+    
+            // End button
+            
+    
+            // end section
+            // start collapsible
+    
+            var collapsibleContainer = material.ul({classList: 'collapsible'})
+                    .set('data-collapsible', 'accordion');
+    
+    
+            var tagsCollapsibleHeader = material.div({
+                classList: ['collapsible-header', 'waves-effect', 'waves-green'],
+                text: 'Tags'
+            });
+            var tagsCollapsibleBody = material.div({classList: 'collapsible-body'});
+            var _categories = material.ul({classList: 'container'});
+            for (var i = manga.categories.length - 1; i >= 0; i--) {
+                _categories.add(material.li({text:manga.categories[i]}));
+            }
+                    
+                
+            collapsibleContainer
+                .add(material.li()
+                    .add(tagsCollapsibleHeader
+                        .add(material.i({classList: 'mdi-notification-more'})))
+                    .add(tagsCollapsibleBody
+                        .add(_categories)));
+    
+    
+    
+            var summaryCollapsibleHeader = material.div({
+                classList: ['collapsible-header', 'waves-effect', 'waves-green'],
+                text: 'Summary'
+            });
+            var summaryCollapsibleBody = material.div({classList: 'collapsible-body'});
+            var _description = material.p({innerHTML: manga.description});
+    
+            collapsibleContainer
+                .add(material.li()
+                    .add(summaryCollapsibleHeader
+                        .add(material.i({classList: 'mdi-action-speaker-notes'})))
+                    .add(summaryCollapsibleBody
+                        .add(_description)));
+    
+            // var loadChapter = function () {
+            //     flyleaf.data.readChapter(manga._id, this.index, 0);
+            //     flyleaf.setID('chapterIndex', this.index);
+            //     var chapterNumber = this.textContent.split(':')[0];
+            //     flyleaf.display.setNavTitle(chapterNumber);
+                
+            //     page('/chapter/' + this.id);
+            // };
+    
+            var _chapters = material.ul({classList: 'collection'});
+                
+            _chapters
+                .add(material.li({classList: 'collection-header'})
+                    .add(material.h4({text: 'Chapters'})));
+            for (var j = 0; j < manga.chapters.length; j++) {
+                var label = (manga.chapters[j][2] === null || manga.chapters[j][2] === manga.chapters[j][0].toString()) ?
+                    'CH ' + manga.chapters[j][0] :
+                    'CH ' + manga.chapters[j][0] + ': ' + manga.chapters[j][2];
+    
+                var _chapterListItem = createElement('li');
+                var _chapterDiv = document.createElement('div');
+                    _chapterDiv.appendChild(document.createTextNode(label));
+                var _chapterA = document.createElement('a');
+                    _chapterA.classList.add('secondary-content');
+                var _chapterIcon = document.createElement('i');
+    
+                if (manga.chapters[j][4] === undefined) {
+                    _chapterIcon.classList.add('mdi-action-bookmark-outline');
+                } else if (parseInt(manga.chapters[j][4]) >= 0) {
+                    _chapterIcon.classList.add('mdi-action-bookmark');
+                } else {
+                    _chapterIcon.classList.add('mdi-action-done');
+                }
+                    _chapterA.appendChild(_chapterIcon);
+                    _chapterDiv.appendChild(_chapterA);
+                    _chapterListItem.appendChild(_chapterDiv);
+    
+                    _chapterListItem.index = j;
+                    _chapterListItem.id = manga.chapters[j][3];
+                    // _chapterListItem.onclick = loadChapter;
+                    _chapterListItem.classList.add('collection-item', 'waves-effect', 'waves-green');
+                _chapters.appendChild(_chapterListItem);
+            }
+    
+            main
+                .add(sectionDiv)
+                .add(collapsibleContainer)
+                .appendChild(_chapters);
+    
+            material.view(main);
+    
+            $(document).ready(function(){
+              $('.parallax').parallax();
+              $('.collapsible').collapsible();
+            });
+    
+    
+            function createElement (elem, text) {
+                var element = document.createElement(elem);
+                element.textContent = text;
+    
+                return element;
+            }
         }
     },
     
@@ -316,6 +522,7 @@ var View = {
                 .add(material.h6({text:error.stack}));
             material.view(mainContainer);
     }
+    
 };
 
 
