@@ -22,6 +22,6 @@ page('/about', viewHandler.about);
 
 page('/manga/:id', dataHandler.manga, viewHandler.manga);
 
-page('/chapter/:id', viewHandler.chapter);
+page('/chapter/:id', dataHandler.chapter, viewHandler.chapter);
 
 page.start({hashbang: true});
