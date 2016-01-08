@@ -1,7 +1,7 @@
 'use strict';
 
 var Firebase = require('firebase');
-var net = require('./net.js');
+var net = require('./net');
 
 var mangaRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden/manga');
 var metaRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden/meta');

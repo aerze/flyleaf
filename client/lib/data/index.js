@@ -1,8 +1,8 @@
 'use strict';
 
 var ForerunnerDB = require('forerunnerdb');
-var net = require('../net.js');
-var mangaEden = require('../MangaEden.js');
+var net = require('../net');
+var mangaEden = require('../MangaEden');
 
 var fdb = new ForerunnerDB();
 var db = fdb.db('flyleafco');
