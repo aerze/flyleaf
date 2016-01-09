@@ -4,7 +4,7 @@
 var Firebase = require('firebase');
 var mangaEdenUpdate = require('./mangaedenUpdate');
 
-var mangaedenRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden');
+var mangaedenRef = new Firebase(process.env.FIREBASE_URL);
 var mangaRef = mangaedenRef.child('manga');
 
 mangaRef.on('value', function (snap) {
@@ -101,8 +101,8 @@ var search = {
                 }
             }
         }
-        
-        
+
+
         books.remove = function (badGenres) {
             for (var i = this.length - 1; i >= 0; i--) {
                 var currentBook = this[i];
