@@ -16,10 +16,10 @@ logo = url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAOECAYAAAD5Tv87AA
 .green
     background-color: darkishGreen !important
 
-body 
+body
     background-color: #FFF;
     /*color:#777;*/
-.main-view 
+.main-view
     overflow: auto !important;
     /*min-height: 700px;*/
 .cover
@@ -43,13 +43,21 @@ body
     background-image: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.9) 100%), url(/images/lalabadie_flyleaf.png);
     background-position: -16% 16%;
     background-size: 45%;
-.logo 
+.logo
     padding: 12px;
 
-.secondary-content 
+.secondary-content
     color: #4CAF50;
 
-.nav-title 
+nav, .navbar-fixed
+    height: 42px;
+    background: darkishGreen;
+    
+    .nav-wrapper
+        .col
+            margin-top: -8px;
+
+.nav-title
     font-weight: 300;
     padding-left: 1.5rem;
     font-size: 1.5rem;
@@ -57,7 +65,7 @@ body
 
 
 .collection-header,
-.collection .collection-header 
+.collection .collection-header
     padding-top: 1rem;
     padding-left: 2rem;
     font-size: medium;
@@ -65,31 +73,31 @@ body
 
 .collection-item
     width: 100%;
-    &:hover 
+    &:hover
         background-color: #DDDDDD;
-    &.avatar 
+    &.avatar
         height: 8em;
         padding-left: 7em;
         position: relative;
         width: 100%;
-        .thumb-image 
+        .thumb-image
             max-height: 7rem;
             max-width: 5rem;
             display: inline-block;
             left: 1em;
             vertical-align: middle;
             position: absolute;
-            
-.collection 
-    .collection-item.avatar 
-        .title 
+
+.collection
+    .collection-item.avatar
+        .title
             color: black;
             margin-top: 0rem;
             margin-bottom: -0.5rem;
             font-weight: 500;
             font-size: 1.2rem;
             padding-left: 1.5rem;
-         p 
+         p
             padding-left: 1.6rem;
             font-weight: 400;
             line-height: 1.3rem;
@@ -99,7 +107,7 @@ body
 
 #filter, #results
     margin: 0px;
-    
+
 
 // FORM
 .form-button
@@ -112,18 +120,18 @@ body
 
 
 // FILTERSSSS
-.filters 
+.filters
     padding: 0.8em;
-.genres 
+.genres
     h6
         border-bottom: 1px solid rgba(0,0,0,0.3);
-    p 
+    p
         padding: 0.5em;
     div
         display: inline-block;
-        
 
-// MANGA 
+
+// MANGA
 
 // Paralax formating
 .parallax
@@ -133,9 +141,9 @@ body
     bottom: -60px;
     margin-top: 5em;
 
-.parallax-container 
+.parallax-container
     height: 400px;
-    
+
 
 // collapsible little bug
 
@@ -152,7 +160,7 @@ body
 
 
 // Auth Modal
-#login 
+#login
     button
         padding: 0px 1.5em;
     .checkbox
