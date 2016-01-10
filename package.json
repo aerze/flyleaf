@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "start": "set DEV=false && node src/server/index.js",
-    "dev": "set DEV=true && node src/server/index.js"
+    "start": "node src/server/index.js"
   },
   "repository": {
     "type": "git",
