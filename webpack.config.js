@@ -1,8 +1,10 @@
+'use strict';
+
 var path    = require('path'),
     webpack = require('webpack');
 
 module.exports = {
-    context: path.join(__dirname, '/client'),
+    context: path.join(__dirname, '/src/client'),
     entry: './index.js',
     output: {
         path: __dirname + '/dist',
@@ -13,4 +15,4 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(true)
     ]
-}
+};
