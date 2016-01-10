@@ -5,10 +5,10 @@ var auth = require('./lib/auth');
 
 var viewHandler = require('./handler/viewHandler');
 var dataHandler = require('./handler/dataHandler');
-var authHandler = require('./handler/authHandler');
+// var authHandler = require('./handler/authHandler');
 
 // on every page load
-page('*', viewHandler.init, authHandler.init, dataHandler.init);
+page('*', viewHandler.init, dataHandler.init);
 
 // redirect to library
 page('/', function () { page('/library'); });
