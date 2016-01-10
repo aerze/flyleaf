@@ -1,6 +1,8 @@
 'use strict';
 /* jshint node:true */
 
+require('dotenv').load();
+
 var express     = require('express'),
     path        = require('path'),
     morgan      = require('morgan'),
