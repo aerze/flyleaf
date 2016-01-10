@@ -18,8 +18,8 @@ if (process.env.DEV) {
     // compiles stylus files to css on the fly
     app.use(stylus.middleware({
 
-        src: path.join(__dirname, '/client/'),
-        dest: path.join(__dirname, '/dist/'),
+        src: path.join(__dirname, '/../../client/'),
+        dest: path.join(__dirname, '/../../dist/'),
         compress: true,
         serve: true
 
@@ -28,10 +28,10 @@ if (process.env.DEV) {
     // webpack files on the fly too
     var webpackCompiler = webpack({
 
-        context: path.join(__dirname, '/client'),
+        context: path.join(__dirname, '/../../client'),
         entry: './index.js',
         output: {
-            path: __dirname + '/dist',
+            path: __dirname + '../dist',
             filename: 'bundle.min.js'
         },
         plugins: [
@@ -61,9 +61,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(multer());
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname + '/dist')));
-app.use('/docs', express.static(path.join(__dirname + '/docs/flyleaf/0.1.0')));
-app.use('/material', express.static(path.join(__dirname + '/node_modules/materialize-css')));
+app.use(express.static(path.join(__dirname + '/../../dist')));
+app.use('/docs', express.static(path.join(__dirname + '/../../docs/flyleaf/0.1.0')));
+app.use('/material', express.static(path.join(__dirname + '/../../node_modules/materialize-css')));
 
 routes(app);
 
