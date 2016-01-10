@@ -1,10 +1,10 @@
-'use strict'; 
+'use strict';
 /*jshint node:true*/
 
 var Firebase = require('firebase');
 var netto = require('netto');
 
-var mangaedenRef = new Firebase('https://flyleafco.firebaseio.com/catalog/mangaeden');
+var mangaedenRef = new Firebase(process.env.FIREBASE_URL);
 var mangaRef = mangaedenRef.child('manga');
 var metaRef = mangaedenRef.child('meta');
 var mangaedenPath = '/api/list/0/';
@@ -15,15 +15,15 @@ var update = function () {
     metaRef.child('lastUpdate').once('value', function (snap) {
         var lastUpdate = new Date(snap.val());
         var now = new Date();
-        
+
         if (now - lastUpdate >= 1000*60*60 ) {
             updateFirebase();
         }
     });
 };
-    
+
 var updateFirebase = function () {
-    
+
     console.log('Firebase Catalog Update: Started');
     netto.node('get', mangaedenPath, null, function (err, data) {
         if (err) {
@@ -64,7 +64,7 @@ var updateFirebase = function () {
             metaRef.child('length').set(parseInt(data.total));
             metaRef.child('genres').set(genres);
             metaRef.child('sorts').set({'hits': true});
-            
+
             var now = new Date();
             console.log('Firebase Catalog Update:' + now);
             metaRef.child('lastUpdate').set(now.toISOString());
