@@ -92,7 +92,7 @@ var ViewHandler = {
                 event.preventDefault();
                 return;
             } else {
-                handleSearch();
+                handleSearch(event);
             }
         });
 
