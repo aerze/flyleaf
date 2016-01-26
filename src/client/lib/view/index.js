@@ -266,18 +266,20 @@ var View = {
 
             listContainer.innerHTML = '';
 
-            var onclick = function () {
-                // console.log(page);
-                page('/manga/' + this.id);
+            // var onclick = function () {
+            //     // console.log(page);
+            //     var link  = '/#!manga/' + this.id;
+            //     console.log()
+            //     page(link);
 
-            };
+            // };
 
             for (var i = 0; i <= mangaList.length - 1; i++) {
 
                 var item = material.li({
                     classList: ['collection-item', 'waves-effect', 'waves-green'],
                     id: mangaList[i]._id,
-                    onclick: onclick
+                    // onclick: onclick
                 });
 
                 item.add(material.h6({
@@ -285,7 +287,9 @@ var View = {
                     text: mangaList[i].title
                 }));
 
-                listContainer.appendChild(item);
+                listContainer.appendChild(
+                    material.a({href: '/#!manga/' + mangaList[i]._id})
+                        .add(item));
             }
 
             material.node(listContainer);
@@ -431,8 +435,9 @@ var View = {
                 // flyleaf.setID('chapterIndex', this.index);
                 // var chapterNumber = this.textContent.split(':')[0];
                 // flyleaf.display.setNavTitle(chapterNumber);
-
-                page('/chapter/' + this.id);
+                var link  = '/#!chapter/' + this.id;
+                console.log()
+                page(link);
             };
 
             var _chapters = material.ul({classList: 'collection'});
@@ -440,6 +445,7 @@ var View = {
             _chapters
                 .add(material.li({classList: 'collection-header'})
                     .add(material.h4({text: 'Chapters'})));
+
             for (var j = 0; j < manga.chapters.length; j++) {
                 var label = (manga.chapters[j][2] === null || manga.chapters[j][2] === manga.chapters[j][0].toString()) ?
                     'CH ' + manga.chapters[j][0] :
@@ -448,8 +454,8 @@ var View = {
                 var _chapterListItem = createElement('li');
                 var _chapterDiv = document.createElement('div');
                     _chapterDiv.appendChild(document.createTextNode(label));
-                var _chapterA = document.createElement('a');
-                    _chapterA.classList.add('secondary-content');
+                var _chapterDIV = document.createElement('div');
+                    _chapterDIV.classList.add('secondary-content');
                 var _chapterIcon = document.createElement('i');
 
                 if (manga.chapters[j][4] === undefined) {
@@ -459,15 +465,18 @@ var View = {
                 } else {
                     _chapterIcon.classList.add('mdi-action-done');
                 }
-                    _chapterA.appendChild(_chapterIcon);
-                    _chapterDiv.appendChild(_chapterA);
+                    _chapterDIV.appendChild(_chapterIcon);
+                    _chapterDiv.appendChild(_chapterDIV);
                     _chapterListItem.appendChild(_chapterDiv);
 
                     _chapterListItem.index = j;
                     _chapterListItem.id = manga.chapters[j][3];
-                    _chapterListItem.onclick = loadChapter;
+                    // _chapterListItem.onclick = loadChapter;
                     _chapterListItem.classList.add('collection-item', 'waves-effect', 'waves-green');
-                _chapters.appendChild(_chapterListItem);
+
+                _chapters.appendChild(
+                    material.a({href: '/#!chapter/' + manga.chapters[j][3]})
+                        .add(_chapterListItem));
             }
 
             main

@@ -8,10 +8,17 @@ var dataHandler = require('./handler/dataHandler');
 // var authHandler = require('./handler/authHandler');
 
 // on every page load
-page('*', viewHandler.init, dataHandler.init);
+page('*', function (ctx, next) {
+    ctx.state.paths = ctx.paths || [];
+    ctx.state.paths.push(ctx.path);
+    ctx.save();
+
+    console.log(window.history, ctx);
+    next();
+}, viewHandler.init, dataHandler.init);
 
 // redirect to library
-page('/', function () { page('/library'); });
+page('/', function () { page('/#!library'); });
 
 page('/library', dataHandler.library, viewHandler.library);
 
@@ -27,4 +34,5 @@ page('/manga/:id', dataHandler.manga, viewHandler.manga);
 
 page('/chapter/:id', dataHandler.chapter, viewHandler.chapter);
 
-page.start({hashbang: true});
+// page.base('/#!/');
+page.start({hashbang: true, popstate:true, click: false});
